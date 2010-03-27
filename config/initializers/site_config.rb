@@ -5,7 +5,7 @@
 PROJECT_NAME = Rails.root.to_s.split('/').last
 
 # Override these - they will be used in the default layout.
-SITE_NAME = PROJECT_NAME.humanize.titleize
+SITE_NAME = 'EasyFollow'
 SITE_TITLE = SITE_NAME + ('production' == Rails.env ? '' : " (#{Rails.env.upcase})")
 
 # Hostname of the site. This will be used by Clearance to generate URLs in emails, to create a CSS signature, and possibly in several other places.
@@ -16,8 +16,8 @@ HOST = (ENV['SERVER_NAME']||'localhost').gsub(/[^A-Za-z0-9._-]/, '') # Ensure we
 CSS_SIGNATURE = HOST.gsub(/[.]/, '-')
 
 # Years and name to list in copyright statements.
-COPYRIGHT_YEARS = '2008, 2009, 2010'
-COPYRIGHT_OWNER = Etc.getpwuid().gecos # NOTE: This probably isn't what you want -- you should really hard-code this.
+COPYRIGHT_YEARS = '2010'
+COPYRIGHT_OWNER = 'Habanero'
 
 # Version of jQuery to use.
 JQUERY_VERSION = '1.4.2'
@@ -29,7 +29,7 @@ GOOGLE_ANALYTICS_CODE = nil
 GOOGLE_WEBMASTERS_CODE = nil
 
 # Email exceptions to this list of addresses, if ExceptionNotifier is loaded.
-EMAIL_EXCEPTIONS_TO = []
+EMAIL_EXCEPTIONS_TO = ['craig@boochtek.com']
 
 # Reply address for emails. Used by Clearance, and possibly other gems/plugins.
 DO_NOT_REPLY = "donotreply@#{HOST}"
