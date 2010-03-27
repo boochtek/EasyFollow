@@ -1,0 +1,4 @@
+(in /Users/booch/Work/BoochTek/clients/Habanero/EasyFollow)
+app/views/layouts/application.html.erb:
+  * [ 52] [TODO] More header/footer stuff.
+

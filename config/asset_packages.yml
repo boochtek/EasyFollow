@@ -1,0 +1,10 @@
+--- 
+javascripts: 
+- base: 
+  - jquery-1.4.2
+  - boochtek
+  - application
+stylesheets: 
+- base: 
+  - application
+  - formtastic
