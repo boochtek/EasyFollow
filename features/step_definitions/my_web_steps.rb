@@ -7,7 +7,11 @@ Given /^(?:|I )(?:am|start) (?:on|at) (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )check the "([^\"]*)" (:?|check)box$/ do |field|
+When /^(?:|I )(?:press|click on) the "([^\"]*)" button$/ do |button|
+  click_button(button)
+end
+
+When /^(?:|I )check the "([^\"]*)" (?:|check)box$/ do |field|
   check(field)
 end
 
@@ -15,7 +19,7 @@ When /^(?:|I )(?:un|don't |DON'T |do not |do NOT |DO NOT )check "([^\"]*)"$/ do 
   uncheck(field)
 end
 
-When /^(?:|I )(?:un|don't |DON'T |do not |do NOT |DO NOT )check the "([^\"]*)" (:?|check)box$/ do |field|
+When /^(?:|I )(?:un|don't |DON'T |do not |do NOT |DO NOT )check the "([^\"]*)" (?:|check)box$/ do |field|
   uncheck(field)
 end
 
