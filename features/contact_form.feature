@@ -4,8 +4,6 @@ Feature: Contact Form
     As a user
     I want to submit feedback on the contact form
 
-# NOTE: Requires rspec-email plugin (http://github.com/bmabey/email-spec)
-
     Scenario: User fills out contact form correctly.
         Given I start at the home page
         When I go to the contact page
@@ -14,10 +12,10 @@ Feature: Contact Form
             | Email Address  | happy@customer.com |
             | Comment        | I love this site!  |
         And do not check the "I am not a human" box
+        And click on the "Submit" button
         Then I should get redirected to the home page
         And I should see "Thanks for your feedback!"
         And my feedback should be emailed to the site admins
-        
 
     Scenario: User fills out contact form incorrectly.
         Given I start at the home page
@@ -27,6 +25,7 @@ Feature: Contact Form
             | Email Address  |                   |
             | Comment        | I love this site! |
         And do not check the "I am not a human" box
+        And click on the "Submit" button
         Then I should still be on the contact page
         And I should NOT see "Thanks for your feedback!"
         And my feedback should NOT be emailed to the site admins
@@ -39,6 +38,7 @@ Feature: Contact Form
             | Email Address  | bot@spammer.com  |
             | Comment        | Buy our junk!    |
         And check the "I am not a human" box
+        And click on the "Submit" button
         Then I should get redirected to the home page
         And I should see "Sorry, we only accept feedback from humans"
         And my feedback should NOT be emailed to the site admins
