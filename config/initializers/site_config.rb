@@ -33,3 +33,6 @@ EMAIL_EXCEPTIONS_TO = ['craig@boochtek.com']
 
 # Reply address for emails. Used by Clearance, and possibly other gems/plugins.
 DO_NOT_REPLY = "donotreply@#{HOST}"
+
+# Email contact form feedback to this address.
+EMAIL_FEEDBACK_TO = 'craig@boochtek.com'
