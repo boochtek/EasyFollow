@@ -10,6 +10,8 @@ doc/api
 doc/app
 vendor/**/.git
 coverage/*
+rerun.txt
+features/rerun.txt
 autotest_result.html
 public/javascripts/*_[0-9]*.js
 public/stylesheets/*_[0-9]*.css
