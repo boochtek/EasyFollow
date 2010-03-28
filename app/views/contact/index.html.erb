@@ -1,0 +1,15 @@
+<h1>Contact Form</h1>
+<p>
+  We're always happy to hear from our customers.
+  Please fill out the form below, and we'll get back to you as soon as we can.
+</p>
+<% form_tag('/contact') do -%>
+  <ol>
+    <li><label>Name:<input type="text" name="name" /></label></li>
+    <li><label>Email Address:<input type="text" name="email_address" /></label></li>
+    <li><label>Comment:<textarea name="comment" cols="80" rows="8"></textarea></label></li>
+  </ol>
+  <label style="display:none">I am NOT a human:<input type="checkbox" name="human" value="no" /></label>
+  <%= hidden_field_tag :referrer, @referrer %>
+  <%= submit_tag 'Submit' %>
+<% end -%>
