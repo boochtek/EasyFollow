@@ -1,10 +1,18 @@
+def dquote(string)
+  '"' + string + '"'
+end
+
+
 Then /^my feedback should be emailed to the site admins$/ do
-  Then '"admin@example.com" should receive 1 email'
-  When '"admin@example.com" opens the email with subject "Feedback from Happy Customer"'
-  Then 'they should see "I love this site!" in the email body'
-  Then 'they should see "happy@customer.com" in the email body'
+  name = 'Happy Customer'
+  address = 'happy@customer.com'
+  comment = 'I love this site!'
+  Then dquote(EMAIL_FEEDBACK_TO) + ' should receive 1 email'
+  When dquote(EMAIL_FEEDBACK_TO) + ' opens the email with subject ' + dquote("#{SITE_NAME} feedback from #{name}")
+  Then 'they should see ' + dquote(address) + ' in the email body'
+  Then 'they should see ' + dquote(comment) + ' in the email body'
 end
 
 Then /^my feedback should NOT be emailed to the site admins$/ do
-  Then '"admin@example.com" should receive no emails'
+  Then dquote(EMAIL_FEEDBACK_TO) + ' should receive no emails'
 end
