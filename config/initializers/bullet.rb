@@ -1,5 +1,4 @@
-# TODO: It'd be nice if we didn't turn this on (as seen by Growl announcements) when just running rake tasks or generators.
-if ['development', 'test'].include? Rails.env
+if ['development', 'test'].include? Rails.env && !defined?(Rails::Generator)
   Bullet.enable = true
   # Log to the standard Rails log as well as log/bullet.log and the browser's console log.
   Bullet.bullet_logger = true
