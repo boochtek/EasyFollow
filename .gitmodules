@@ -25,3 +25,6 @@
 [submodule "vendor/plugins/ssl_requirement"]
 	path = vendor/plugins/ssl_requirement
 	url = git://github.com/rails/ssl_requirement.git
+[submodule "vendor/plugins/activerecord-attribute_declarations"]
+	path = vendor/plugins/activerecord-attribute_declarations
+	url = git://github.com/boochtek/activerecord-attribute_declarations.git
