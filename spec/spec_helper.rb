@@ -52,4 +52,3 @@ Spec::Runner.configure do |config|
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
-Dir.glob(File.join(Dir.pwd, 'helpers/**/*.rb')).each { |file| require file }

@@ -6,7 +6,7 @@ module Spec
     module ObjectExpectations
       def should_each(matcher=:use_operator_matcher, &block)
         self.each {|item| ExpectationMatcherHandler.handle_matcher(item, matcher, &block)}
-      end        
+      end
     end
   end
 end
@@ -16,7 +16,7 @@ module Spec
     module ExampleGroupMethods
       def should_method?(method_name)
         !(method_name =~ /^should(_not|_each)?$/) &&
-        method_name =~ /^should/ && 
+        method_name =~ /^should/ &&
           ( instance_method(method_name).arity == 0 ||
             instance_method(method_name).arity == -1 )
       end
