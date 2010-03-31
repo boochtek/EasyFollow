@@ -2,10 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'home'
   map.home '', :controller => 'home'
   map.contact '/contact', :conditions => { :method => :get },
-    :controller => 'contact',
-    :action => 'index'
+    :controller => 'feedback',
+    :action => 'new'
   map.contact '/contact', :conditions => { :method => :post },
-    :controller => 'contact',
+    :controller => 'feedback',
     :action => 'create'
 
   # The priority is based upon order of creation: first created -> highest priority.

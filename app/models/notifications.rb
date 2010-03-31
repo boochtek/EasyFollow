@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  def contact(params)
+  def feedback(params)
     subject     "#{SITE_NAME} feedback from #{params[:name]}"
     recipients  EMAIL_FEEDBACK_TO
     from        params[:email_address]
