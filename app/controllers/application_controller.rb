@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+protected
+
+  helper_method :current_user
+
   # Special case handling for RecordNotFound exceptions. We don't want to send emails for these!
   def rescue_action(exception)
     case exception
@@ -36,6 +40,10 @@ class ApplicationController < ActionController::Base
     else
       super
     end
+  end
+
+  def current_user
+    session[:user_id] ? User.find(session[:user_id]) : nil rescue nil
   end
 
 end
