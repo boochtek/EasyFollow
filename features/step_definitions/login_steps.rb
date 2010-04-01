@@ -15,15 +15,6 @@ Given /^(?:|I )(?:am logged|log) in as (.+)$/ do |username|
   login_as(username)
 end
 
-Then /^(?:|I )should(| not| NOT) see my name$/ do |nt|
-  Then "I should#{nt} see \"Fake User\""
-end
-
-Then /^(?:|I )should(| not| NOT) see my profile$/ do |nt|
-  Then "I should#{nt} see \"User Profile\""
-end
-
-
 Given /^the "([^\"]*)" user exists$/ do |username|
   @user = Factory(:user, :login => username)
 end
