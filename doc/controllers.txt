@@ -1,0 +1,66 @@
+Controllers
+===========
+Home page
+    Show Home Page (if not logged in)
+    Show My Profile (if logged in)
+Login page
+Signup Step 1 (Create Profile)
+Signup Step 2 (Add Networks)
+    Show Signup Step 2 (composite page)
+        List My Networks
+        Add Network
+        Remove Network
+Signup Step 3 (Connect)
+    Show Signup Step 3 - similar to Show My Profile?
+Networks - used in Show Signup Step 2 and Show My Profile
+    List My Networks (shows all networks we can add, and info on ones we've added)
+    List Their Networks (shows info on networks they've added)
+    Add Network (enter username, authenticate to the network)
+    Remove Network
+Connections
+    List My Connections
+    List Their Connections
+    List My Connections Network (friends-of-friends)
+    Add Connection (all networks, or single network)
+    Remove Connection (all networks, or single network)
+Profile
+    Show My Profile (composite page)
+        Show My Bio
+        Show My settings
+        List my networks
+        List my connections (possibly filtered)
+        Site News
+        List My News Items
+        List My Connections Network 
+    Show Their Profile (if logged in)
+        Show Their Bio
+        Add Connection (all networks)
+        List Their Networks
+        Add Connection (single network)
+        List Their Connections (possibly filtered)
+    Show Their Public Profile (if not logged in)
+        Show Their Bio
+        List Their Networks
+        List Their Connections (possibly filtered)
+Bio
+    Show My Bio
+    Show Their Bio
+    Edit My Bio
+Settings
+    Show My Settings
+    Edit My Settings
+News
+    List My News Items (new connections in either direction, sites added, etc.)
+Network Browse Mode
+Auto-complete
+    Users In My Network
+    Location
+    Industry
+    Title
+Search
+    Simple
+    Advanced
+    Results (divided into people in your network and not in your network)
+Contact
+    Show Contact Form
+    Process Contact Form

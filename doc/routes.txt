@@ -1,0 +1,21 @@
+home (AKA /)
+session
+login => login_session/new
+logout => login_session/delete
+feedback
+contact => feedback/create
+user
+signup => user/create
+profile
+bio
+connection(s)
+network
+networks => network/list
+settings
+search
+locations => location/list
+industries => industry/list
+titles => title/list
+news
+browse
+admin (reserved)
