@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
   attribute :last_name,     :string, :max_length => 50
   timestamps
 
+  validates_each :login do |record, attr, value|
+    record.errors.add attr, 'may not contain a slash (/)' if value =~ %r{/}
+    record.errors.add attr, 'may not contain any whitespace characters' if value =~ %r{\s}
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
