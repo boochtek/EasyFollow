@@ -14,63 +14,84 @@
 #   But I may just use his version instead.
 
 
+# I wrote these to make it easy to specify invalid and valid attributes in a list, to "declare" good and bad attribute values to test. (Craig Buchek)
+
+# Examples:
+#       @quote_section.should allow_values_for(:name, 'Craig', 'Bob', 'a' * 64, 'John Johnson')
+#       @quote_section.should_not allow_values_for(:name, nil, '', 'a' * 65, 12.2)
+#       describe User do
+#          it { should allow_values_for(:name, 'Jim', 'Bob Jefferson', 'Dale Earnhardt, Jr.') }
+#          it { should_not allow_values_for(:name, nil, '', 12.2, 145, 'A-B') }
+#       end
 
 
-# TODO: Implement this.
-if false
-Spec::Matchers.define :allow_values do |attrib, *expected|
-  description { "be valid with given attribute set to each/any of the given values" }
-  failure_message_for_should { |actual| "#{actual.class} expected to be valid but had errors:\n  #{actual.errors.full_messages.join("\n  ")}" }
-  failure_message_for_should_not { |actual| "expected that #{actual.class} would be invalid, but it was valid" }
-  match do |actual|
-    attrib_setter = (attrib.to_s + '=')
-    expected.each do |value|
-      actual.send(attrib_setter, value)
-      if !actual.valid?
-        return false
-      end
-    end
-    return true
+module AllowValuesForMatchers
+
+  # :call-seq:
+  # it { should     allow_values_for(attribute, *array) }
+  # it { should_not allow_values_for(attribute, *array) }
+  #
+  # Passes if the receiving object would be valid with the specified attribute set to each and every one of the items in the array.
+  def allow_values_for(attrib, *array_of_expected_values)
+    AllowValuesFor.new(attrib, *array_of_expected_values)
   end
-end
-end
 
+  alias :be_valid_with :allow_values_for
 
-module Spec
-  module Rails
-    module Matchers
+  # Note that we cannot use Spec::Matchers.define, because that doesn't handle does_not_match?.
+  # We need does_not_match? because the should_not case is not the exact opposite of the should case.
+  # For example, if an attribute is only valid set to either 'A' or 'B', then both of these should fail:
+  #   should     allow_values_for(:a_or_b, 'A', 'C') # fails because it's not valid with C
+  #   should_not allow_values_for(:a_or_b, 'A', 'C') # fails because it's valid with A
+  class AllowValuesFor  #:nodoc:
 
-      # I wrote these to make it easy to specify invalid and valid attributes in a list, to "declare" good and bad attribute values to test. (Craig Buchek)
-      # Example: @quote_section.should be_valid_with(:name, ['Craig', 'Bob', 'a' * 64, 'John Johnson'])
-      # Example: @quote_section.should be_invalid_with(:name, [nil, '', 'a' * 65, 12.2])
-      # TODO: Can I replace should be_invalid_with() with should_not be_valid_with()? I don't think so.
-      class AllowValuesFor  #:nodoc:
-        def initialize(attrib, *array_of_expected_values)
-          @attrib = attrib
-          @expected = array_of_expected_values
-        end
-        def matches?(actual)
-          @actual = actual
-          attrib_set = (@attrib.to_s + '=').to_sym
-          @expected.each do |value|
-            @actual.send(attrib_set, value)
-            if !@actual.valid?
-              @invalid_value = value
-              return false
-            end
-          end
-          return true
-        end
-        def failure_message_for_should
-          "#{@actual.class} expected to be valid when #{@attrib}=#{@invalid_value.inspect} but had errors:\n  #{@actual.errors.full_messages.join("\n  ")}"
-        end
-        def description
-          'be valid with given attribute set to each/any of the given values'
-        end
-      end
-      def allow_values_for(attrib, *array_of_expected_values)
-        AllowValuesFor.new(attrib, *array_of_expected_values)
-      end
+    def description
+      "be valid with '#{@attrib}' attribute set to each/any of the given values"
     end
+
+    def failure_message_for_should
+      "#{@actual.class} was not valid when #{@attrib} attribute was set to the following values:\n  #{@invalid_values.each{|v| v.inspect}.join("\n  ")}"
+    end
+
+    def failure_message_for_should_not
+      "#{@actual.class} was valid when #{@attrib} attribute was set to the following values:\n  #{@valid_values.each{|v| v.inspect}.join("\n  ")}"
+    end
+
+    def initialize(attrib, *array_of_expected_values)
+      @attrib = attrib
+      @expected = array_of_expected_values
+    end
+
+    def matches?(actual)
+      @actual = actual
+      @invalid_values = []
+      attrib_setter = (@attrib.to_s + '=').to_sym
+      @expected.each do |value|
+        @actual.send(attrib_setter, value)
+        if !@actual.valid?
+          @invalid_values << value
+        end
+      end
+      return @invalid_values.empty?
+    end
+
+    def does_not_match?(actual)
+      @actual = actual
+      @valid_values = []
+      attrib_setter = (@attrib.to_s + '=').to_sym
+      @expected.each do |value|
+        @actual.send(attrib_setter, value)
+        if @actual.valid?
+          @valid_values << value
+        end
+      end
+      return @valid_values.empty?
+    end
+
   end
+
+end
+
+Spec::Runner.configure do |config|
+  config.include(AllowValuesForMatchers)
 end
