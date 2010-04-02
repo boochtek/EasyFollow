@@ -7,6 +7,15 @@ ActionController::Routing::Routes.draw do |map|
   map.contact '/contact', :conditions => { :method => :post },
     :controller => 'feedback',
     :action => 'create'
+  map.login '/login', :conditions => { :method => :get },
+    :controller => 'login',
+    :action => 'new'
+  map.login '/login', :conditions => { :method => :post },
+    :controller => 'login',
+    :action => 'create'
+  map.logout '/logout',
+    :controller => 'login',
+    :action => 'delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

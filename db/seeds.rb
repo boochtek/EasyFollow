@@ -5,3 +5,8 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+if Rails.env != 'production'
+  User.create(:login => 'booch', :first_name => 'Craig', :last_name => 'Buchek', :email_address => 'craig@boochtek.com')
+  User.create(:login => 'greg', :first_name => 'Greg', :last_name => 'Mattison', :email_address => 'greg.mattison@habanero.com')
+  User.create(:login => 'CraigBuchek', :first_name => 'Craig', :last_name => 'Buchek', :email_address => 'craig@boochtek.com')
+end
