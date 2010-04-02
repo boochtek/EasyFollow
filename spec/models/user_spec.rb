@@ -10,7 +10,9 @@ describe User do
   it { should validate_uniqueness_of :login }
   it { should ensure_length_of(:login).is_at_least(2).is_at_most(50) }
   it { should allow_values_for(:login, 'jo', 'CraigBuchek', 'craig_buchek') }
-  it { should_not allow_values_for(:login, nil, '', ' ', 'Craig Buchek', 'admin', 'a/b', 'c') }
+  it { should_not allow_values_for(:login, nil, '', ' ', 'Craig Buchek', 'a/b', 'c') }
+  it { should_not allow_values_for(:login, *User::PROHIBITED_USERNAMES) }
+  it { should_not allow_values_for(:login, 'test.html', 'anything.php', 'something.css', 'xyz.js', '.ico') }
 
   it { should validate_presence_of :email_address }
   it { should ensure_length_of(:email_address).is_at_least(6).is_at_most(100) }
