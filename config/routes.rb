@@ -16,10 +16,10 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout',
     :controller => 'login',
     :action => 'delete'
-  map.logout '/signup', :conditions => { :method => :get },
+  map.signup '/signup', :conditions => { :method => :get },
     :controller => 'user',
     :action => 'new'
-  map.logout '/signup', :conditions => { :method => :post },
+  map.signup '/signup', :conditions => { :method => :post },
     :controller => 'user',
     :action => 'create'
 
