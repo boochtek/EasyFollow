@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   attribute :email_address, :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   attribute :first_name,    :string, :required => true, :max_length => 50
   attribute :last_name,     :string, :max_length => 50
+  attribute :accept_terms,  :boolean, :acceptance_required => true, :default => false
   timestamps
 
   validates_each :login do |record, attr, value|
