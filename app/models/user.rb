@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attribute :email_address, :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   attribute :first_name,    :string, :required => true, :max_length => 50
   attribute :last_name,     :string, :max_length => 50
-  attribute :accept_terms,  :boolean, :acceptance_required => true, :default => false
+  attr_accessor :terms_of_service # Note that this is a *virtual* attribute, not in the database. Used for validates_acceptance_of below.
   timestamps
 
   validates_each :login do |record, attr, value|
@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   end
 
   validates_uniqueness_of :login, :case_sensitive => false
+  validates_acceptance_of :terms_of_service
 
   def full_name
     "#{first_name} #{last_name}"
