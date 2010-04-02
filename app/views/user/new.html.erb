@@ -2,7 +2,7 @@
 <p>
   Please fill out the form below to sign up for an EasyFollow account.
 </p>
-<% form_for @user, :url => login_path do |form| %>
+<% form_for @user, :url => signup_path do |form| %>
 
   <%= form.label :first_name, 'First Name' %><br />
   <%= form.text_field :first_name, :size => 20 %><br />
@@ -13,7 +13,7 @@
   <%= form.label :email_address, 'Email Address' %><br />
   <%= form.text_field :email_address, :size => 20 %><br />
 
-  <%= form.label :login, 'Userame' %><br />
+  <%= form.label :login, 'Username' %><br />
   <%= form.text_field :login, :size => 20 %><br />
 
   <%= form.label :password, 'Password' %><br />
