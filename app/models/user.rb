@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     record.errors.add attr, 'may not contain any whitespace characters' if value =~ %r{\s}
   end
 
+  validates_uniqueness_of :login, :case_sensitive => false
+
   def full_name
     "#{first_name} #{last_name}"
   end

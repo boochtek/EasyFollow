@@ -24,4 +24,13 @@ describe User do
 
   it { should ensure_length_of(:last_name).is_at_most(50) }
   it { should allow_values_for(:last_name, '', 'Buchek', 'Buchek, III', 'Buchek, Jr.') }
+
+  describe 'login' do
+    it 'should not allow duplicate login IDs (case-insensitive)' do
+      user1 = User.new(Factory.attributes_for(:user, :login => 'CraigBuchek'))
+      user1.save
+      user2 = User.new(Factory.attributes_for(:user, :login => 'craigbuchek'))
+      user2.should_not be_valid
+    end
+  end
 end
