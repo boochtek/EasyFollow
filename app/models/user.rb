@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def email_user_signup_confirmation
-    Notifications.deliver_signup_confirmation(:username => login, :full_name => full_name, :first_name => first_name, :email_address => email_address)
+    Notifications.deliver_signup_confirmation(self)
   end
 
   # We don't support passwords yet, but want to allow entering them on the login form.
@@ -43,5 +43,10 @@ class User < ActiveRecord::Base
   end
   def verify_password(pwd)
     return pwd != 'incorrect password'
+  end
+
+  # TODO: Change the login field to username. This is an interim step to allow callers to access either one.
+  def username
+    self.login
   end
 end

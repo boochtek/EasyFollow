@@ -10,14 +10,12 @@ class Notifications < ActionMailer::Base
          :email_address => params[:email_address]
   end
 
-  def signup_confirmation(params)
+  def signup_confirmation(user)
     subject     "Welcome to #{SITE_NAME}"
-    recipients  params[:email_address]
+    recipients  user.email_address
     from        DO_NOT_REPLY
     sent_on     Time.now.utc
 
-    body :username => params[:username],
-         :first_name => params[:first_name],
-         :full_name => params[:full_name]
+    body :user => user
   end
 end
