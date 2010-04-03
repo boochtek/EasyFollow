@@ -3,12 +3,20 @@
 require 'uri'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
-Given /^(?:|I )(?:am|start) (?:on|at) (.+)$/ do |page_name|
+
+Given /^(?:|I )am at (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+Given /^(?:|I )start (?:on|at) (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
 When /^(?:|I )(?:press|click on) the "([^\"]*)" button$/ do |button|
   click_button(button)
+end
+
+When /^(?:|I )click on the "([^\"]*)" link$/ do |link|
+  click_link(link)
 end
 
 When /^(?:|I )check the "([^\"]*)" (?:|check)box$/ do |field|
@@ -53,6 +61,14 @@ Then /^the "([^\"]*)" checkbox should (?:not|NOT) be checked$/ do |label|
   field_labeled(label).should_not be_checked
 end
 
-Then /^(?:|I )should (?:|still )(?:be|end up|get redirected|be redirected|redirect|stay)(?: at| on| to) (.+)$/ do |page_name|
+Then /^(?:|I )should be at (.+)$/ do |page_name|
   URI.parse(current_url).path.should == path_to(page_name)
 end
+Then /^(?:|I )should still be (?:at|on) (.+)$/ do |page_name|
+  URI.parse(current_url).path.should == path_to(page_name)
+end
+Then /^(?:|I )should (?:|still )(?:end up|get redirected|be redirected|redirect|stay)(?: at| on| to) (.+)$/ do |page_name|
+  URI.parse(current_url).path.should == path_to(page_name)
+end
+
+
