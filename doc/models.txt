@@ -2,39 +2,6 @@ Models
 ======
 User
     name, username, email, password
-    Make sure username doesn't match any of the URLs we'll be using.
-        No "/" in the username
-        No spaces in the username
-        Usernames are case INsensitive
-        Top-level routes
-            admin
-            session
-            login/logout/signup
-            home
-            profile
-            bio
-            connections/connection/connect
-            follow/follows/following/followings
-            network/networks
-            settings
-            search
-            location/locations
-            industry/industries
-            title/titles
-            news/site_news
-            contact/feedback
-            browse
-        Static content
-            stylesheets/css/styles
-            scripts/javascripts
-            images/icons
-            robots.txt
-            *.html/*.php/*.css/*.js/*.ico
-            about
-            terms/legal/privacy/terms_and_conditions
-            faq/faqs
-        Networking sites
-            facebook/twitter/linkedin/youtube/...
 Bio 
     more details about a user
 Following/Connection 
