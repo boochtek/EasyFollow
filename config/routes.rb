@@ -22,6 +22,15 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :conditions => { :method => :post },
     :controller => 'user',
     :action => 'create'
+  map.networks '/networks', :conditions => { :method => :get },
+    :controller => 'network',
+    :action => 'index'
+  map.network '/network/add/:network', :conditions => { :method => :get },
+    :controller => 'network',
+    :action => 'new'
+  map.network '/network/add/:network', :conditions => { :method => :post },
+    :controller => 'network',
+    :action => 'create'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
