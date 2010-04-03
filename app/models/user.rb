@@ -26,8 +26,14 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :login, :case_sensitive => false
   validates_acceptance_of :terms_of_service
 
+  after_create :email_user_signup_confirmation
+
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def email_user_signup_confirmation
+    Notifications.deliver_signup_confirmation(:username => login, :full_name => full_name, :first_name => first_name, :email_address => email_address)
   end
 
   # We don't support passwords yet, but want to allow entering them on the login form.
