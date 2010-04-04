@@ -1,0 +1,11 @@
+<h1>Networks</h1>
+
+<ul>
+<% @networks.each do |network| %>
+  <li class="network_site" id="<%= network.name %>">
+    <img alt="<%= network.name %>" src="<%= network.icon %>" />
+    <div class="network_site_name"><%= network.name.humanize %></div>
+    <div class="network_site_username_or_add"><%= username_on_site_or_add_link %></div>
+  </li>
+<% end %>
+</ul>
