@@ -1,0 +1,78 @@
+Signing Up for GithHub
+======================
+Got to http://github.com/.
+Click on the Sign Up button.
+Click on the Sign Up button for the Open Source / Free account.
+Enter a username, password, and your email address.
+    Skip the SSH Public Key for now.
+Click on Account Settings in the upper right.
+Enter your personal details in the Account Settings page.
+Follow the directions at http://help.github.com/mac-key-setup/.
+    If you have an existing SSH key, use it -- don't remove it.
+Send me (craig@boochtek.com) your Gitub account name.
+    I'll give you access to the EasyFollow repository.
+
+Installing Git
+==============
+Follow the directions at http://help.github.com/mac-git-installation/.
+    You'll probably want to use the Pre-compiled Installer.
+
+Git Configuation
+================
+Set up git with your username and email address:
+    git config --global user.name "Example Name"
+    git config --global user.email "example@habanero.com"
+    Note that these do not have to match the GitHub settings.
+
+Pulling Down the Repository
+===========================
+Clone the repository from its Github URL:
+    git clone git@github.com:boochtek/EasyFollow.git
+Change to the project directory:
+    cd EasyFollow
+Pull in some dependencies:
+    git submodule init
+All git commands should be run from this top-level directory.
+
+Day-to-Day Workflow
+===================
+Get the latest updates from Github:
+    git pull
+Edit your files and make your changes.
+See what files have been changed:
+    git status
+When done with the changes, add files with changes you want to commit:
+    git add file-I-changed.txt
+    git add public/images/a-new-file-I-added.png
+See what changes you'll be committing:
+    git diff --cached
+Commit the changes to your local repository:
+    git commit # You'll be prompted to enter a commit message.
+When done with a set of changes, push them up to Github:
+    git pull
+    git push
+NOTE: The 'git push' command won't let you push if you need to pull first.
+
+History
+=======
+To see what you and others have done:
+    git log
+
+Merge Conflicts
+===============
+Merge conflicts happen when 2 people change the same file at the same time.
+If you pull and push frequently, this should not happen too often.
+The 'git pull' command will tell you what files have conflicts.
+    The 'git status' command will also show them as 'unmerged'.
+Edit the files in question.
+    The conflicting parts will be marked with <<<<<<< and >>>>>>>.
+When done with the changes, add files with changes you want to commit:
+    git add file-with-resolved-conflict.txt
+The git docs have a good section on merge conflicts:
+    http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#resolving-a-merge
+
+Note on Editors
+===============
+Be aware that git pull can change files on the file system.
+Be sure that your editor will detect this and load the new version.
+Be sure that you have saved (and committed) everything before pulling.
