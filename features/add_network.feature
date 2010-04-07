@@ -23,7 +23,7 @@ Feature: Add Network
         And I should see "Twitter network added"
         And I should see my Twitter account name next to the "Twitter" network
 
-    Scenario: Trying to Twitter, but network credentials are incorrect
+    Scenario: Trying to add Twitter, but network credentials are incorrect
         Given I am logged in
         And I have not joined any networks
         And I go to the add Twitter network page

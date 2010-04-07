@@ -6,11 +6,11 @@ Bio
     more details about a user
 Following/Connection 
     details regarding one user following another
-SocialNetworkingSite (abstract class - tell AR this!) 
+SocialNetworkSite (abstract class, non-AR) 
     details about a site
     connect one friend to another
     sign in to the site (and authorize our application)
-SocialNetworkingAccount
+SocialNetworkAccount
     details about a user's account on a SocialNetworkSite (id, username, full name)
 
 
