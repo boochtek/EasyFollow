@@ -1,4 +1,4 @@
-Feature: Home Page
+Feature: Login
 
     In order to use the site to its fullest
     As a user
