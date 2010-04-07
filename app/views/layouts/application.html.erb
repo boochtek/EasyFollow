@@ -8,7 +8,7 @@
 
   <head>
 
-    <title><%=h (yield(:title).blank? ? SITE_NAME : "#{yield(:title)} - #{SITE_NAME}") %></title>
+    <title><%=h (yield(:title).blank? ? SITE_TITLE : "#{yield(:title)} - #{SITE_TITLE}") %></title>
 
     <!-- Declare UTF-8 character encoding, for situations where we don't have a web server to do so for us. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -71,6 +71,7 @@
 <% end %>
       </div>
 
+      <!-- Main page content gets pulled in by the yield statement below. -->
       <%= yield %>
     </div>
 
