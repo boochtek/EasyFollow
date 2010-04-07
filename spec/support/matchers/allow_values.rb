@@ -68,7 +68,7 @@ module AllowValuesForMatchers
       attrib_setter = (@attrib.to_s + '=').to_sym
       @expected.each do |value|
         @actual.send(attrib_setter, value)
-        if !@actual.valid?
+        if !@actual.valid? and !@actual.errors.on(@attrib).nil?
           @invalid_values << value
         end
       end
@@ -81,7 +81,7 @@ module AllowValuesForMatchers
       attrib_setter = (@attrib.to_s + '=').to_sym
       @expected.each do |value|
         @actual.send(attrib_setter, value)
-        if @actual.valid?
+        if @actual.valid? or @actual.errors.on(@attrib).nil?
           @valid_values << value
         end
       end
