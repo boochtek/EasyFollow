@@ -46,7 +46,7 @@ Feature: Signup
         And I am on the signup page
         When I fill out the signup form
         But I enter a username that contains a slash
-        Then I should see "may not contain a slash"
+        Then I should see "may only contain alphanumeric characters, plus"
         And I should still be in "Step 1" of the signup
 
     Scenario: User tries to sign up, but the entered information is not valid

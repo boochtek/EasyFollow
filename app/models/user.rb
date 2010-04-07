@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
     easyfollow facebook twitter linkedin youtube
   ]
   PROHIBITED_USERNAME_SUFFIXES = %w[html htm php js css ico]
-  PROHIBITED_USERNAME_REGEX = Regexp.new("(#{PROHIBITED_USERNAMES.join('|')}|\.(#{PROHIBITED_USERNAME_SUFFIXES.join('|')}))")
+  PROHIBITED_USERNAME_REGEX = Regexp.new("(\\A#{PROHIBITED_USERNAMES.join('|')}|\.(#{PROHIBITED_USERNAME_SUFFIXES.join('|')}))\\Z")
 
   attribute :login,         :string, :required => true, :unique => true, :min_length => 2, :max_length => 50
   attribute :email_address, :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
   timestamps
 
   validates_each :login do |record, attr, value|
-    record.errors.add attr, 'may not contain a slash (/)' if value =~ %r{/}
-    record.errors.add attr, 'may not contain any whitespace characters' if value =~ %r{\s}
+    record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:alnum:]]*\Z}
     record.errors.add attr, 'is not allowed' if value =~ PROHIBITED_USERNAME_REGEX
   end
 
