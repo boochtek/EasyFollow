@@ -17,7 +17,11 @@ class User < ActiveRecord::Base
   attr_accessor :terms_of_service # Note that this is a *virtual* attribute, not in the database. Used for validates_acceptance_of below.
   timestamps
 
-  has_many :accounts, :class_name => 'SocialNetworkAccount'
+  has_many :accounts, :class_name => 'SocialNetworkAccount' do
+    def [](network_name)
+      find(:first, :conditions => {:network_name => network_name.to_s.downcase})
+    end
+  end
 
   validates_each :login do |record, attr, value|
     record.errors.add attr, 'may not contain a slash (/)' if value =~ %r{/}

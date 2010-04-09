@@ -15,8 +15,8 @@ class NetworkController < ApplicationController
 
   # Enter info to connect to a network.
   def new
-    @network = params[:network]
-    @account = current_user.accounts.find_by_network_name(@network) || SocialNetworkAccount.create(:network_name => @network, :user => current_user)
+    @network = params[:network].downcase
+    @account = current_user.accounts[@network] || SocialNetworkAccount.create(:network_name => @network, :user => current_user)
     case @account.auth_type
     when :oauth
       if true or !@account.authenticated_to_network_site? # FIXME/TODO: Remove the 'true or'.
@@ -46,8 +46,8 @@ class NetworkController < ApplicationController
       redirect_to networks_path
       return
     end
-    @network = params[:network]
-    @account = current_user.accounts.find_by_network_name(@network)
+    @network = params[:network].downcase
+    @account = current_user.accounts[@network]
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     if @account.verify_oauth_result(@account, params)
       flash[:notice] = "Successfully added the #{@network.humanize} network"
@@ -63,8 +63,8 @@ class NetworkController < ApplicationController
 
   # Connect to a network with the given network credentials.
   def create
-    @network = params[:network]
-    @account = current_user.accounts.find_by_network_name(@network)
+    @network = params[:network].downcase
+    @account = current_user.accounts[@network]
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     # TODO: This stuff not tested yet.
     @account = SocialNetworkAccount.new(params[:user].merge(:network => @network))

@@ -5,8 +5,8 @@
   <li class="network_site" id="<%= network.name %>">
     <img alt="<%= network.name %>" src="<%= network.icon %>" />
     <div class="network_site_name"><%= network.name.humanize %></div>
-  <% if current_user.accounts.find_by_network_name(network.name) && current_user.accounts.find_by_network_name(network.name).authenticated_to_network_site? %>
-    <div class="network_site_username"><%= current_user.accounts.find_by_network_name(network.name).username %></div>
+  <% if current_user.accounts[network.name] && current_user.accounts[network.name].authenticated_to_network_site? %>
+    <div class="network_site_username"><%= current_user.accounts[network.name].username %></div>
   <% else %>
     <div class="network_site_add"><%= link_to('Add Network', network_path(:network => network.name)) %></div>
   <% end %>
