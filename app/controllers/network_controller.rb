@@ -1,7 +1,4 @@
 # TODO:
-#       Make SocialNetworkAccount an AR class, define its properties, migrate.
-#       Change all the session-stored attributes to AR-stored attributes.
-#       Add has_many :accounts, :class => SocialNetworkAccount to the User model.
 #       Make feature scenarios work.
 
 
@@ -29,13 +26,12 @@ class NetworkController < ApplicationController
   # Enter info to connect to a network.
   def new
     @network = params[:network]
-#    current_user.accounts[@network] ||= SocialNetworkAccount.new(@network)
-#    @account = current_user.accounts[@network]
-    @account = SocialNetworkAccount.new(@network, session)
+    @account = current_user.accounts.find_by_network_name(@network) || SocialNetworkAccount.create(:network_name => @network, :user => current_user)
     case @account.auth_type
     when :oauth
       if true or !@account.authenticated_to_network_site? # FIXME/TODO: Remove the 'true or'.
         begin
+          @account.save
           url = @account.oauth_authorize_url(@account, network_oauth_url(:network => @network))
           redirect_to url
         rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
@@ -61,8 +57,7 @@ class NetworkController < ApplicationController
       return
     end
     @network = params[:network]
-#    @account = current_user.accounts[@network]
-    @account = SocialNetworkAccount.new(@network, session)
+    @account = current_user.accounts.find_by_network_name(@network)
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     if @account.verify_oauth_result(@account, params)
       flash[:notice] = "Successfully added the #{@network.humanize} network"
@@ -72,15 +67,14 @@ class NetworkController < ApplicationController
       redirect_to networks_path
     end
   rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
-    flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
+    flash[:notice] = "You did not authorize us to access your #{@network.humanize} account!!!!"
     redirect_to networks_path
   end
 
   # Connect to a network with the given network credentials.
   def create
     @network = params[:network]
-#    @account = current_user.accounts[@network]
-    @account = SocialNetworkAccount.new(@network, session)
+    @account = current_user.accounts.find_by_network_name(@network)
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     # TODO: This stuff not tested yet.
     @account = SocialNetworkAccount.new(params[:user].merge(:network => @network))
@@ -100,9 +94,4 @@ protected
     redirect_to home_path and return if !current_user
   end
 
-  def username_on_site_or_add_link
-    @template.link_to('Add Network', network_path(:network => 'twitter')) # FIXME/TODO: Use the next line.
-#    session[:twitter_username] ? session[:twitter_username] : @template.link_to('Add Network', network_path(:network => 'twitter'))
-    # TODO: current_user.accounts.[network.name] ? current_user.accounts[network.name].username : link_to('Add Network', network_path(:network => network.name))
-  end
 end
