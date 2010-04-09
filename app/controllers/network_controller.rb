@@ -1,7 +1,7 @@
 # TODO:
-#       Add has_many :accounts, :class => SocialNetworkAccount to the User model.
 #       Make SocialNetworkAccount an AR class, define its properties, migrate.
 #       Change all the session-stored attributes to AR-stored attributes.
+#       Add has_many :accounts, :class => SocialNetworkAccount to the User model.
 #       Make feature scenarios work.
 
 
@@ -32,7 +32,8 @@ class NetworkController < ApplicationController
 #    current_user.accounts[@network] ||= SocialNetworkAccount.new(@network)
 #    @account = current_user.accounts[@network]
     @account = SocialNetworkAccount.new(@network, session)
-    if @account.type == :oauth
+    case @account.auth_type
+    when :oauth
       if true or !@account.authenticated_to_network_site? # FIXME/TODO: Remove the 'true or'.
         begin
           url = @account.oauth_authorize_url(@account, network_oauth_url(:network => @network))
@@ -53,6 +54,12 @@ class NetworkController < ApplicationController
 
   # Process callback from OAuth authorization.
   def create_oauth
+    if params[:denied]
+      # User did not allow us access to their OAuth account.
+      flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
+      redirect_to networks_path
+      return
+    end
     @network = params[:network]
 #    @account = current_user.accounts[@network]
     @account = SocialNetworkAccount.new(@network, session)
@@ -64,6 +71,9 @@ class NetworkController < ApplicationController
       flash[:notice] = "Something went wrong adding the #{@network.humanize} network"
       redirect_to networks_path
     end
+  rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
+    flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
+    redirect_to networks_path
   end
 
   # Connect to a network with the given network credentials.

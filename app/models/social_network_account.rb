@@ -3,7 +3,7 @@ class SocialNetworkAccount
   attr_accessor :network_site
   attr_accessor :session ## TODO: This is temporary. We really need to be storing this stuff in AR.
 
-  delegate :type, :to => :network_site
+  delegate :auth_type, :to => :network_site
   delegate :oauth_authorize_url, :to => :network_site
   delegate :verify_oauth_result, :to => :network_site
   delegate :consumer, :to => :network_site # TODO: Temp.
@@ -26,7 +26,7 @@ class SocialNetworkAccount
   def authenticated_to_network_site?
     case network_site.type
     when :oauth
-      session[:oauth_atoken] || session[:oauth_rtoken]
+      session[:oauth_atoken]
     else
       false # TODO
     end
