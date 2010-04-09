@@ -2,16 +2,6 @@
 #       Make feature scenarios work.
 
 
-#class User
-#  has_many :accounts, :class => SocialNetworkAccount
-#  def follow(user_to_follow)
-#    # TODO: Add a Following/Connection object, linking the 2. Probably delegate the following line to that object:
-#    accounts.each{|account| account.follow(user_to_follow.accounts[account.network_name])}
-#  end
-#end
-
-
-
 class NetworkController < ApplicationController
 
   before_filter :must_be_logged_in
