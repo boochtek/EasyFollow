@@ -19,7 +19,7 @@ class NetworkController < ApplicationController
     @account = current_user.accounts[@network] || SocialNetworkAccount.create(:network_name => @network, :user => current_user)
     case @account.auth_type
     when :oauth
-      if true or !@account.authenticated_to_network_site? # FIXME/TODO: Remove the 'true or'.
+      if !@account.authenticated_to_network_site?
         begin
           @account.save
           url = @account.oauth_authorize_url(@account, network_oauth_url(:network => @network))
@@ -40,13 +40,13 @@ class NetworkController < ApplicationController
 
   # Process callback from OAuth authorization.
   def create_oauth
+    @network = params[:network].downcase
     if params[:denied]
       # User did not allow us access to their OAuth account.
       flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
       redirect_to networks_path
       return
     end
-    @network = params[:network].downcase
     @account = current_user.accounts[@network]
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     if @account.verify_oauth_result(@account, params)

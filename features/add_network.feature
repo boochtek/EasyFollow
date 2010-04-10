@@ -18,7 +18,7 @@ Feature: Add Network
         When I follow "Add Network" within "#Twitter"
         And I authorize this app to access my Twitter account
         Then I should be redirected to the networks page
-        And I should see "Twitter network added"
+        And I should see "added the Twitter network"
         And I should see my Twitter account name within "#Twitter"
 
     Scenario: Trying to add Twitter, but network credentials are incorrect
@@ -28,4 +28,4 @@ Feature: Add Network
         When I follow "Add Network" within "#Twitter"
         And I do not authorize this app to access my Twitter account
         Then I should still be on the networks page
-        And I should NOT see "Twitter network added"
+        And I should NOT see "added the Twitter network"
