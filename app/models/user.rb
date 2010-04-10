@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
   attr_accessor :terms_of_service # Note that this is a *virtual* attribute, not in the database. Used for validates_acceptance_of below.
   timestamps
 
+  has_many :accounts, :class_name => 'SocialNetworkAccount' do
+    def [](network_name)
+      find(:first, :conditions => {:network_name => network_name.to_s.downcase})
+    end
+  end
+
   validates_each :login do |record, attr, value|
     record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:alnum:]]*\Z}
     record.errors.add attr, 'is not allowed' if value =~ PROHIBITED_USERNAME_REGEX
@@ -47,5 +53,10 @@ class User < ActiveRecord::Base
   # TODO: Change the login field to username. This is an interim step to allow callers to access either one.
   def username
     self.login
+  end
+
+  def follow(user_to_follow)
+    # TODO: Add a Following/Connection object, linking the 2. Probably delegate the following line to that object:
+    accounts.each{|account| account.follow(user_to_follow.accounts[account.network_name])}
   end
 end

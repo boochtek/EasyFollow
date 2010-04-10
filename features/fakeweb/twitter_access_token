@@ -1,0 +1,3 @@
+HTTP/1.1 200 OK
+
+oauth_token=fake_access_token&oauth_token_secret=fake_access_secret

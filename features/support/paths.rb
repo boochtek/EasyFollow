@@ -18,6 +18,10 @@ module NavigationHelpers
       '/logout'
     when /the signup page/
       '/signup'
+    when /the networks page/
+      '/networks'
+    when /the add Twitter network page/
+      '/network/add/twitter'
 
 
     # Add more mappings here.
