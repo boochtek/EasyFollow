@@ -1,6 +1,8 @@
 # Global constants that apply to the site as a whole.
 # Idea from http://www.smashingmagazine.com/2009/02/25/ruby-on-rails-tips/.
 
+# NOTE: Initializers get loaded alphabetically. We named this file starting with an underscore, so that it gets loaded first, so other initializers can use the constants defined here.
+
 # Name (identifier) of the project. Generally the same name as the directory containing the project.
 PROJECT_NAME = Rails.root.to_s.split('/').last
 
