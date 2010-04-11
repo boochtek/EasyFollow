@@ -7,7 +7,7 @@ class LoginController < ApplicationController
 
   def create
     # TODO: We don't have passwords yet, as we may end up using OpenID or something similar.
-    @user = User.find_by_login(params[:user][:login])
+    @user = User.find(:first, :conditions => ['LOWER(login) = ?', params[:user][:login].downcase]) # NOTE: It'd be better if we just set the collation on this column in the DB to be case-insensitive.
     if @user && @user.verify_password(params[:user][:password])
       session[:user_id] = @user.id
       redirect_to(home_path)

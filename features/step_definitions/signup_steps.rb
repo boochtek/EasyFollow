@@ -59,7 +59,6 @@ end
 
 Then /^I should receive an email confirming that I've signed up$/ do
   user = User.find(@integration_session.session[:user_id])
-  puts Rails.configuration.action_mailer.deliveries.inspect
   Then "\"#{user.email_address}\" should receive 1 email"
   When "\"#{user.email_address}\" opens the email with subject \"Welcome to #{SITE_NAME}\""
   Then "they should see \"#{user.full_name}\" in the email body"
