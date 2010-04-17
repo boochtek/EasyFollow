@@ -15,7 +15,7 @@ class UserController < ApplicationController
     @user = User.new(params[:user])
     if @user.valid?
       @user.save!
-      session[:user_id] = @user.id # Log the user in right away.
+      sign_in @user # Log the user in immediately (via Devise).
       flash[:notice] = "Proceeding to Signup Step 2"
       redirect_to home_path
     else

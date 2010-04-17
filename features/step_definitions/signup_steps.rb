@@ -1,7 +1,7 @@
 
 
 Given /^I have not signed up for an account$/ do
-  Given "no \"#{@signup_username}\" account exists"
+  Given %{no "#{@signup_username}" account exists}
 end
 
 Given /^I have not added any networks$/ do
@@ -11,10 +11,11 @@ end
 
 When /^I fill out the signup form$/ do
   user = Factory.attributes_for(:user)
-  fill_in 'Username', :with => user[:login]
+  fill_in 'Username', :with => user[:username]
   fill_in 'First Name', :with => user[:first_name]
   fill_in 'Last Name', :with => user[:last_name]
-  fill_in 'Email Address', :with => user[:email_address]
+  fill_in 'Email Address', :with => user[:email]
+  fill_in 'Password', :with => user[:password]
   check 'Agree to Terms'
 end
 
@@ -42,7 +43,7 @@ end
 When /^I enter a username that is already taken$/ do
   user = Factory(:user)
   When 'I fill out the signup form'
-  fill_in 'Username', :with => user.login
+  fill_in 'Username', :with => user.username
   click_button 'Sign Up'
 end
 
@@ -54,13 +55,13 @@ end
 
 
 Then /^I should(?:| still) be in "([^\"]*)" of the signup$/ do |step|
-  Then "I should see \"#{step}\""
+  Then %{I should see "#{step}"}
 end
 
 Then /^I should receive an email confirming that I've signed up$/ do
-  user = User.find(@integration_session.session[:user_id])
-  Then "\"#{user.email_address}\" should receive 1 email"
-  When "\"#{user.email_address}\" opens the email with subject \"Welcome to #{SITE_NAME}\""
-  Then "they should see \"#{user.full_name}\" in the email body"
-  Then "they should see \"#{user.login}\" in the email body"
+  user = @integration_session.controller.current_user
+  Then %{"#{user.email}" should receive 1 email}
+  When %{"#{user.email}" opens the email with subject "Welcome to #{SITE_NAME}"}
+  Then %{they should see "#{user.full_name}" in the email body}
+  Then %{they should see "#{user.username}" in the email body}
 end

@@ -16,7 +16,7 @@ Given /^(?:|I )(?:am logged|log) in as (.+)$/ do |username|
 end
 
 Given /^the "([^\"]*)" user exists$/ do |username|
-  @user = Factory(:user, :login => username)
+  @user = Factory(:user, :username => username)
 end
 
 
@@ -24,59 +24,65 @@ Then /^I should be logged out$/ do
   Then 'I should NOT be logged in'
 end
 Then /^I should(| not| NOT) be logged in$/ do |nt|
-  user_id = @integration_session.session[:user_id]
   if nt =~ / not/i
-    user_id.should be_nil
+    Then %{I should NOT see "Log Out"}
   else
-    user_id.should_not be_nil
+    Then %{I should see "Log Out"}
   end
 end
 
 Given /^the "([^\"]*)" account exists$/ do |user|
-  Factory(:user, :login => user)
+  Factory(:user, :username => user)
 end
 Given /^no "([^\"]*)" account exists$/ do |user|
-  User.find_by_login(user).should be_nil
+  User.find_by_username(user).should be_nil
 end
 
 Given /^the "([^\"]*)" account has a(?:|n) (.+) of "([^\"]*)"$/ do |user, prop, val|
-  User.find_by_login(user).send(prop, val) unless prop == 'password' # We don't support passwords yet.
+  @user = User.find_by_username(user)
+  @user.send((prop+'=').to_sym, val)
+  @user.send(prop.to_sym).should == val
+  @user.save!
 end
-
 
 
 # These are the simplest way to test logging in and out without actually having a User class.
 def login
-  visit('/home/fake_login')
-  @integration_session.session[:user_id].should_not be_nil
+  Given %{the "test" account exists}
+  Given %{the "test" account has a password of "password"}
+  When %{I go to the login page}
+  When %{fill in "Username" with "test"}
+  When %{fill in "Password" with "password"}
+  When %{click on the "Log In" button}
+  Then %{I should end up on the home page}
+  Then %{I should be logged in}
 end
 
 def logout
-  visit('/home/fake_logout')
+  visit('/logout')
   @integration_session.session[:user_id].should be_nil
 end
 
 # This one requires having a User class.
 def login_as(login)
-  user = @user || User.find_by_login(login) || Factory(:user, :login => login)
-  visit("/home/fake_login?id=#{user.id}")
+  user = @user || User.find_by_username(login) || Factory(:user, :username => login)
+  visit('/login')
   user_id = @integration_session.session[:user_id]
   user_id.should == user.id
 end
 
 
-# Fake out login, based on ideas from http://www.jarrodspillers.com/2008/08/22/faking-the-funk-stub-authentication-in-a-rails-rspec-story/.
-class HomeController
-  def fake_login
-    (user = params[:id] ? User.find(params[:id]) : User.new).save(false)
-    session[:user_id] = user.id
-    render :text => ''
+
+
+# Based on code from http://www.francisfish.com/debugging_cucumber_scripts_cucumber_and_devise_authenticati.htm
+def create_user(params)
+  unless user = User.find_by_username(params[:username])
+    params[:password_confirmation] = params[:password]
+    user = User.create!(params)
   end
-  def fake_logout
-    session[:user_id] = nil
-    render :text => ''
-  end
+  user
 end
+
 
 if !defined?(User)
   class User

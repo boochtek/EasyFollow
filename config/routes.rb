@@ -1,27 +1,42 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.root :controller => 'home'
   map.home '', :controller => 'home'
+
   map.contact '/contact', :conditions => { :method => :get },
     :controller => 'feedback',
     :action => 'new'
   map.contact '/contact', :conditions => { :method => :post },
     :controller => 'feedback',
     :action => 'create'
+
+  # This provides all the routes that Devise needs.
+  map.devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup'}
+
+  # I don't like the routes that Devise uses, so I override some of them, and create aliases for some of them.
+  map.new_user_session '/login', :conditions => { :method => :get },
+    :controller => 'sessions',
+    :action => 'new'
+  map.user_session '/login', :conditions => { :method => :post },
+    :controller => 'sessions',
+    :action => 'create'
   map.login '/login', :conditions => { :method => :get },
-    :controller => 'login',
+    :controller => 'sessions',
     :action => 'new'
   map.login '/login', :conditions => { :method => :post },
-    :controller => 'login',
+    :controller => 'sessions',
     :action => 'create'
   map.logout '/logout',
-    :controller => 'login',
-    :action => 'delete'
+    :controller => 'sessions',
+    :action => 'destroy'
+
   map.signup '/signup', :conditions => { :method => :get },
     :controller => 'user',
     :action => 'new'
   map.signup '/signup', :conditions => { :method => :post },
     :controller => 'user',
     :action => 'create'
+
   map.networks '/networks', :conditions => { :method => :get },
     :controller => 'network',
     :action => 'index'

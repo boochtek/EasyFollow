@@ -5,7 +5,7 @@ Devise.setup do |config|
   config.mailer_sender = DO_NOT_REPLY
 
   # Configure the content type of DeviseMailer mails (defaults to text/html")
-  # config.mailer_content_type = "text/plain"
+  config.mailer_content_type = "text/plain"
 
   # ==> Configuration for :authenticatable
   # Invoke `rake secret` and use the printed value to setup a pepper to generate
@@ -30,7 +30,7 @@ Devise.setup do |config|
   # parameters are used only when authenticating and not when retrieving from
   # session. If you need permissions, you should implement that in a before filter.
   # config.authentication_keys = [ :email ]
-  config.authentication_keys = [ :username ]
+  config.authentication_keys = [:username]
 
   # The realm used in Http Basic Authentication
   # config.http_authentication_realm = "Application"

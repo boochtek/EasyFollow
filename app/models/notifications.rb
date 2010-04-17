@@ -12,7 +12,7 @@ class Notifications < ActionMailer::Base
 
   def signup_confirmation(user)
     subject     "Welcome to #{SITE_NAME}"
-    recipients  user.email_address
+    recipients  user.email
     from        DO_NOT_REPLY
     sent_on     Time.now.utc
 
