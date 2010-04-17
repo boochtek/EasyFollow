@@ -1,21 +1,27 @@
 class User < ActiveRecord::Base
+  # Use Devise for login authentication, password recovery, etc. We're not using Devise for registration/signup.
+  devise :authenticatable, :recoverable, :rememberable, :trackable, :validatable, :locakable
+
   # These usernames cannot be used, because they might be used within the site itself.
   PROHIBITED_USERNAMES = %w[
-    admin session login logout signup home profile bio connections connection connect follow follows following followings
-    network networks settings search location locations industry industries title titles news site_news contact feedback browse
-    stylesheets css styles scripts javascripts js javascript images icons files robots.txt
-    about terms legal privacy terms_and_conditions terms_of_service faq faqs
+    users? admin sessions? login logout signup home profiles? bios? connections? connect follows? followings? registrations? passwords?
+    networks? settings search locations? industry industries titles? news site_news contact feedback browse
+    stylesheets? css styles? scripts? javascripts? js javascript images? icons? files? robots.txt
+    about terms legal privacy terms_and_conditions terms_of_service faqs?
     easyfollow facebook twitter linkedin youtube
   ]
   PROHIBITED_USERNAME_SUFFIXES = %w[html htm php js css ico]
-  PROHIBITED_USERNAME_REGEX = Regexp.new("(\\A#{PROHIBITED_USERNAMES.join('|')}|\.(#{PROHIBITED_USERNAME_SUFFIXES.join('|')}))\\Z")
+  PROHIBITED_USERNAME_REGEX = Regexp.new("\\A(#{PROHIBITED_USERNAMES.join('|')}|.*\\.(#{PROHIBITED_USERNAME_SUFFIXES.join('|')}))\\Z")
 
-  attribute :login,         :string, :required => true, :unique => true, :min_length => 2, :max_length => 50
-  attribute :email_address, :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  attribute :username,      :string, :required => true, :unique => true, :min_length => 2, :max_length => 50
+  attribute :email,         :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   attribute :first_name,    :string, :required => true, :max_length => 50
   attribute :last_name,     :string, :max_length => 50
   attr_accessor :terms_of_service # Note that this is a *virtual* attribute, not in the database. Used for validates_acceptance_of below.
   timestamps
+
+  # Only allow users to directly modify these attributes.
+  attr_accessible :username, :email, :first_name, :last_name, :password, :password_confirmation
 
   has_many :accounts, :class_name => 'SocialNetworkAccount' do
     def [](network_name)
@@ -23,36 +29,28 @@ class User < ActiveRecord::Base
     end
   end
 
-  validates_each :login do |record, attr, value|
+  validates_each :username do |record, attr, value|
     record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:alnum:]]*\Z}
     record.errors.add attr, 'is not allowed' if value =~ PROHIBITED_USERNAME_REGEX
   end
 
-  validates_uniqueness_of :login, :case_sensitive => false
+  validates_uniqueness_of :username, :case_sensitive => false
   validates_acceptance_of :terms_of_service
+  attr_accessible :terms_of_service # Required for validates_acceptance_of
 
+  # We're not using Devise's confirmable to make users confirm their email addresses. But we're seding them an email telling them that they've signed up.
   after_create :email_user_signup_confirmation
-
-  def full_name
-    "#{first_name} #{last_name}"
-  end
 
   def email_user_signup_confirmation
     Notifications.deliver_signup_confirmation(self)
   end
 
-  # We don't support passwords yet, but want to allow entering them on the login form.
-  def password
-  end
-  def password=(val)
-  end
-  def verify_password(pwd)
-    return pwd != 'incorrect password'
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
-  # TODO: Change the login field to username. This is an interim step to allow callers to access either one.
-  def username
-    self.login
+  def self.find_first_by_username(username)
+    self.find(:first, :conditions => ['LOWER(username) = ?', username.downcase]) # NOTE: It'd be better if we just set the collation on this column in the DB to be case-insensitive.
   end
 
   def follow(user_to_follow)
