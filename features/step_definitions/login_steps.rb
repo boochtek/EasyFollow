@@ -11,12 +11,7 @@ end
 Given /^(?:|I )(?:am logged|log) in as (.+)$/ do |username|
   # TODO: Snip off dquotes, if neccessary.
   # TODO: Allow looking up user by username or full name.
-  Given "the \"#{username}\" user exists"
   login_as(username)
-end
-
-Given /^the "([^\"]*)" user exists$/ do |username|
-  @user = Factory(:user, :username => username)
 end
 
 
@@ -31,22 +26,7 @@ Then /^I should(| not| NOT) be logged in$/ do |nt|
   end
 end
 
-Given /^the "([^\"]*)" account exists$/ do |user|
-  Factory(:user, :username => user)
-end
-Given /^no "([^\"]*)" account exists$/ do |user|
-  User.find_by_username(user).should be_nil
-end
 
-Given /^the "([^\"]*)" account has a(?:|n) (.+) of "([^\"]*)"$/ do |user, prop, val|
-  @user = User.find_by_username(user)
-  @user.send((prop+'=').to_sym, val)
-  @user.send(prop.to_sym).should == val
-  @user.save!
-end
-
-
-# These are the simplest way to test logging in and out without actually having a User class.
 def login
   Given %{the "test" account exists}
   Given %{the "test" account has a password of "password"}
@@ -63,12 +43,21 @@ def logout
   @integration_session.session[:user_id].should be_nil
 end
 
-# This one requires having a User class.
 def login_as(login)
-  user = @user || User.find_by_username(login) || Factory(:user, :username => login)
-  visit('/login')
-  user_id = @integration_session.session[:user_id]
-  user_id.should == user.id
+  Given %{the "#{login}" account exists}
+  Given %{the "#{login}" account has a password of "password"}
+  When %{I go to the login page}
+  When %{fill in "Username" with "#{login}"}
+  When %{fill in "Password" with "password"}
+  When %{click on the "Log In" button}
+  Then %{I should end up on the home page}
+  Then %{I should be logged in}
+
+#  user = @user || User.find_by_username(login) || Factory(:user, :username => login)
+#  visit('/login')
+
+#  user_id = @integration_session.session[:user_id]
+#  user_id.should == user.id
 end
 
 
@@ -89,11 +78,8 @@ if !defined?(User)
     def self.find(id)
       self.new
     end
-  end
-end
-
-class User
-  def full_name
-    'Fake User'
+    def full_name
+      'Fake User'
+    end
   end
 end

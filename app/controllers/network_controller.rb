@@ -10,6 +10,7 @@ class NetworkController < ApplicationController
   # List the user's networks
   def index
     @networks = SocialNetworkSite.all
+    @user = current_user
     render 'network/list'
   end
 

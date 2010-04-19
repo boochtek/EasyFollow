@@ -4,10 +4,6 @@ Given /^I have not signed up for an account$/ do
   Given %{no "#{@signup_username}" account exists}
 end
 
-Given /^I have not added any networks$/ do
-  pending # TODO
-end
-
 
 When /^I fill out the signup form$/ do
   user = Factory.attributes_for(:user)

@@ -1,3 +1,10 @@
+class String
+  def trim_quotes
+    self[/\A["']*([^"']*)["']*\Z/, 1]
+  end
+end
+
+
 module NavigationHelpers
   # Maps a name to a path. Used by the
   #
@@ -6,6 +13,9 @@ module NavigationHelpers
   # step definition in web_steps.rb
   #
   def path_to(page_name)
+    return page_name if page_name =~ %r{\A/.*}
+    return page_name.trim_quotes if page_name.trim_quotes =~ %r{\A/.*}
+
     case page_name
     
     when /the home\s?page/
@@ -22,7 +32,6 @@ module NavigationHelpers
       '/networks'
     when /the add Twitter network page/
       '/network/add/twitter'
-
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

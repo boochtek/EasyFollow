@@ -57,10 +57,10 @@ Feature: Signup
         Then I should still be in "Step 1" of the signup
         And I should see "problems with the following fields"
 
-    Scenario: User signed up, but never added any networks
-        Given I am logged in
-        And I have not added any networks
-        When I go to the home page
-        Then I should be redirected to the signup page
-        And I should be in "Step 2" of the signup
+#    Scenario: User signed up, but never added any networks
+#        Given I am logged in
+#        And I have not added any networks
+#        When I go to the home page
+#        Then I should be redirected to the networks page
+#        And I should be in "Step 2" of the signup
 

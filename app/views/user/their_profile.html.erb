@@ -1,0 +1,4 @@
+<div class="their">
+  Profile for <%= @user.full_name %> (<%= @user.username %>)
+  <%= render :partial => 'user/profile', :locals => {:who => 'their name', :user => @user} %>
+</div>

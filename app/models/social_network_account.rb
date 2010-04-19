@@ -25,7 +25,7 @@ class SocialNetworkAccount < ActiveRecord::Base
 
   def username
     return nil if !authenticated_to_network_site?
-    username ||= network_site.get_user_details(self)[:username]
+    @username ||= read_attribute(:username) || network_site.get_user_details(self)[:username]
   end
 
   # NOTE: This takes a SocialNetworkAccount parameter.

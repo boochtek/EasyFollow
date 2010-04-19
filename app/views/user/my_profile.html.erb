@@ -7,3 +7,9 @@
 <p>
   <%= link_to 'Networks', '/networks' %>
 </p>
+
+<div class="their">
+  <%= render :partial => 'user/profile', :locals => {:who => 'your', :user => @user} %>
+</div>
+
+Your email address: <%= @user.email %>
