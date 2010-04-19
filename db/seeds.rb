@@ -8,5 +8,5 @@
 if Rails.env != 'production'
   User.create(:username => 'booch', :first_name => 'Craig', :last_name => 'Buchek', :email => 'craig@boochtek.com', :password => 'craigbuchek')
   User.create(:username => 'greg', :first_name => 'Greg', :last_name => 'Mattison', :email => 'greg.mattison@habanero.com', :password => 'habanero')
-  User.create(:username => 'CraigBuchek', :first_name => 'Craig', :last_name => 'Buchek', :email => 'craig@boochtek.com', :password => 'boochtek')
+  User.create(:username => 'CraigBuchek', :first_name => 'Craig', :last_name => 'Buchek', :email => 'craig2@boochtek.com', :password => 'boochtek', :password_confirmation => 'boochtek')
 end

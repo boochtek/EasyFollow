@@ -2,7 +2,9 @@ SITES_TO_CHECK = %w[Twitter] # TODO: Add LinkedIn, Facebook, etc.
 ACCOUNTS_TO_USE = {'Twitter' => 'CraigBuchek'} # NOTE: FakeWeb pages will manually have to match these.
 
 
-
+Given /^I have not added any networks$/ do
+  SocialNetworkAccount.all.should == []
+end
 Given /^(?:|I )have not joined any networks$/ do
   SocialNetworkAccount.all.should == []
 end

@@ -15,10 +15,6 @@ Given /^(?:|I )(?:am logged|log) in as (.+)$/ do |username|
   login_as(username)
 end
 
-Given /^the "([^\"]*)" user exists$/ do |username|
-  @user = Factory(:user, :username => username)
-end
-
 
 Then /^I should be logged out$/ do
   Then 'I should NOT be logged in'
@@ -29,20 +25,6 @@ Then /^I should(| not| NOT) be logged in$/ do |nt|
   else
     Then %{I should see "Log Out"}
   end
-end
-
-Given /^the "([^\"]*)" account exists$/ do |user|
-  Factory(:user, :username => user)
-end
-Given /^no "([^\"]*)" account exists$/ do |user|
-  User.find_by_username(user).should be_nil
-end
-
-Given /^the "([^\"]*)" account has a(?:|n) (.+) of "([^\"]*)"$/ do |user, prop, val|
-  @user = User.find_by_username(user)
-  @user.send((prop+'=').to_sym, val)
-  @user.send(prop.to_sym).should == val
-  @user.save!
 end
 
 
