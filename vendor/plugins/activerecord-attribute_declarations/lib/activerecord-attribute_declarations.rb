@@ -1,7 +1,3 @@
-# BUGS:
-#       Apparently, models get loaded twice sometimes, causing us to get duplicate declarations.
-#           Only solution is probably to make sure duplicate declarations are the same.
-
 # TODO:
 #       Write docs, including how to use it, and why I created it.
 #       Allow migration_code to take a hash, indicating renamed fields.
@@ -40,7 +36,7 @@ module ActiveRecord::AttributeDeclarations
   # These are all the options that can be provided in an 'attribute' declaration. They're divided up into where they are used.
   MIGRATION_OPTIONS = [:null, :default, :limit, :scale, :precision]
   ATTRIBUTE_OPTIONS = [:protected, :read_only, :serialize, :composed_of]
-  VALIDATION_OPTIONS = [:confirmation, :required, :acceptance_required, :length, :min_length, :max_length, :unique, :format, :within, :not_in, :minimum, :maximum]
+  VALIDATION_OPTIONS = [:confirmation, :required, :length, :min_length, :max_length, :unique, :format, :within, :not_in, :minimum, :maximum]
   DECLARATION_OPTIONS = ATTRIBUTE_OPTIONS + MIGRATION_OPTIONS + VALIDATION_OPTIONS
 
 
@@ -53,7 +49,8 @@ module ActiveRecord::AttributeDeclarations
   # Not sure if there's a better way to do this -- but it was easy enough to write my own.
   def self.load_all_models
     #Dir[File.join(Rails.root, 'app', 'models', '**', '*.rb')].each {|file| require File.basename(file, File.extname(file)) } # The Ruby way.
-    Dir[File.join(Rails.root, 'app', 'models', '**', '*.rb')].each {|file| load File.basename(file) } # The Rails way.
+    #Dir[File.join(Rails.root, 'app', 'models', '**', '*.rb')].each {|file| load File.basename(file) } # The Rails way.
+    Dir[File.join(Rails.root, 'app', 'models', '**', '*.rb')].each {|file| File.basename(file, File.extname(file)).camelize.constantize } # The Rails autoload way (prevents double-loading).
   end
 
 
@@ -202,7 +199,6 @@ module ActiveRecord::AttributeDeclarations
       validates_uniqueness_of name                                                  if decl[:unique]
       validates_presence_of name                                                    if decl[:required]
       validates_confirmation_of name                                                if decl[:confirmation]
-      validates_acceptance_of name                                                  if decl[:acceptance_required]
       validates_length_of name, :in => decl[:length]                                if decl[:length]
       validates_length_of name, :minimum => decl[:min_length]                       if decl[:min_length]
       validates_length_of name, :maximum => decl[:max_length]                       if decl[:max_length]
