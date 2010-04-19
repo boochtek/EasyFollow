@@ -7,7 +7,7 @@ end
 
 
 Given /^the (.*) account exists$/ do |username|
-  Factory(:user, :username => username.trim_quotes)
+  Factory(:user, :username => username.trim_quotes, :email => "craig#{rand(1000000)}@example.com")
 end
 Given /^no (.*) account exists$/ do |username|
   User.find_by_username(username.trim_quotes).should be_nil
@@ -22,14 +22,18 @@ Given /^the (.*) account has a(?:|n) (.+) of "([^\"]*)"$/ do |username, prop, va
 end
 
 Given /^my account has the following details:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  @user.should_not be_nil
+  table.rows_hash.each do |prop, val|
+    @user.send((prop+'=').to_sym, val)
+    @user.send(prop.to_sym).should == val
+  end
+  @user.save!
 end
-
-
-Given /^the CraigBuchek account has the following details:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+Given /^the (.*) account has the following details:$/ do |username, table|
+  @user = User.find_by_username(username.trim_quotes)
+  table.rows_hash.each do |prop, val|
+    @user.send((prop+'=').to_sym, val)
+    @user.send(prop.to_sym).should == val
+  end
+  @user.save!
 end
-
-

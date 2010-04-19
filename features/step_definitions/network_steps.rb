@@ -2,11 +2,21 @@ SITES_TO_CHECK = %w[Twitter] # TODO: Add LinkedIn, Facebook, etc.
 ACCOUNTS_TO_USE = {'Twitter' => 'CraigBuchek'} # NOTE: FakeWeb pages will manually have to match these.
 
 
-Given /^I have not added any networks$/ do
+Given /^(?:|I )have not (?:added|joined) any networks$/ do
   SocialNetworkAccount.all.should == []
 end
-Given /^(?:|I )have not joined any networks$/ do
-  SocialNetworkAccount.all.should == []
+
+Given /^(.*) has added (?:his|her|their) "([^\"]*)" Twitter account$/ do |username, account|
+  @user = User.find_by_username(username.trim_quotes)
+  @network = SocialNetworkAccount.new(:username => account, :network_name => 'twitter', :user => @user, :token => {})
+  @network.token[:oauth_atoken] = 'not_nil' # Fake it so that @network.authenticated_to_network_site? will return true.
+  @network.save!
+end
+Given /^(?:|I )have added my "([^\"]*)" Twitter account/ do |account|
+  @user.should_not be_nil
+  @network = SocialNetworkAccount.new(:username => account, :network_name => 'twitter', :user => @user, :token => {})
+  @network.token[:oauth_atoken] = 'not_nil' # Fake it so that @network.authenticated_to_network_site? will return true.
+  @network.save!
 end
 
 
