@@ -7,7 +7,7 @@
 
 
 # Only run this if the plugin has been loaded, and we're not in a generator.
-if defined?(ActiveRecord::AttributeDeclarations) && !defined?(Rails::Generator)
+if false and defined?(ActiveRecord::AttributeDeclarations) && !defined?(Rails::Generator)
   ActiveRecord::AttributeDeclarations.load_all_models
 
   # Check each AR model class. We have to use send, because subclasses is a protected method.
