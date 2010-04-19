@@ -28,4 +28,19 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 config.gem 'bullet', :version => '>= 1.7.6'
 
-  config.gem 'rspec-rails', :version => '>= 1.3.2', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+config.gem 'email_spec', :lib => 'email_spec', :version => '>= 0.6.2' # See http://github.com/bmabey/email-spec for docs.
+config.gem 'rr', :lib => 'rr', :version => '>= 0.10.11'
+config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com', :version => '>= 1.2.2'
+config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com', :version => '>= 2.10.1'
+config.gem 'webrat', :lib => false, :version => '>= 0.7.0'
+config.gem 'database_cleaner', :lin => false
+config.gem 'rspec', :lib => false, :version => '>= 1.3.0'
+config.gem 'rspec-rails', :lib => false, :version => '>= 1.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+config.gem 'cucumber', :lib => false, :version => '>= 0.6.3'
+config.gem 'cucumber-rails', :lib => false, :version => '>= 0.3.0'
+config.gem 'chronic'
+config.gem 'roodi'
+config.gem 'reek'
+config.gem 'flog'
+config.gem 'flay'
+config.gem 'jscruggs-metric_fu', :lib => 'metric_fu', :source => 'http://gems.github.com', :version => '1.0.2'

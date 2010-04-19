@@ -20,25 +20,27 @@ require 'capistrano/ext/multistage'
 set :application, 'NAME_OF_APPLICATION'
 
 # Define short names of servers we'll be deploying to.
-set :prod_server, 'SERVER.TO.DEPLOY.TO'
+set :prod_server, 'meezy.boochtek.com'
 
 # Set SSH port, in case we use a non-standard port.
 set :port, 22
 
 # Define the Subversion repository.
-set :scm, :svn
-set :repository,  "svn+ssh://#{prod_server}/var/svn/#{application}/trunk"
+#set :scm, :svn
+#set :repository,  "svn+ssh://#{prod_server}/var/svn/#{application}/trunk"
 
 # Define a GIT repository.
-#set :scm, :git
-#set :repository,  "git@github.com:GITHUBUSERNAME/GITHUBREPOSITORYNAME.git"
-#set :git_enable_submodules, 1         # Make sure git submodules are populated
+set :scm, :git
+set :repository,  "git@github.com:boochtek/EasyFollow.git"
+set :git_enable_submodules, 1         # Make sure git submodules are populated
+set :deploy_via, :remote_cache # Keep a local git repo on the server, and simply run a fetch from that rather than an entire clone.
+
 
 # Don't use sudo - run the startup scripts as myself. If we've set up the directory as sticky, with proper group ownership, this should work.
 set :use_sudo, false
 
 # Define the top-level directory into which to deploy.
-set :deploy_to, "/var/www/#{site_name}"
+set :deploy_to, "/var/www/meezy.boochtek.com"
 
 namespace :deploy do
   desc 'Restart Application (using Phusion Passenger)'
@@ -61,9 +63,18 @@ namespace :deploy do
   task :package_assets, :roles => [:web] do
     run "cd #{release_path} && rake asset:packager:build_all"
   end
+
+  # NOTE: Make sure your sudoers file allows the Capistrano user to sudo /usr/local/bin/rake gems\:install RAILS_ENV=production
+  desc "Installs and build gems as specified in environment.rb"
+  task :install_gems, :roles => :app do
+    run "cd #{release_path} && sudo rake gems:install RAILS_ENV=production"
+  end
+
+
 end
 after 'deploy:setup', 'deploy:create_database_yaml'
 after 'deploy:update_code', 'deploy:symlink_database_yaml'
-after 'deploy:update_code', 'deploy:package_assets'
+after 'deploy:update_code', 'deploy:install_gems'
+#after 'deploy:update_code', 'deploy:package_assets'
 after 'deploy', 'deploy:cleanup' # Leaves current deployment, plus the 4 previous.
 after 'deploy:migrations', 'deploy:cleanup'
