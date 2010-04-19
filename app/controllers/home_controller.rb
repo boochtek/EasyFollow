@@ -1,10 +1,14 @@
 class HomeController < ApplicationController
 
   def index
-    if current_user
+    @user = current_user
+    @networks = SocialNetworkSite.all
+    if @user and @user.accounts.empty? and request.referrer == signup_url
+      redirect_to networks_path
+    elsif @user
       render 'user/my_profile'
     else
-      render 'index'
+      render 'home/index'
     end
   end
 

@@ -3,6 +3,7 @@ class ProfileController < ApplicationController
   def show
     @username = params[:username]
     @user = User.find_first_by_username(@username)
+    @networks = SocialNetworkSite.all
     if @user.nil?
       flash[:error] = "Could not find the #{@username} user."
       redirect_to home_path
