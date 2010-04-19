@@ -1,15 +1,3 @@
-<h1>Networks</h1>
+<h1><%= @user.accounts.nil? ? 'Signup (Step 2)' : 'Networks' %></h1>
 
-<ul>
-<% @networks.each do |network| %>
-  <li class="network_site" id="<%= network.name %>">
-    <img alt="<%= network.name %>" src="<%= network.icon %>" />
-    <div class="network_site_name"><%= network.name.humanize %></div>
-  <% if current_user.accounts[network.name] && current_user.accounts[network.name].authenticated_to_network_site? %>
-    <div class="network_site_username"><%= current_user.accounts[network.name].username %></div>
-  <% else %>
-    <div class="network_site_add"><%= link_to('Add Network', network_path(:network => network.name)) %></div>
-  <% end %>
-  </li>
-<% end %>
-</ul>
+<%= render :partial => 'network/list', :locals => {:networks => @networks, :user => @user} %>
