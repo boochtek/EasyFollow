@@ -58,6 +58,12 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'network',
     :action => 'create_oauth'
 
+  # Connections (following)
+  map.new_connection '/connection/new/:user', :conditions => { :method => :post },
+    :controller => 'connection',
+    :action => 'new'
+
+
   # Profile pages -- we can use profile_url(:username => 'CraigBuchek')
   map.profile ':username', :conditions => { :method => :get },
     :controller => 'profile',
