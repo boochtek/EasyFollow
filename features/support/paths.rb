@@ -18,7 +18,7 @@ module NavigationHelpers
 
     case page_name
     
-    when /the home\s?page/
+    when /the home\s?page/, /my profile page/
       '/'
     when /the (contact|feedback) page/
       '/contact'

@@ -59,14 +59,15 @@ ActionController::Routing::Routes.draw do |map|
     :action => 'create_oauth'
 
   # Connections (following)
-  map.new_connection '/connection/new/:user', :conditions => { :method => :post },
+  map.create_connection '/connection/create', :conditions => { :method => :post },
     :controller => 'connection',
-    :action => 'new'
-
+    :action => 'create'
 
   # Profile pages -- we can use profile_url(:username => 'CraigBuchek')
   map.profile ':username', :conditions => { :method => :get },
     :controller => 'profile',
     :action => 'show'
+  # Make my_profile an alias for the home page (assuming the user is logged in)
+  map.my_profile '', :controller => 'home'
 
 end
