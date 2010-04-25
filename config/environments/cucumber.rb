@@ -27,4 +27,9 @@ config.gem 'webrat',           :lib => false, :version => '>=0.7.0' unless File.
 config.gem 'rspec',            :lib => false, :version => '>=1.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 
+config.gem 'email_spec', :lib => 'email_spec', :version => '>= 0.6.2' # See http://github.com/bmabey/email-spec for docs.
+config.gem 'rr', :lib => 'rr', :version => '>= 0.10.11'
+config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com', :version => '>= 1.2.2'
+config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com', :version => '>= 2.10.1'
+
 config.gem 'fakeweb',          :lib => false, :version => '>=1.2.8'
