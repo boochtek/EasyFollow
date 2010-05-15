@@ -12,7 +12,7 @@ Feature: Following
         When I go to '/BoochTek'
         And I click on the "Follow Me" button
         Then I should end up at my profile page
-        And I should see "BoochTekTwitter" within "#Twitter"
+        And I should see "BoochTek" within ".connections"
 
     Scenario: I'm already following him on Twitter
         Given I am logged in as CraigBuchek
@@ -23,4 +23,4 @@ Feature: Following
         When I go to '/BoochTek'
         And I click on the "Follow Me" button
         Then I should end up at my profile page
-        And I should see "BoochTekTwitter" within "#Twitter"
+        And I should see "BoochTek" within ".connections"
