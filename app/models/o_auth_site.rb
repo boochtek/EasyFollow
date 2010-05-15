@@ -34,7 +34,7 @@ class OAuthSite < SocialNetworkSite
     end
 
     def options
-      @options ||= OAUTH_CREDENTIALS[self.name.downcase.to_sym]
+      @options ||= OAUTH_CREDENTIALS[self.name.underscore.to_sym]
     end
 
     def consumer

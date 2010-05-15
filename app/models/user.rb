@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   has_many :accounts, :class_name => 'SocialNetworkAccount' do
     def [](network_name)
-      find(:first, :conditions => {:network_name => network_name.to_s.downcase})
+      find(:first, :conditions => {:network_name => network_name.to_s})
     end
   end
 
