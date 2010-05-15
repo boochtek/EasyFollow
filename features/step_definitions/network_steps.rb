@@ -6,11 +6,15 @@ Given /^(?:|I )have not (?:added|joined) any networks$/ do
   SocialNetworkAccount.all.should == []
 end
 
-Given /^(.*) has added (?:his|her|their) "([^\"]*)" Twitter account$/ do |username, account|
+Given /^(.*) has added (?:his|her|their|the) "([^\"]*)" Twitter account$/ do |username, account|
   @user = User.find_by_username(username.trim_quotes)
   @network = SocialNetworkAccount.new(:username => account, :network_name => 'twitter', :user => @user, :token => {})
   @network.token[:oauth_atoken] = 'not_nil' # Fake it so that @network.authenticated_to_network_site? will return true.
   @network.save!
+  stub_post("http://api.twitter.com/1/friendships/create.json?screen_name=#{account}", 'twitter_follow.json')
+end
+Given /^I am already following "([^\"]*)" on Twitter$/ do |account|
+  stub_post("http://api.twitter.com/1/friendships/create.json?screen_name=#{account}", 'twitter_follow_already_following.json')
 end
 Given /^(?:|I )have added my "([^\"]*)" Twitter account/ do |account|
   @user.should_not be_nil

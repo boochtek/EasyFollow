@@ -19,7 +19,7 @@ Feature: Following
         And I have added my "CraigBuchekTwitter" Twitter account
         And the BoochTek account exists
         And BoochTek has added the "BoochTekTwitter" Twitter account
-        And I'm already following "BoochTekTwitter" on Twitter
+        And I am already following "BoochTekTwitter" on Twitter
         When I go to '/BoochTek'
         And I click on the "Follow Me" button
         Then I should end up at my profile page
