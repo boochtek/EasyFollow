@@ -1,0 +1,157 @@
+/* Host Analytics Print CSS */
+
+	* {
+	  color : black !important;
+	  background-image : none !important;
+	  background-color : transparent !important;
+	  position : static !important;
+	  float : none !important;
+	}
+	
+	a {
+	  text-decoration : underline !important;
+	}
+	
+	html, body {
+	  padding : 0 !important;
+	  margin : 0 !important; 
+	}
+	
+	.bgd-wrapper {
+		padding : 0 !important;
+		margin : 0 !important;
+		width : 730px !important;
+	}
+	
+	.page-wrapper {
+	  padding : 0 !important;
+	  text-align: left;
+	  width: 730px !important;
+	  margin : 15px 0px 0px 20px !important;
+	  background-image : none !important;
+	  background-color : transparent !important;
+	}   
+	
+	.column-wrapper {
+		width : auto !important;
+	}
+	
+	.footer-wrapper {
+	  padding : 0 !important;
+	  text-align: left;
+	  width: 730px !important;
+	  margin : 0px 0px 0px 20px !important;
+	  height : auto !important;
+	}   	
+	
+	@media print {
+	
+	  .page-wrapper { margin : 0 0 0 0 !important; }		/* removes page margins from print version */
+	  .footer-wrapper { margin : 0 0 0 0 !important; }		/* removes page margins from print version */
+	
+	}   	
+	
+	.page-wrapper .header {
+	  height : auto !important;
+	  margin : 0 0 12px 0 !important;
+	  padding : 0 0 10px 0 !important;
+	  border-bottom : 2px solid #000;	
+	}
+	
+	.header .utility-block,
+	.header .primary-nav {
+		display : none;		
+	}
+	
+	.header .logo a {
+	  text-decoration : none !important;
+	  display : inline;
+	}
+	
+	.header .logo {
+		display : inline;
+		vertical-align : middle;
+		font-size : 20px;
+		font-weight : bold;
+		margin-right : 15px;		
+	}	
+	
+	.header .logo span {
+		display : none;	
+	}	
+		
+	.header {
+	  /*border-bottom : 2px solid #000 !important;*/
+	  margin-bottom : 10px !important;
+	}   
+
+	.column-wrapper {
+	  padding : 0 !important;
+	  margin : 0 !important;
+	}
+	
+	.left-col {
+		display : none;
+	}
+	
+	.additional-nav { display : none; }
+	
+/* main-col */	
+	
+	.main-col .inner {
+	  margin : 0 !important;     
+	}
+	
+	.common h4,
+	.common h5,
+	.common h6 {
+		font-weight : bold !important;
+	}
+	
+	.common ul {            
+		margin : 0 0 10px 15px !important;            
+		list-style-type : square !important;
+		padding : 0 !important;
+	}
+	
+	.common ul li {            
+		list-style-type : square !important;
+		margin : 0 0 5px 0 !important;
+		font-weight : normal !important;
+		padding : 0 !important;
+	}
+	
+	.common .align-left,
+	.common .align-right {
+		float : left !important;
+		margin : 0 10px 5px 0 !important;
+	}
+					
+/* right-col */
+
+	.right-col {
+      	display : none;
+	}
+
+/* other styles */
+
+	.footer .social-links {
+	  display : none !important;
+	}
+
+	.footer .footer-links {
+	  display : none !important;
+	}
+	
+	.footer .footer-text {
+	  text-align : left !important;
+	  font-style : italic;
+	}
+	
+	.footer {
+		width : 730px !important;
+		padding : 5px 0 20px 0 !important;
+		border-top : 1px solid #666 !important;
+		height : auto !important;	 		
+	}
+	  
