@@ -1,3 +1,5 @@
+# NOTE: Connections are directional. User1 following User2 does not imply that User2 is following User1.
+
 class Connection < ActiveRecord::Base
 
   # NOTE: Probably should use a serialized field here, but that did not work too well for me. Instead, we use custom accessors.
@@ -25,4 +27,16 @@ class Connection < ActiveRecord::Base
     write_attribute(:networks, array.join(','))
   end
 
+  # Do the actual work to connect the 2 accounts.
+  after_create :create_connections_on_social_network_sites
+  def create_connections_on_social_network_sites
+    follower.accounts.collect{|a| a.network_site}.each do |site|
+      follower_account = follower.accounts[site.name]
+      followee_account = followee.accounts[site.name]
+      if followee_account
+        site.follow(follower_account, followee_account)
+        self.networks += site.name
+      end
+    end
+  end
 end

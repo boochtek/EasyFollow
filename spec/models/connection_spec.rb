@@ -16,3 +16,13 @@ describe Connection do
   it { should_not allow_values_for(:networks, 'twitter linked_in', ' ', ['twitter linked_in']) }
 
 end
+
+
+describe User do
+  let(:user1) { u = Factory :user;  u.accounts << Factory(:twitter);  u }
+  let(:user2) { u = Factory :user2; u.accounts << Factory(:twitter2); u }
+
+  it 'should be able to follow another user' do
+    user1.follow(user2)
+  end
+end
