@@ -2,7 +2,7 @@ class SocialNetworkAccount < ActiveRecord::Base
 
   attribute :network_name,  :string, :required => true, :min_length => 2, :max_length => 40
   attribute :username,      :string, :required => false
-  attribute :uid,           :string, :required => false # NOTE: This should probably be an integer, but made it a string, in case some sites don't use decimal integers.
+  attribute :uid,           :string, :required => false # NOTE: This is a string, because some sites (eg. LinkedIn) don't use decimal integers for their UIDs.
   attribute :full_name,     :string, :required => false
   attribute :token,         :text, :serialize => true # NOTE: We're just serializing the token info as a hash here, so we don't need to subclass this class for each SocialNetworkSite.
 

@@ -2,7 +2,7 @@
 <% @networks.each do |network| %>
   <li class="network_site" id="<%= network.name %>">
     <img alt="<%= network.name %>" src="<%= network.icon %>" />
-    <div class="network_site_name"><%= network.name.humanize %></div>
+    <div class="network_site_name"><%= network.name %></div>
   <% if @user.accounts[network.name] && @user.accounts[network.name].authenticated_to_network_site? %>
     <div class="network_site_username"><%= @user.accounts[network.name].username %></div>
   <% else %>
