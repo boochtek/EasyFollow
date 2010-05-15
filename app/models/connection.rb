@@ -35,7 +35,7 @@ class Connection < ActiveRecord::Base
       followee_account = followee.accounts[site.name]
       if followee_account
         site.follow(follower_account, followee_account)
-        self.networks += site.name
+        self.networks << site.name
       end
     end
   end

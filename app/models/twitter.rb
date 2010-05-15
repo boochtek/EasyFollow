@@ -14,7 +14,7 @@ class Twitter < OAuthSite
 
     # Have one user follow another on this site. (Or whatever is most analagous to following.)
     def follow(account, account_to_follow)
-      account.access_token.post("http://api.twitter.com/1/friendships/create.json?screen_name=#{account_to_follow.username}")
+      access_token(account).post("http://api.twitter.com/1/friendships/create.json?screen_name=#{account_to_follow.username}")
     end
 
     def authenticate_to_network
