@@ -4,8 +4,10 @@ User
     name, username, email, password
 Bio 
     more details about a user
-Following/Connection 
-    details regarding one user following another
+Connection
+    networks (comma-separated)
+    follower_id (ID within our app, not the SocialMediaSite)
+    followee_id (ID within our app, not the SocialMediaSite)
 SocialNetworkSite (abstract class, non-AR) 
     details about a site
     connect one friend to another
