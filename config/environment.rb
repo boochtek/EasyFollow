@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'bcrypt-ruby', :lib => 'bcrypt'
   config.gem 'haml', :version => '>= 2.2.22'
   config.gem 'json'
+  config.gem 'nokogiri'
   config.gem 'capistrano'
   config.frameworks -= [ :active_resource ]
   # Settings in config/environments/* take precedence over those specified here.
