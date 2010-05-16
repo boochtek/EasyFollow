@@ -7,7 +7,7 @@
 PROJECT_NAME = Rails.root.to_s.split('/').last
 
 # Override these - they will be used in the default layout.
-SITE_NAME = 'Meezy'
+SITE_NAME = 'Meezy.me'
 SITE_TITLE = SITE_NAME + ('production' == Rails.env ? '' : " (#{Rails.env.upcase})")
 
 # Hostname of the site. This will be used by Clearance to generate URLs in emails, to create a CSS signature, and possibly in several other places.
@@ -19,7 +19,7 @@ CSS_SIGNATURE = HOST.gsub(/[.]/, '-')
 
 # Years and name to list in copyright statements.
 COPYRIGHT_YEARS = '2010'
-COPYRIGHT_OWNER = 'Habanero'
+COPYRIGHT_OWNER = 'Influence LLC'
 
 # Version of jQuery to use.
 JQUERY_VERSION = '1.4.2'

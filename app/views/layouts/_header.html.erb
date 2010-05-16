@@ -1,0 +1,20 @@
+<div class="header">                   <!-- begin header -->
+
+  <% if 'home#index' == controller_action %>
+    <h1 class="logo">
+      <span>Meezy.me</span>
+    </h1>
+  <% else %>
+    <div class="logo h1">
+      <a href="#" title="Meezy.Me">
+        <span>Meezy.me</span>
+      </a>
+    </div>
+  <% end %>
+
+  <h3><%= @tagline || 'One username to connect them all' %></h3>
+
+  <% if current_user and !%w[home#index user#new login#new].include?(controller_action) %>
+    <div class="return-link"><a href="#" title="Return to Your Profile">Return to Your Profile</a></div>
+  <% end %>
+</div>

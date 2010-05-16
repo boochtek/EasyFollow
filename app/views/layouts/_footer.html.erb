@@ -1,0 +1,24 @@
+<div class="footer-wrapper">           	   <!-- begin footer -->
+  <div class="footer">
+
+    <p class="footer-text"><a href="#" title="">&copy; <%= COPYRIGHT_YEARS %> <%= COPYRIGHT_OWNER %></a></p>
+
+    <ul class="footer-links">
+      <li><a href="#" title="About Meezy.me">about</a></li>
+      <li><a href="#" title="Contact Us">contact us</a></li>
+      <li><a href="#" title="Frequently Asked Questions">FAQs</a></li>
+      <li class="no-border"><a href="#" title="Terms and Conditions">terms and conditions</a></li>
+    </ul>
+
+  </div>
+</div>                             	   <!-- end footer -->
+
+
+  <% if current_user %>
+    <div>Logged in as <%= current_user.username %> (<%= current_user.full_name %>) | <%= link_to 'Log Out', logout_path %><div>
+  <% elsif !%w[home#index user#new login#new].include?(controller_action) %>
+    <%= link_to 'Log In', login_path %> | <%= link_to 'Create an account', signup_path %>
+  <% end %>
+
+
+<%= controller_action %>
