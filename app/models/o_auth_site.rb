@@ -26,7 +26,7 @@ class OAuthSite < SocialNetworkSite
   protected
 
     def access_token(account)
-      @access_token ||= OAuth::AccessToken.new(consumer, account.token[:oauth_atoken], account.token[:oauth_asecret])
+      OAuth::AccessToken.new(consumer, account.token[:oauth_atoken], account.token[:oauth_asecret])
     end
 
     def request_token
