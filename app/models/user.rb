@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Use Devise for login authentication, password recovery, etc. We're not using Devise for registration/signup.
-  devise :authenticatable, :recoverable, :rememberable, :trackable, :validatable, :locakable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :locakable
 
   # These usernames cannot be used, because they might be used within the site itself.
   PROHIBITED_USERNAMES = %w[
