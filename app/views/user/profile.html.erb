@@ -1,7 +1,7 @@
 <div class="<%= @profile_type %>_profile">
 
   <div class="profile-block column bio">
-    <img class="thumb" src="images/samples/medium_thumb.jpg" alt="" /><!-- TODO: Pull in user's image here. -->
+    <img class="thumb" src="/images/samples/medium_thumb.jpg" alt="" /><!-- TODO: Pull in user's image here. -->
     <h3><%= @user.username %></h3>
     <p><strong>Name:</strong> <%= @user.full_name %></p>
     <p><strong>Location:</strong> <%= @user.location %></p>
@@ -27,7 +27,7 @@
       <%= render :partial => 'network/list', :locals => {:user => @user} %>
     </div>
     <div class="grid-footer">
-      <a href="#" title="Get the code"><img src="images/profile/meezy_logo_sm.gif" alt="" /></a>
+      <a href="#" title="Get the code"><img src="/images/profile/meezy_logo_sm.gif" alt="" /></a>
       <small><a href="#" title="Get the code">Get the code</a> to add this meezy.me badge to your website or blog</small>
     </div>
   </div>
@@ -36,7 +36,7 @@
     <div class="grid-title">
       <h2><%= @who %> Connections</h2>
       <div class="pagination">
-        <img src="images/samples/pagination.jpg" alt="" />
+        <img src="/images/samples/pagination.jpg" alt="" />
       </div>
     </div>
     <div class="grid-contents connections">
@@ -46,7 +46,7 @@
       <% form_for :search, :url => search_path do |form| %>
         <input class="text-input clear-field" type="text" value="find meezy.me connections" name="search[query]" />
         <input class="submit-button" type="submit" value="search" />
-        <!-- <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" /> -->
+        <!-- <input class="submit-button" type="image" src="/images/buttons/search.gif" alt="search" /> -->
       <% end %>
     </div>
   </div>
