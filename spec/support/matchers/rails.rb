@@ -10,11 +10,11 @@ end
 
 
 # Override ApplicationController#current_user, since we cannot set session[:user_id] from RSpec's before.
-class ApplicationController
-  def current_user
-    @current_user ||= User.find(1)
-  end
-end
+#class ApplicationController
+#  def current_user
+#    @current_user ||= User.find(1)
+#  end
+#end
 
 
 
