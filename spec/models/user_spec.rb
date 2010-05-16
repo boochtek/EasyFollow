@@ -36,4 +36,13 @@ describe User do
       user2.should have_errors_on(:username)
     end
   end
+
+  describe '#follow' do
+    # TODO
+  end
+
+  describe '#following?' do
+    # TODO
+  end
+
 end

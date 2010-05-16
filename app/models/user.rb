@@ -24,13 +24,13 @@ class User < ActiveRecord::Base
   # Only allow users to directly modify these attributes.
   attr_accessible :username, :email, :first_name, :last_name, :password, :password_confirmation
 
+  has_one :bio
+  has_many :connections, :foreign_key => :follower_id
   has_many :accounts, :class_name => 'SocialNetworkAccount' do
     def [](network_name)
       find(:first, :conditions => {:network_name => network_name.to_s})
     end
   end
-
-  has_many :connections, :foreign_key => :follower_id
 
   validates_each :username do |record, attr, value|
     record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:alnum:]]*\Z}
