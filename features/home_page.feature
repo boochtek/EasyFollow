@@ -7,7 +7,7 @@ Feature: Home Page
     Scenario: User is not logged in.
         Given I am not logged in
         When I go to the home page
-        Then I should see "Create a profile"
+        Then I should see "Create your own profile"
 
     Scenario: User is logged in.
         Given I am logged in

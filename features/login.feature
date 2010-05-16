@@ -62,4 +62,4 @@ Feature: Login
         Then I should be logged out
         And I should be redirected to the home page
         And I should see "Logged out"
-        And I should see "Create a profile"
+        And I should see "Create your own profile"

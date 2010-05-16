@@ -7,7 +7,7 @@ Feature: Signup
     Scenario: Getting to the signup page
         Given I am not logged in
         When I start at the home page
-        And I click on the "Create a profile" link
+        And I click on the "get-started" link
         Then I should be on the signup page
 
     Scenario: User signs up (Step 1)

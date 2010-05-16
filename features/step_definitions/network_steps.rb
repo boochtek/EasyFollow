@@ -1,5 +1,5 @@
 SITES_TO_CHECK = %w[Twitter] # TODO: Add LinkedIn, Facebook, etc.
-ACCOUNTS_TO_USE = {'Twitter' => 'CraigBuchekTwitter'} # NOTE: FakeWeb pages will manually have to match these.
+ACCOUNTS_TO_USE = {'Twitter' => 'CraigBuchek'} # NOTE: FakeWeb pages will manually have to match these.
 
 
 Given /^(?:|I )have not (?:added|joined) any networks$/ do
