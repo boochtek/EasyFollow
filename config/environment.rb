@@ -10,6 +10,7 @@ Rails::Initializer.run do |config|
   config.gem 'devise', :version => '~> 1.0' # 1.0 is for Rails 2.3; 1.1 is for Rails 3.0.
   config.gem 'warden', :version => '>= 0.10'
   config.gem 'oauth'
+  config.gem 'oauth2'
   config.gem 'bcrypt-ruby', :lib => 'bcrypt'
   config.gem 'haml', :version => '>= 2.2.22'
   config.gem 'json'
