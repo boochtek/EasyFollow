@@ -2,12 +2,14 @@ class HomeController < ApplicationController
 
   def index
     @user = current_user
-    @networks = SocialNetworkSite.all
-    if @user and @user.accounts.empty? and request.referrer == signup_url
+    if @user and @user.accounts.empty?
+      # User has not completed Step 2 of the signup process, and needs to add at least 1 network.
       redirect_to networks_path
     elsif @user
+      # If the user is logged in, they should see their own profile as their home page.
       render 'user/my_profile'
     else
+      # If the user is not logged in, show them the main home page, with signup, login, and search options.
       render 'home/index'
     end
   end

@@ -1,0 +1,27 @@
+<% @slug = 'signup_2' %>
+
+<div class="signup-section">
+  <div class="signup-contents">
+    <div class="signup-left common">
+      <p><em>Select at least one of the Meezy.me supported networks to the right to begin adding them to your profile.</em></p>
+      <blockquote>
+        <% if @user.accounts.size == 0 %>
+          <p>Once selected you will be asked for your network identity so we can display that network on your profile.</p>
+        <% else %>
+          <p class="boost">From here you have the option of adding more content to your profile, adding another network or making connections, the choice is yours.</p>
+          <div class="submit-button inline">
+            <a href="/" title="View Profile"><img src="images/buttons/view_profile.gif" alt="View Profile" /></a>
+          </div>
+          &nbsp;&nbsp;
+          <div class="submit-button inline">
+            <a href="/user/list" title="Connect"><img src="images/buttons/connect.gif" alt="Connect" /></a>
+          </div>
+        <% end %>
+      </blockquote>
+    </div>
+    <div class="signup-right">
+      <%= render :partial => 'network/list', :locals => {:user => @user} %>
+    </div>
+  </div>
+  <%= render :partial => 'signup/common' %>
+</div>

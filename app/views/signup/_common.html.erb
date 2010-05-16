@@ -1,6 +1,6 @@
 <ul class="signup-nav">
   <li<%= %w[user#new user#create].include?(controller_action) ? ' class="active"' : '' %>>Enter Info</li>
-  <li<%= controller_action == 'network#list' ? ' class="active"' : '' %>>Add Networks</li>
+  <li<%= %w[network#list network#index].include?(controller_action) ? ' class="active"' : '' %>>Add Networks</li>
   <li<%= controller_action == 'user#list' ? ' class="active"' : '' %>>Connect</li>
 </ul>
 <div class="signup-footer">
