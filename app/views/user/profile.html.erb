@@ -4,10 +4,10 @@
     <img class="thumb" src="images/samples/medium_thumb.jpg" alt="" /><!-- TODO: Pull in user's image here. -->
     <h3><%= @user.username %></h3>
     <p><strong>Name:</strong> <%= @user.full_name %></p>
-    <p><strong>Location:</strong> St. Louis</p>
-    <p><strong>Industry:</strong> Advertising</p>
-    <p><strong>Title:</strong> Senior Art Director</p>
-    <p><strong>Bio:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus risus a dignissim mattis, tellus lorem varius ipsum.</p>
+    <p><strong>Location:</strong> <%= @user.location %></p>
+    <p><strong>Industry:</strong> <%= @user.industry %></p>
+    <p><strong>Title:</strong> <%= @user.title %></p>
+    <p><strong>Bio:</strong> <%= @user.description %></p>
     <% if @profile_type == 'my' %>
       <h6 class="edit-link"><a href="<%= edit_profile_path %>" title="Edit Profile">edit my profile</a></h6>
     <% elsif @profile_type == 'their' %>
