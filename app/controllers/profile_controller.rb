@@ -17,7 +17,7 @@ class ProfileController < ApplicationController
       @who = "#{@username}'s"
       @profile_type = 'their'
     end
-    render 'user/profile'
+    render 'profile/show'
   end
 
   def edit

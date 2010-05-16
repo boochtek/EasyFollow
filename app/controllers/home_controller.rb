@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       # If the user is logged in, they should see their own profile as their home page.
       @who = "Your"
       @profile_type = 'my'
-      render 'user/profile'
+      render 'profile/show'
     else
       # If the user is not logged in, show them the main home page, with signup, login, and search options.
       render 'home/index'
