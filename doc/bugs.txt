@@ -1,0 +1,7 @@
+BUGS
+====
+
+1	OPEN	When I view any profile, I see the CraigBuchek Twitter account listed under my networks, no matter who I'm logged in as or looking at.
+			Turns out, we're not storing the username/uid/full_name in SocialNetworkAccounts.
+2	OPEN	The @who variable is not getting set when passed in via locals to user/profile partial.
+			Perhaps the locals have to point at variables for some reason, and literals just don't work.

@@ -1,5 +1,5 @@
 <ul>
-<% @networks.each do |network| %>
+<% SocialNetworkSite.all.each do |network| %>
   <li class="network_site" id="<%= network.name %>">
     <img alt="<%= network.name %>" src="<%= network.icon %>" />
     <div class="network_site_name"><%= network.name %></div>

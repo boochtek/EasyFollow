@@ -1,6 +1,6 @@
 <div class="their">
   Profile for <%= @user.full_name %> (<%= @user.username %>)
-  <%= render :partial => 'user/profile', :locals => {:who => 'their name', :user => @user} %>
+  <%= render :partial => 'user/profile', :locals => {:who => 'Their', :user => @user} %>
 </div>
 
 <% form_for @user, :url => create_connection_path(:user => @user.username), :html => {:method => :post} do |form| %>

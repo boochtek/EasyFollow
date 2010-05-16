@@ -1,6 +1,6 @@
 <div class="public">
   Public Profile for <%= @user.full_name %> (<%= @user.username %>)
-  <%= render :partial => 'user/profile', :locals => {:who => 'their name', :user => @user} %>
+  <%= render :partial => 'user/profile', :locals => {:who => 'Their', :user => @user} %>
 </div>
 
 <%= link_to 'Sign up to follow me', signup_path %>
