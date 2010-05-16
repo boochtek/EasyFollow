@@ -7,7 +7,7 @@ class UserController < ApplicationController
       redirect_to home_path
     else
       @user = User.new
-      render 'user/signup'
+      render 'signup/step1'
     end
   end
 
