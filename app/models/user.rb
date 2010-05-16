@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
 
   # These usernames cannot be used, because they might be used within the site itself.
   PROHIBITED_USERNAMES = %w[
-    users? admin sessions? login logout signup home profiles? bios? connections? connect follows? followings? registrations? passwords?
+    users? admin sessions? login logout signup[123]? home profiles? bios? connections? connect follows? followings? registrations? passwords?
     networks? settings search locations? industry industries titles? news site_news contact feedback browse
+    edit new add oauth index update create delete destroy show
     stylesheets? css styles? scripts? javascripts? js javascript images? icons? files? robots.txt
     about terms legal privacy terms_and_conditions terms_of_service faqs?
     easyfollow facebook twitter linkedin youtube
