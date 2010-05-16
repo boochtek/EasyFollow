@@ -1,0 +1,32 @@
+<% form_for @bio, :url => edit_profile_path, :class => 'edit_profile' do |form| %>
+
+  <div class="outline-box">
+    <div class="inner common common-form">
+      <div class="left-col column">
+        <fieldset class="section thumb-height">
+          <label>Meezy.me Profile</label>
+          <%= form.text_field :location, :class => 'text-input clear-field', :value => 'Location' %>
+          <%= form.text_field :title,    :class => 'text-input clear-field', :value => 'Title' %>
+          <%= form.text_field :industry, :class => 'text-input clear-field', :value => 'Industry' %>
+        </fieldset>
+      </div>
+      <div class="right-col column">
+        <fieldset>
+          <label>Bio</label>
+          <%= form.text_area :description, :class => 'text-input' %>
+        </fieldset>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <div class="outline-box-buttons">
+    <div class="submit-button">
+      <a href="<%= my_profile_path %>" title="Cancel"><img src="/images/buttons/cancel.gif" alt="Cancel" /></a>
+    </div>
+<!--    <input class="submit-button" type="image" src="/images/buttons/update_my_profile.gif" alt="Upload my Profile" /> -->
+    <%= form.submit 'update my profile', :class => 'submit-button' %>
+
+  </div>
+
+<% end %>
