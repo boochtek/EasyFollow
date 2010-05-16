@@ -28,8 +28,8 @@ module NavigationHelpers
       '/logout'
     when /the signup page/
       '/signup'
-    when /the networks page/
-      '/networks'
+    when /the signup2 page/
+      '/signup2'
     when /the add Twitter network page/
       '/network/add/twitter'
 

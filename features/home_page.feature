@@ -11,6 +11,7 @@ Feature: Home Page
 
     Scenario: User is logged in.
         Given I am logged in
+        And I have added my "CraigBuchekTwitter" Twitter account
         When I go to the home page
         Then I should see my name
         And I should see my profile

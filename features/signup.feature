@@ -20,8 +20,9 @@ Feature: Signup
 
     Scenario: User tries to sign up, but is already logged in
         Given I am logged in
+        And I have added my "CraigBuchekTwitter" Twitter account
         When I go to the signup page
-        Then I should be redirected to the home page
+        Then I should be redirected to the home page or the signup page
         And I should see "you are already signed up"
 
     Scenario: User tries to sign up, but the selected username is already taken

@@ -42,11 +42,11 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :conditions => { :method => :post },
     :controller => 'user',
     :action => 'create'
-
-  # Networks page
-  map.networks '/networks', :conditions => { :method => :get },
+  map.signup2 '/signup2', :conditions => { :method => :get },
     :controller => 'network',
     :action => 'index'
+
+  # Networks page
   map.network '/network/add/:network', :conditions => { :method => :get },
     :controller => 'network',
     :action => 'new'

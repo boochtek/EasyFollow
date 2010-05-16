@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     @user = current_user
     if @user and @user.accounts.empty?
       # User has not completed Step 2 of the signup process, and needs to add at least 1 network.
-      redirect_to networks_path
+      redirect_to signup2_path
     elsif @user
       # If the user is logged in, they should see their own profile as their home page.
       render 'user/my_profile'

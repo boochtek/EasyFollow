@@ -34,8 +34,8 @@ def login
   When %{fill in "Username" with "test"}
   When %{fill in "Password" with "password"}
   When %{click on the "Log In" button}
-  Then %{I should end up on the home page}
   Then %{I should be logged in}
+  Then %{I should end up on the home page or the signup page}
 end
 
 def logout
@@ -50,8 +50,8 @@ def login_as(login)
   When %{fill in "Username" with "#{login}"}
   When %{fill in "Password" with "password"}
   When %{click on the "Log In" button}
-  Then %{I should end up on the home page}
   Then %{I should be logged in}
+  Then %{I should end up on the home page or the signup page}
 
 #  user = @user || User.find_by_username(login) || Factory(:user, :username => login)
 #  visit('/login')
@@ -82,4 +82,9 @@ if !defined?(User)
       'Fake User'
     end
   end
+end
+
+
+Then /I should end up on the home page or the signup page/ do
+  URI.parse(current_url).path.should be_in([path_to('the home page'),  path_to('the signup2 page')])
 end

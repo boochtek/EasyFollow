@@ -15,6 +15,7 @@ class NetworkController < ApplicationController
 
   # Enter info to connect to a network.
   def new
+    session[:referrer] = request.referrer
     @network = params[:network]
     @account = current_user.accounts[@network] || SocialNetworkAccount.create(:network_name => @network, :user => current_user)
     case @account.auth_type
@@ -31,7 +32,7 @@ class NetworkController < ApplicationController
       else
         @username = @account.username # TODO: Temp, to make the username_on_site_or_add_link helper work.
         flash[:notice] = "You've already added the #{@network.humanize} network."
-        redirect_to networks_path
+        redirect_to :back
       end
     else
       # TODO: Non-OAuth authentication/authorization.
@@ -44,21 +45,21 @@ class NetworkController < ApplicationController
     if params[:denied]
       # User did not allow us access to their OAuth account.
       flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
-      redirect_to networks_path
+      redirect_to session[:referrer]
       return
     end
     @account = current_user.accounts[@network]
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     if @account.verify_oauth_result(@account, params)
       flash[:notice] = "Successfully added the #{@network.humanize} network"
-      redirect_to networks_path
+      redirect_to session[:referrer]
     else
       flash[:notice] = "Something went wrong adding the #{@network.humanize} network"
-      redirect_to networks_path
+      redirect_to session[:referrer]
     end
   rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
     flash[:notice] = "You did not authorize us to access your #{@network.humanize} account!!!!"
-    redirect_to networks_path
+    redirect_to session[:referrer]
   end
 
   # Connect to a network with the given network credentials.
@@ -71,7 +72,7 @@ class NetworkController < ApplicationController
     if @network.valid?
       @network.save!
       flash[:notice] = "Successfully added the #{@network.name} network"
-      redirect_to networks_path
+      redirect_to session[:referrer]
     else
       render 'network/add'
     end

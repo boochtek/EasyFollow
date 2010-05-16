@@ -12,10 +12,9 @@ Feature: Login
         And fill in "Username" with "test"
         And fill in "Password" with "password"
         And click on the "Log In" button
-        Then I should end up on the home page
+        Then I should end up on the home page or the signup page
         And I should be logged in
         And I should see my name
-        And I should see my profile
 
 # FIXME: Devise doesn't support case-insensitive usernames.
 #    Scenario: Logging in with username capitalized
