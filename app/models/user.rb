@@ -58,4 +58,9 @@ class User < ActiveRecord::Base
   def follow(user_to_follow)
     Connection.create(:follower => self, :followee => user_to_follow)
   end
+
+  def following?(user_to_follow)
+    connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, user_to_follow.id])
+    return !!connection
+  end
 end
