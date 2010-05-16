@@ -73,7 +73,7 @@ ActionController::Routing::Routes.draw do |map|
   map.edit_profile '/profile/edit', :conditions => { :method => :get },
     :controller => 'profile',
     :action => 'edit'
-  map.edit_profile '/profile/edit', :conditions => { :method => :post },
+  map.edit_profile '/profile/edit', :conditions => { :method => [:post, :put] },
     :controller => 'profile',
     :action => 'update'
   # Make my_profile an alias for the home page (assuming the user is logged in)

@@ -21,9 +21,19 @@ class ProfileController < ApplicationController
   end
 
   def edit
+    @bio = current_user.bio || Bio.new
+    render 'profile/edit'
   end
 
   def update
+    @bio = current_user.bio
+    @bio = Bio.create(:user => current_user) if @bio.nil?
+    if @bio.update_attributes(params[:bio])
+      flash[:notice] = 'Profile was successfully updated.'
+      redirect_to(my_profile_path)
+    else
+      render 'profile/edit'
+    end
   end
 
 end
