@@ -6,14 +6,18 @@ class ProfileController < ApplicationController
     @networks = SocialNetworkSite.all
     if @user.nil?
       flash[:error] = "Could not find the #{@username} user."
-      redirect_to home_path
+      redirect_to home_path and return
     elsif current_user.nil?
-      render 'user/public_profile'
+      @who = "#{@username}'s"
+      @profile_type = 'public'
     elsif current_user.username == @username
-      render 'user/my_profile'
+      @who = "Your"
+      @profile_type = 'my'
     else
-      render 'user/their_profile'
+      @who = "#{@username}'s"
+      @profile_type = 'their'
     end
+    render 'user/profile'
   end
 
   def edit

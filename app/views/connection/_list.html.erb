@@ -1,7 +1,5 @@
-<ul>
 <% @user.connections.collect(&:followee).each do |user| %>
-  <li class="user_connection" id="<%= user.id %>">
+  <div class="cell user_connection" id="user_<%= user.id %>">
     <%= user.username %>
-  </li>
+  </div>
 <% end %>
-</ul>

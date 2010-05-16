@@ -7,7 +7,9 @@ class HomeController < ApplicationController
       redirect_to signup2_path
     elsif @user
       # If the user is logged in, they should see their own profile as their home page.
-      render 'user/my_profile'
+      @who = "Your"
+      @profile_type = 'my'
+      render 'user/profile'
     else
       # If the user is not logged in, show them the main home page, with signup, login, and search options.
       render 'home/index'
