@@ -1,0 +1,14 @@
+<ul>
+<% @users.each do |user| %>
+  <% following = current_user.following?(user) %>
+  <li class="user" id="user_<%= user.id %>">
+    <%= user.username %>
+    <%= user.full_name %>
+    <% if !following %>
+      <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
+        <%= form.submit 'Follow' %>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>
+</ul>

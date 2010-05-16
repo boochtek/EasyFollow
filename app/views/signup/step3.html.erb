@@ -1,0 +1,26 @@
+<% @slug = 'signup_3' %>
+
+<div class="signup-section">
+  <div class="signup-contents">
+		<div class="signup-left common common-form">
+				<p><em>Select at least one of the Meezy.me supported networks to the right to begin adding them to your profile.</em></p>
+				<blockquote>
+					<p class="boost">From here you have the option of adding more content to your profile, adding another network or making connections, the choice is yours.</p>
+          <% form_for :search, :url => search_path do |form| %>
+						<fieldset class="signup-search"> 
+              <input class="text-input" type="text" name="search[query]" />&nbsp;&nbsp;
+              <input class="submit-button" type="submit" value="search" />
+              <!-- <input class="submit-button" type="image" src="images/buttons/search.gif" alt="Search" /> -->
+						</fieldset>
+          <% end %>
+					<small>Searching will take you away from this page. Don't worry though, you will still be able to connect.</small>			
+				</blockquote>
+		</div>
+		<div class="signup-right">
+			<div class="signup-grid big-cells">
+        <%= render :partial => 'user/list', :locals => {:users => @users} %>
+      </div>
+		</div>
+  </div>
+  <%= render :partial => 'signup/common' %>
+</div>
