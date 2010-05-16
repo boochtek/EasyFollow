@@ -1,30 +1,28 @@
-<h1>Signup (Step 1)</h1>
+<% @slug = 'signup_1' %>
+
 <%= error_messages_for 'user' %>
-<p>
-  Please fill out the form below to sign up for an EasyFollow account.
-</p>
-<% form_for @user, :url => signup_path do |form| %>
 
-  <%= form.label :first_name, 'First Name' %><br />
-  <%= form.text_field :first_name, :size => 20 %><br />
-
-  <%= form.label :last_name, 'Last Name' %><br />
-  <%= form.text_field :last_name, :size => 20 %><br />
-
-  <%= form.label :email, 'Email Address' %><br />
-  <%= form.text_field :email, :size => 20 %><br />
-
-  <%= form.label :username, 'Username' %><br />
-  <%= form.text_field :username, :size => 20 %><br />
-
-  <%= form.label :password, 'Password' %><br />
-  <%= form.password_field :password, :size => 20 %>
-
-  <%= form.label :terms_of_service, 'Agree to Terms' %><br />
-  <%= form.check_box :terms_of_service %>
-
-  <hr />
-
-  <%= form.submit 'Sign Up' %>
-
-<% end %>
+<div class="signup-section">
+  <div class="signup-contents">
+    <div class="signup-form common common-form">
+      <% form_for @user, :url => signup_path do |form| %>
+        <fieldset class="signup-left">
+          <%= form.text_field :first_name, :size => 20, :class => 'text-input clear-field', :value => 'First Name' %>
+          <%= form.text_field :last_name, :size => 20, :class => 'text-input clear-field', :value => 'Last Name' %>
+          <%= form.text_field :email, :size => 20, :class => 'text-input clear-field', :value => 'Email Adress' %>
+        </fieldset>
+        <fieldset class="signup-right">
+          <%= form.text_field :username, :size => 20, :class => 'text-input clear-field', :value => 'Desired Username' %>
+          <%= form.password_field :password, :size => 20, :class => 'text-input clear-field', :value => 'Desired Password' %>
+          <div class="form-misc">
+            <%= form.label :terms_of_service, 'Agree to Terms' %>
+            <%= form.check_box :terms_of_service, :class => 'checkbox-input' %>
+<!--            <input class="submit-button" type="image" src="images/buttons/sign_up.gif"  /> -->
+            <%= form.submit 'sign up', :class => 'submit-button' %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+  <%= render :partial => 'signup/common' %>
+</div>
