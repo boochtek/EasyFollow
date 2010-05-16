@@ -16,7 +16,6 @@ Feature: Profile
         Then I should see "Craig Buchek"
         And I should see "CraigBuchek"
         And I should see "CraigBuchekTwitter"
-        And I should NOT see "craigbuchek@example.com"
         And I should NOT see "Follow Me"
         And I should see "Sign up to follow me"
         And I should see their bio
@@ -35,7 +34,6 @@ Feature: Profile
         Then I should see "Craig Buchek"
         And I should see "CraigBuchek"
         And I should see "CraigBuchekTwitter"
-        And I should NOT see "craigbuchek@example.com"
         And I should NOT see "Follow Me"
         And I should see "Sign up to follow me"
         And I should see their bio
@@ -54,7 +52,6 @@ Feature: Profile
         Then I should see "Craig Buchek"
         And I should see "CraigBuchek"
         And I should see "CraigBuchekTwitter"
-        And I should NOT see "craigbuchek@example.com"
         And I should NOT see "Follow Me"
         And I should NOT see "Sign up"
         And I should see their bio
@@ -72,7 +69,6 @@ Feature: Profile
         Then I should see "Craig Buchek"
         And I should see "CraigBuchek"
         And I should see "CraigBuchekTwitter"
-        And I should see "craigbuchek@example.com"
         And I should NOT see "Follow Me"
         And I should NOT see "Sign up"
         And I should see my bio

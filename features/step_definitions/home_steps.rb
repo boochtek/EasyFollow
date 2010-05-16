@@ -4,7 +4,9 @@ Then /^(?:|I )should(| not| NOT) see my name$/ do |nt|
 end
 
 Then /^(?:|I )should(| not| NOT) see my profile$/ do |nt|
-  Then %{I should#{nt} see "User Profile"}
+  Then %{I should#{nt} see "Your Networks"}
+  Then %{I should#{nt} see "Your Connections"}
+  Then %{I should#{nt} see "edit my profile"}
 end
 
 

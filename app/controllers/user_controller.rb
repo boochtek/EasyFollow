@@ -29,7 +29,7 @@ class UserController < ApplicationController
       flash[:notice] = "Proceeding to Signup Step 2"
       redirect_to home_path
     else
-      render 'user/signup'
+      render 'signup/step1'
     end
   end
 

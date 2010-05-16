@@ -2,6 +2,8 @@ BUGS
 ====
 
 1	FIXED	When I view any profile, I see the CraigBuchek Twitter account listed under my networks, no matter who I'm logged in as or looking at.
-2	OPEN	The @who variable is not getting set when passed in via locals to user/profile partial.
+2	FIXED	The @who variable is not getting set when passed in via locals to user/profile partial.
 			Perhaps the locals have to point at variables for some reason, and literals just don't work.
+			Filed Rails bug report - https://rails.lighthouseapp.com/projects/8994/tickets/4620-partial-locals-do-not-accept-a-string-constant
+			No longer using that code-path.
 3	OPEN	Not storing the username/uid/full_name in SocialNetworkAccounts.

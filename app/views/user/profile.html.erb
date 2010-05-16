@@ -1,8 +1,9 @@
 <div class="<%= @profile_type %>_profile">
 
-  <div class="profile-block column">
+  <div class="profile-block column bio">
     <img class="thumb" src="images/samples/medium_thumb.jpg" alt="" /><!-- TODO: Pull in user's image here. -->
     <h3><%= @user.username %></h3>
+    <p><strong>Name:</strong> <%= @user.full_name %></p>
     <p><strong>Location:</strong> St. Louis</p>
     <p><strong>Industry:</strong> Advertising</p>
     <p><strong>Title:</strong> Senior Art Director</p>
@@ -22,7 +23,7 @@
     <div class="grid-title">
       <h2><%= @who %> Networks</h2>
     </div>
-    <div class="grid-contents">
+    <div class="grid-contents networks">
       <%= render :partial => 'network/list', :locals => {:user => @user} %>
     </div>
     <div class="grid-footer">
@@ -38,7 +39,7 @@
         <img src="images/samples/pagination.jpg" alt="" />
       </div>
     </div>
-    <div class="grid-contents">
+    <div class="grid-contents connections">
       <%= render :partial => 'connection/list', :locals => {:user => @user} %>
     </div>
     <div class="grid-footer">
