@@ -70,4 +70,7 @@ ActionController::Routing::Routes.draw do |map|
   # Make my_profile an alias for the home page (assuming the user is logged in)
   map.my_profile '', :controller => 'home'
 
+  # Search page
+  map.search '/search', :controller => 'search'
+
 end

@@ -22,9 +22,9 @@
     <% end %>
   </div>
   <div class="gateway-search">
-    <% form_for :search, :url => 'search_path' do |form| %>
+    <% form_for :search, :url => search_path do |form| %>
       <label>See who is using Meezy.me</label>
-      <input class="search-input text-input clear-field" type="text" value="keyword search" />
+      <input class="search-input text-input clear-field" type="text" value="keyword search" name="search[query]" />
       <input class="submit-button" type="submit" value="search" />
       <!-- <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" /> -->
     <% end %>
