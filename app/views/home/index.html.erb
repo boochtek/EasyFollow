@@ -16,17 +16,14 @@
     <% form_for :user, :url => login_path do |form| %>
       <input class="username-input text-input clear-field" type="text" value="username" name="user[username]" />
       <input class="password-input text-input clear-field" type="password" value="password" name="user[password]" />
-      <input class="submit-button" type="submit" value="log in" />
-      <input type="hidden" id="user_remember_me" name="user[remember_me]" value="1" />
-      <!-- <input class="submit-button" type="image" src="images/buttons/log_in.gif" alt="Submit" /> -->
+      <input class="submit-button" type="image" src="images/buttons/log_in.gif" alt="Submit" />
     <% end %>
   </div>
   <div class="gateway-search">
     <% form_for :search, :url => search_path do |form| %>
       <label>See who is using Meezy.me</label>
       <input class="search-input text-input clear-field" type="text" value="keyword search" name="search[query]" />
-      <input class="submit-button" type="submit" value="search" />
-      <!-- <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" /> -->
+      <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" />
     <% end %>
   </div>
 </div>
