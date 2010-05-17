@@ -1,4 +1,4 @@
-require 'social_network_site' # Make sure we get the SocialNetworkSite method.
+SocialNetworkSite # Make sure we get the SocialNetworkSite method.
 
 class SocialNetworkAccount < ActiveRecord::Base
 
@@ -17,17 +17,26 @@ class SocialNetworkAccount < ActiveRecord::Base
     write_attribute(:token, {}) if read_attribute(:token).nil?
   end
 
-  delegate :auth_type, :to => :network_site
-  delegate :oauth_authorize_url, :to => :network_site
-  delegate :verify_oauth_result, :to => :network_site
-
   def network_site
     @network_site ||= SocialNetworkSite(network_name) # returns the Twitter, Facebook, etc. class.
   end
 
-  def username
-    return nil if !authenticated_to_network_site?
-    @username ||= read_attribute(:username) || network_site.get_user_details(self)[:username]
+#  def username
+#    return nil if !authenticated_to_network_site?
+#    @username ||= read_attribute(:username) || network_site.get_user_details(self)[:username]
+#  end
+
+  delegate :auth_type, :to => :network_site
+  delegate :oauth_authorize_url, :to => :network_site
+
+  def verify_oauth_result(account, params)
+    result = network_site.verify_oauth_result(account, params)
+    user_details = network_site.get_user_details(self)
+    self.username = user_details[:username]
+    self.uid = user_details[:uid]
+    self.full_name = user_details[:full_name]
+    self.save!
+    return result
   end
 
   # NOTE: This takes a SocialNetworkAccount parameter.
@@ -38,7 +47,7 @@ class SocialNetworkAccount < ActiveRecord::Base
   def authenticated_to_network_site?
     case network_site.auth_type
     when :oauth, :oauth2, :facebook
-      token[:oauth_atoken]
+      token && token[:oauth_atoken]
     else
       false # TODO
     end

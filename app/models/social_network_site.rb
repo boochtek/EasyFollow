@@ -1,5 +1,5 @@
 def SocialNetworkSite(site_name)
-    (site_name.to_s.camelize).constantize
+    site_name.constantize
 end
 
 class SocialNetworkSite

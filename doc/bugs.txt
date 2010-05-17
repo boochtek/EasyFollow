@@ -6,4 +6,4 @@ BUGS
 			Perhaps the locals have to point at variables for some reason, and literals just don't work.
 			Filed Rails bug report - https://rails.lighthouseapp.com/projects/8994/tickets/4620-partial-locals-do-not-accept-a-string-constant
 			No longer using that code-path.
-3	OPEN	Not storing the username/uid/full_name in SocialNetworkAccounts.
+3	OPEN	Not storing the username/uid/full_name in SocialNetworkAccounts. Causing issues going to FaceBook to get the info later.
