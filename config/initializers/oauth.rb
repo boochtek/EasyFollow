@@ -1,7 +1,7 @@
 # Config settings for OAuth.
 # TODO: Should we make this a YAML file?
 
-if defined?(OAuth)
+if defined?(OAuth) or defined?(OAuth2)
   OAUTH_CREDENTIALS = {
     :twitter => {
       :key => 'MN7i4s3zrzbyLMMIFuw',
@@ -22,5 +22,14 @@ if defined?(OAuth)
       :secret => '9a8eb43959ff24b2834b4f2b14705be0',
       :site => 'https://graph.facebook.com',
     },
+  }
+end
+
+if Rails.env == 'staging'
+  OAUTH_CREDENTIALS[:face_book] = {
+    :id => '117755198264651',
+    :key => 'd71d036e7b7e7b3fdf0c2abf58b0d036',
+    :secret => '2c9be86bc13781f90f1d1c1792e78466',
+    :site => 'https://graph.facebook.com',
   }
 end
