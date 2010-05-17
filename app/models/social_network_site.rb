@@ -8,7 +8,7 @@ class SocialNetworkSite
     # Return a list of all the SocialNetworkSite (non-abstract) subclasses.
     # NOTE: Listing these manually, because determining them programatically would require loading all the subclasses first, which is kind of a chicken-and-egg problem.
     def all
-      [Twitter, LinkedIn]
+      [Twitter, LinkedIn, FaceBook]
     end
 
     # TODO: Can we replace these class methods with cattrs or something? Then have the parent class check for them and raise if they're not there.

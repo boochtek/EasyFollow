@@ -6,7 +6,7 @@ if defined?(OAuth)
     :twitter => {
       :key => 'MN7i4s3zrzbyLMMIFuw',
       :secret => '6KPug2dJxNehZvN4jBeMTl42fyX07Yl2B6dVAybIGMM',
-      :site => 'http://twitter.com'
+      :site => 'http://twitter.com',
     },
     :linked_in => {
       :key => 'P6fffcQ5IFSAlMNfD0ZsFUy8c-c77VozYrYVvtZtTlmt-hLicy7NKF89ipfktGG_',
@@ -14,7 +14,13 @@ if defined?(OAuth)
       :site => 'https://api.linkedin.com',
       :request_token_path => '/uas/oauth/requestToken',
       :access_token_path => '/uas/oauth/accessToken',
-      :authorize_path => '/uas/oauth/authorize'
+      :authorize_path => '/uas/oauth/authorize',
+    },
+    :face_book => {
+      :id => '126514797359617',
+      :key => '2b80538d2339cf402969696a2427f779',
+      :secret => '9a8eb43959ff24b2834b4f2b14705be0',
+      :site => 'https://graph.facebook.com',
     },
   }
 end
