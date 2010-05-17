@@ -1,5 +1,5 @@
 <% @user.connections.collect(&:followee).each do |user| %>
   <div class="cell user_connection" id="user_<%= user.id %>">
-    <%= user.username %>
+    <%= link_to user.username, user.username %>
   </div>
 <% end %>
