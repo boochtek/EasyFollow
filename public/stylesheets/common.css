@@ -130,54 +130,6 @@
             .home .header h3 {
 				height : 26px;
 			}  
-						
-	/* search component */
-
-	/*		.header .utility-search {										
-				position : absolute;
-				left : 214px;
-				top : 5px;
-				width : 230px;
-				height : 25px;
-			} 
-
-			.header .utility-search .text-input {										
-				font-size : 13px;
-				color : #333;
-				font-family : Tahoma, Helvetica, Arial, sans-serif;
-				width : 145px;
-				left : 9px;
-				top : 1px;
-				padding : 1px 0 0 2px;				
-				position : absolute;
-				background-color : transparent;
-				border : none;
-			} 				
-			
-			.header .utility-search .button-text {
-				position : absolute;
-				top : 4px;
-				left : 	168px;
-				text-transform : uppercase;	
-				background-color : transparent;	
-				border : none;
-				color : #ffffcc;
-				font-size : 1.2em;
-				line-height : 1.1;		
-				font-weight : normal;
-				text-decoration : none;
-				cursor : pointer;
-				text-align : left;				
-				margin : 0 !important;
-				padding : 0 !important;	
-			} 						
-			
-		.header .utility-search .submit-button {			
-				position : absolute;
-				top : 2px;
-				left : 	164px;
-				color : #fff;			
-			} 				*/
 
     /* default column layout */
 			
@@ -365,9 +317,128 @@
 			
 			.common-form .submit-button a {
 				color : #660000;
+			}	
+			
+/* cells */
+
+			.cell-wrapper {
+				position : relative;
+				float : left;
+				margin : 0px 2px 3px 0;
+			}		
+			
+			.grid2 .cell-wrapper {
+				margin : 0 3px 3px 0;
+			}		
+		
+			.cell-wrapper .cell {
+				border : 1px solid #fabb62;				
+				background-color : #fff;
+				height : 57px;
+				width : 142px;			
+				float : left;
+				margin : 0;
+			}	
+			
+			.cell-wrapper .cell:hover,
+			.cell-wrapper .cell:active {
+				text-decoration : none !important;
+				color : #000;
+			}
+						
+			.medium-cells .cell {
+				width : 195px;
+			}
+			
+			.large-cells .cell {
+				width : 300px;
 			}			
+			
+			.cell-wrapper .featured-cell {
+				border : 1px solid #660000;
+			}		
+			
+			.cell-wrapper .inactive-cell {
+				background-color : #fbf8ee;
+			}	
+			
+			.cell-wrapper .inactive-cell .cell-thumb,
+			.cell-wrapper .inactive-cell .cell-text {
+				opacity : .6;				
+			}					
+			
+			.cell-wrapper .cell .cell-thumb {
+				position : absolute;
+				top : 4px;
+				left : 5px;
+			}
+			
+			.cell-wrapper .cell .cell-text {
+				position : absolute;
+				top : 6px;
+				left : 59px;
+				display : block;
+			}		
+			
+			.cell-wrapper .cell .cell-text .cell-title {
+				font-size : 1.2em;
+				font-weight : bold;
+				line-height : 1.1;
+				display : block;
+				color : #000;
+				text-decoration : none !important;
+			}	
+						
+			.cell-wrapper .cell .cell-text .cell-details {
+				font-size : 1.1em;
+				font-weight : normal;
+				line-height : 1.1;
+				display : block;
+				color : #000;
+				text-decoration : none !important;
+			}			
+			
+			.cell-wrapper .cell:hover .cell-text .cell-title {
+				text-decoration : none !important;
+			}	
+						
+			.cell-wrapper .cell:hover .cell-text .cell-details {
+				text-decoration : none !important;
+			}							
+			
+			.cell-wrapper a.cell 				{ outline : 0; cursor : pointer; }
+			.cell-wrapper a.cell:active 		{ outline : 1px dotted #660000 !important; }	
+			
+			.cell-wrapper .cell .action-button {
+				position : absolute;
+				bottom : 1px;
+				right : 1px;
+				background-color : #fad69b;
+				padding : 4px 21px 3px 7px;
+				display : none;										
+				text-align : left;
+				color : #000;
+				background-image : url(../images/icons/plus_icon.gif);
+				background-position : 95% 5px;
+				background-repeat : no-repeat;	
+				text-decoration : none !important;
+				text-transform : uppercase;			
+			}	
+			
+			.cell-wrapper .cell:hover * {
+				text-decoration : none !important;
+				color : #000 !important;		
+			}			
+			
+			.cell-wrapper .cell .remove-button {
+				background-image : url(../images/icons/x_icon.gif);		
+			}			
+			
+			.cell-wrapper .cell:hover .action-button {			
+				display : block;							
+			}									
 			            
-      /* outline-box and edit page contents */  
+/* outline-box and edit page contents */  
             
             .outline-box {
             	border : 3px #660000 solid;
@@ -433,17 +504,17 @@
             	padding : 0;
             	border : 1px solid #ffda7c;
             	background-color : #fceccf;
-            	padding : 10px 10px 8px 10px;
-            	width : 878px;
+            	padding : 10px 10px 8px 30px;
+            	width : 860px;
             	float : left;
      		}        		
      
      		.search-form .form-cell {
      			float : left;
      			width : 195px;
-     			height : 55px;
-     			margin : 0 0 0 20px;
-     		}      	
+     			height : 55px;   
+     			margin : 0 20px 0 0;
+     		}    	
      		
      		.search-form .form-cell label,
      		.search-form .form-cell input,
@@ -463,10 +534,10 @@
      			padding : 4px 2px 4px 2px !important;
      			font-size : 12px !important;
      			border : 1px solid #ffe889 !important;
-     			margin : -1px 0 7px -1px !important;
-     		}     		     		
+     			margin : -2px 0 7px -2px !important;
+     		}    		     		
      		
-     		.search-form .submit-button {
+     		.search-form .search-submit {
      			float : right;
      			margin-right : 8px;
      		}   
@@ -547,8 +618,7 @@
 			.profile-block .edit-link a:active {
 				text-decoration : underline;
 			}															
-														
-			
+																	
 			.grid1 {
 				width : 298px;	
 				margin-right : 15px;			
@@ -578,43 +648,15 @@
 				border-left : 1px solid #fee578;	
 				border-bottom : 1px solid #fee578;
 				border-right : 1px solid #fee578;		
-			}
-			
-			.grid-contents .cell {
-				background-color : #fbf8ee;
-				border : 1px solid #f8dcac;
-				height : 57px;
-				width : 142px;	
-				position : relative;
-				float : left;
-				margin : 0px 2px 3px 0;
 			}	
 			
-			.grid-contents .active-cell {
-				border : 1px solid #fabb62;
-				background-color : #fff;
-			}		
+			.grid2 .pagination {
+				display : none;
+			}
 
 			.grid2 .grid-contents {
 				padding : 4px 0px 3px 4px;
-			}								
-			
-			.grid2 .grid-contents .cell {
-				width : 195px;	
-				margin : 0 4px 3px 0px;
-			}	
-			
-			.grid-contents .cell .icon {
-				position : absolute;
-				top : 5px;
-				left : 5px;
-			}
-			
-			.grid-contents .cell .cell-contents {
-				position : absolute;
-				top : 5px;
-				left : 50px;
-			}								
+			}																			
 						
 			.grid-footer {
 				background-position : 50% 0;
@@ -679,16 +721,19 @@
 	/* home page */
 		
 			.home-gateway {
-				background-image : url(../images/homepage/gateway_bgd.gif);
-				background-position : 0 0;
-				background-repeat : no-repeat;	
-				width : 900px;
-				height : 344px;		
-				position : relative;	
+				background-image : url(../images/homepage/gateway_slice.gif);
+				background-position : 50% 0;
+				background-repeat : repeat-y;	
+				width : 900px;	
 			}
 			
 			.home-gateway .gateway-header {
-			
+				width : 100%;
+				background-image : url(../images/homepage/gateway_header.gif);
+				background-position : 50% 0;
+				background-repeat : no-repeat;
+				height : 54px;							
+				position : relative;		
 			}
 			
 			.home-gateway .gateway-header h2 {
@@ -715,16 +760,22 @@
 			}				
 
 			.home-gateway .gateway-panels {
-				position : absolute;
-				top : 53px;
-				left : 20px; 
+				width : 100%;
+				margin : 0;
+				padding : 0 0 0 20px;
 				list-style-type : none;
+				height : 246px;
 			}		
 			
 			.home-gateway .gateway-panels li {
 				float : left;
 				margin-right : 10px;
-			}		
+				color : #660000;
+			}	
+			
+			.home-gateway .gateway-panels li a {
+				color : #660000;
+			}				
 			
 			.home-gateway .text-input {
 				background-color : transparent;
@@ -735,50 +786,61 @@
 				padding : 4px 2px 3px 2px;
 			}	
 			
-		/* homepage login and search */					
+		/* homepage login and search */	
+		
+			.home-gateway .gateway-footer {
+				clear : left;
+				width : 100%;
+				background-image : url(../images/homepage/gateway_footer.gif);
+				background-position : 50% 0;
+				background-repeat : no-repeat;
+				height : 47px;							
+				position : relative;		
+			}						
 			
 			.home-gateway .gateway-login .username-input {
 				position : absolute;
-				top : 309px;
+				top : 12px;
 				left : 38px;
 				width : 151px;
 			}	
 			
 			.home-gateway .gateway-login .password-input {
 				position : absolute;
-				top : 309px;
+				top : 12px;
 				left : 215px;	
 				width : 151px;		
 			}				
 			
 			.home-gateway .gateway-login .submit-button {
 				position : absolute;
-				top : 309px;
+				top : 12px;
 				left : 380px;				
 			}	
 			
 			.home-gateway .gateway-search label {
 				position : absolute;
-				top : 314px;
+				top : 16px;
 				left : 465px;
 				color : #660000;
 				font-weight : bold;
 				margin : 0;
 				line-height : 1.0;
 				font-size : 1.2em;
+				padding-bottom : 3px;
 				font-family : Lucida Sans Unicode, Lucida Grande, sans-serif;		
 			}				
 						
 			.home-gateway .gateway-search .search-input {
 				position : absolute;
-				top : 309px;
+				top : 12px;
 				left : 644px;
 				width : 154px;			
 			}	
 			
 			.home-gateway .gateway-search .submit-button {
 				position : absolute;
-				top : 309px;
+				top : 12px;
 				left : 810px;			
 			}																	
 				
@@ -786,17 +848,21 @@
 	
 			.signup-section {
 				position : relative;	
-				width : 100%;		
+				width : 900px;			
 			}	
 			
 			.signup-section .signup-nav {
 				list-style-type : none;
-				float : left;
 				width : 248px;
 				position : absolute;
 				top : 34px;
 				left : 0;
+				z-index : 100;
 			}	
+			
+		.signup-section h2 {
+				color :red;position : absolute;
+			}			
 			
 			.signup-section .signup-nav li {
 				text-align : center;
@@ -835,12 +901,14 @@
 			.signup-section .signup-contents .signup-left {
 				width : 305px;
 				float : left; 
+				display : inline;
 				margin : 15px 0px 15px 25px;
 			}
 			
 			.signup-section .signup-contents .signup-right {
 				width : 302px;
 				float : left; 	
+				display : inline;
 				margin : 15px 10px 15px 20px;		
 			}	
 			
@@ -878,23 +946,14 @@
 				position : absolute;
 				right : 0;
 				top : 1px;
-			}									
-			
-			.signup-section .signup-contents {
-				margin-left : 231px;
-				background-color : #fceccf;
-				border : 1px solid #ffd877;
-				width : 668px;
-				float : left;
-				min-height : 325px;
-			}								
+			}																
 			
 			.signup-section .signup-footer {
 				clear : left;
 				font-size : 1.3em;
 				margin : 0 0 20px 235px;
 				font-weight : bold;	
-				height : 60px;			
+				height : 20px;			
 				color : #660000;
 				padding-top : 5px;	
 			}						
@@ -933,7 +992,7 @@
 			.signup-form .form-misc label {
 				position : absolute;
 				top : 9px;
-				left : 24px;
+				left : 22px;
 				font-size : 12px;
 				color : #000;
 				font-weight : normal;
@@ -1023,7 +1082,7 @@
 				display : block;
 				color : #fff;
 				font-weight : bold;
-				padding : 17px 15px 0 49px;
+				padding : 17px 16px 0 48px;
 				text-align : center;
 				height : 23px;
 				outline-color : #660000;

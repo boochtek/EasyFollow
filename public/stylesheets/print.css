@@ -1,4 +1,4 @@
-/* Host Analytics Print CSS */
+/* Meezy Print CSS */
 
 	* {
 	  color : black !important;
@@ -15,12 +15,6 @@
 	html, body {
 	  padding : 0 !important;
 	  margin : 0 !important; 
-	}
-	
-	.bgd-wrapper {
-		padding : 0 !important;
-		margin : 0 !important;
-		width : 730px !important;
 	}
 	
 	.page-wrapper {
@@ -58,11 +52,6 @@
 	  border-bottom : 2px solid #000;	
 	}
 	
-	.header .utility-block,
-	.header .primary-nav {
-		display : none;		
-	}
-	
 	.header .logo a {
 	  text-decoration : none !important;
 	  display : inline;
@@ -84,24 +73,9 @@
 	  /*border-bottom : 2px solid #000 !important;*/
 	  margin-bottom : 10px !important;
 	}   
-
-	.column-wrapper {
-	  padding : 0 !important;
-	  margin : 0 !important;
-	}
-	
-	.left-col {
-		display : none;
-	}
-	
-	.additional-nav { display : none; }
 	
 /* main-col */	
-	
-	.main-col .inner {
-	  margin : 0 !important;     
-	}
-	
+
 	.common h4,
 	.common h5,
 	.common h6 {

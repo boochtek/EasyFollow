@@ -25,3 +25,12 @@
 	    });
 	 
 	 });
+	 
+	// preload cell hover images
+	
+	jQuery(document).ready(function() {
+	
+	    jQuery('<img src="images/icons/plus_icon.gif" alt="" />');
+		jQuery('<img src="images/icons/x_icon.gif" alt="" />');
+		   	 
+	 });	 
