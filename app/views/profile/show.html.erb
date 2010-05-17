@@ -35,9 +35,11 @@
   <div class="profile-grid column grid2">
     <div class="grid-title">
       <h2><%= @who %> Connections</h2>
+<!--
       <div class="pagination">
         <img src="/images/samples/pagination.jpg" alt="" />
       </div>
+-->
     </div>
     <div class="grid-contents connections">
       <%= render :partial => 'connection/list', :locals => {:user => @user} %>

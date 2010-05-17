@@ -4,26 +4,28 @@
   <div class="gateway-header">
     <h2>Create your own profile in 3 easy steps</h2>
     <div class="start-link">
-      <a href="/signup" id="get-started" title="Get Started"><img src="images/buttons/get_started.gif" alt="Get Started" /></a>
+      <a href="/signup" title="Get Started"><img src="images/buttons/get_started.gif" alt="Get Started" /></a>
     </div>
   </div>
   <ol class="gateway-panels">
-    <li><a href="/signup" title="Step 1 - Sign Up"><img src="images/homepage/step1.gif" alt="Step 1 - Sign Up"></a></li>
-    <li><a href="/signup" title="Step 2 - Sign Up"><img src="images/homepage/step2.gif" alt="Step 2 - Sign Up"></a></li>
-    <li><a href="/signup" title="Step 3 - Sign Up"><img src="images/homepage/step3.gif" alt="Step 3 - Sign Up"></a></li>
+    <li><a href="/signup" title="Step 1 - Sign Up"><img src="images/homepage/step1.gif" alt="Step 1 - Sign Up" /></a></li>
+    <li><a href="/signup" title="Step 2 - Sign Up"><img src="images/homepage/step2.gif" alt="Step 2 - Sign Up" /></a></li>
+    <li><a href="/signup" title="Step 3 - Sign Up"><img src="images/homepage/step3.gif" alt="Step 3 - Sign Up" /></a></li>
   </ol>
-  <div class="gateway-login">
+  <div class="gateway-footer">
     <% form_for :user, :url => login_path do |form| %>
-      <input class="username-input text-input clear-field" type="text" value="username" name="user[username]" />
-      <input class="password-input text-input clear-field" type="password" value="password" name="user[password]" />
-      <input class="submit-button" type="image" src="images/buttons/log_in.gif" alt="Submit" />
+      <fieldset class="gateway-login">
+        <input class="username-input text-input clear-field" type="text" value="username" name="user[username]" />
+        <input class="password-input text-input clear-field" type="password" value="password" name="user[password]" />
+        <input class="submit-button" type="image" src="images/buttons/log_in.gif" alt="Submit" />
+      </fieldset>
     <% end %>
-  </div>
-  <div class="gateway-search">
     <% form_for :search, :url => search_path do |form| %>
-      <label>See who is using Meezy.me</label>
-      <input class="search-input text-input clear-field" type="text" value="keyword search" name="search[query]" />
-      <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" />
+      <fieldset class="gateway-search">
+        <label>See who's on Meezy.me</label>
+        <input class="search-input text-input clear-field" type="text" value="keyword search" name="search[query]" />
+        <input class="submit-button" type="image" src="images/buttons/search.gif" alt="search" />
+      </fieldset>
     <% end %>
   </div>
 </div>
