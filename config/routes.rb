@@ -56,10 +56,13 @@ ActionController::Routing::Routes.draw do |map|
   map.network '/network/add/:network', :conditions => { :method => :post },
     :controller => 'network',
     :action => 'create'
-  # The following route is for OAuth callbacks.
+  # The following routes are for OAuth and OAuth2 callbacks.
   map.network_oauth '/network/oauth/:network', :conditions => { :method => :get },
     :controller => 'network',
     :action => 'create_oauth'
+  map.network_oauth2 '/network/oauth2/:network', :conditions => { :method => :get },
+    :controller => 'network',
+    :action => 'create_oauth2'
 
   # Connections (following)
   map.create_connection '/connection/create', :conditions => { :method => :post },

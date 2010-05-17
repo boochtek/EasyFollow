@@ -30,8 +30,19 @@ class NetworkController < ApplicationController
           render :text => "#{network_oauth_url(:network => @network)}\n#{e.inspect}"
         end
       else
-        @username = @account.username # TODO: Temp, to make the username_on_site_or_add_link helper work.
-        flash[:notice] = "You've already added the #{@network.humanize} network."
+        redirect_to :back
+      end
+    when :facebook, :oauth2
+      if !@account.authenticated_to_network_site?
+        begin
+          @account.save
+          url = @account.oauth_authorize_url(@account, network_oauth2_url(:network => @network))
+          redirect_to url
+        rescue StandardError => e # OAuth2::AccessDenied => e # TODO: Handle OAuth2::ErrorWithResponse and OAuth2::HTTPError as well.
+          # TODO: Figure out how to handle this. This will only happen if Twitter rejects our OAuth consumer account.
+          render :text => "#{network_oauth_url(:network => @network)}\n#{e}"
+        end
+      else
         redirect_to :back
       end
     else
@@ -44,21 +55,45 @@ class NetworkController < ApplicationController
     @network = params[:network]
     if params[:denied]
       # User did not allow us access to their OAuth account.
-      flash[:notice] = "You did not authorize us to access your #{@network.humanize} account"
+      flash[:notice] = "You did not authorize us to access your #{@network} account"
       redirect_to session[:referrer]
       return
     end
     @account = current_user.accounts[@network]
     raise RuntimeError if @account.nil? # TODO: What should we do here?
     if @account.verify_oauth_result(@account, params)
-      flash[:notice] = "Successfully added the #{@network.humanize} network"
+      flash[:notice] = "Successfully added the #{@network} network"
       redirect_to session[:referrer]
     else
-      flash[:notice] = "Something went wrong adding the #{@network.humanize} network"
+      flash[:notice] = "Something went wrong adding the #{@network} network"
       redirect_to session[:referrer]
     end
   rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
-    flash[:notice] = "You did not authorize us to access your #{@network.humanize} account!!!!"
+    flash[:notice] = "You did not authorize us to access your #{@network} account!"
+    redirect_to session[:referrer]
+  end
+
+  # Process callback from OAuth2 authorization.
+  def create_oauth2
+    @network = params[:network]
+    if params[:denied]
+      # User did not allow us access to their OAuth account.
+      flash[:notice] = "You did not authorize us to access your #{@network} account"
+      redirect_to session[:referrer]
+      return
+    end
+    @account = current_user.accounts[@network]
+    raise RuntimeError if @account.nil? # TODO: What should we do here?
+    params[:callback_url] = network_oauth2_url(:network => @network)
+    if @account.verify_oauth_result(@account, params)
+      flash[:notice] = "Successfully added the #{@network} network."
+      redirect_to session[:referrer]
+    else
+      flash[:notice] = "Something went wrong adding the #{@network} network"
+      redirect_to session[:referrer]
+    end
+  rescue OAuth2::AccessDenied => e # TODO: Handle OAuth2::ErrorWithResponse and OAuth2::HTTPError as well.
+    flash[:notice] = "You did not authorize us to access your #{@network} account!"
     redirect_to session[:referrer]
   end
 
