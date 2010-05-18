@@ -3,7 +3,7 @@
     <img alt="<%= network.name %>" src="<%= network.icon %>" />
     <h6><%= network.name %></h6>
   <% if @user.accounts[network.name] && @user.accounts[network.name].authenticated_to_network_site? %>
-    <small class="network_site_username"><%= @user.accounts[network.name].username %></small>
+    <small class="network_site_username"><%= @user.accounts[network.name].username || @user.accounts[network.name].full_name %></small>
   <% elsif current_user and @user.id == current_user.id %>
     <small class="network_site_add"><%= link_to('Add Network', network_path(:network => network.name)) %></small>
   <% end %>
