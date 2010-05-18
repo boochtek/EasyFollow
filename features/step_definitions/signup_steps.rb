@@ -18,14 +18,14 @@ end
 When /^I fill out the signup form correctly$/ do
   When 'I fill out the signup form'
   check 'Agree to Terms'
-  click_button 'Sign Up'
+  click_button 'sign-up'
 end
 
 When /^I fill out the signup form incorrectly$/ do
   When 'I fill out the signup form'
   fill_in 'user[email]', :with => 'invalid_email_address'
   check 'Agree to Terms'
-  click_button 'Sign Up'
+  click_button 'sign-up'
 end
 
 
@@ -33,20 +33,20 @@ When /^I enter a username that is in the restricted list$/ do
   restricted_username = 'logout'
   When 'I fill out the signup form'
   fill_in 'user[username]', :with => restricted_username
-  click_button 'Sign Up'
+  click_button 'sign-up'
 end
 
 When /^I enter a username that is already taken$/ do
   user = Factory(:user)
   When 'I fill out the signup form'
   fill_in 'user[username]', :with => user.username
-  click_button 'Sign Up'
+  click_button 'sign-up'
 end
 
 When /^I enter a username that contains a slash$/ do
   When 'I fill out the signup form'
   fill_in 'user[username]', :with => 'craig/buchek'
-  click_button 'Sign Up'
+  click_button 'sign-up'
 end
 
 
