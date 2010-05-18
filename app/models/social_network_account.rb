@@ -32,10 +32,12 @@ class SocialNetworkAccount < ActiveRecord::Base
   def verify_oauth_result(account, params)
     result = network_site.verify_oauth_result(account, params)
     user_details = network_site.get_user_details(self)
-    self.username = user_details[:username]
-    self.uid = user_details[:uid]
-    self.full_name = user_details[:full_name]
-    self.save!
+    if user_details
+      self.username = user_details[:username]
+      self.uid = user_details[:uid]
+      self.full_name = user_details[:full_name]
+      self.save!
+    end
     return result
   end
 
