@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Use Devise for login authentication, password recovery, etc. We're not using Devise for registration/signup.
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :locakable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   # These usernames cannot be used, because they might be used within the site itself.
   PROHIBITED_USERNAMES = %w[
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms_of_service
   attr_accessible :terms_of_service # Required for validates_acceptance_of
 
-  # We're not using Devise's confirmable to make users confirm their email addresses. But we're seding them an email telling them that they've signed up.
+  # We're not using Devise's confirmable to make users confirm their email addresses. But we're sending them an email telling them that they've signed up.
   after_create :email_user_signup_confirmation
 
   def email_user_signup_confirmation
