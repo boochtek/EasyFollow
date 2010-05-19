@@ -54,8 +54,17 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+
+  # Search for usernames case-insensitively. It'd be easier to set a case-insensitive collation on the column in the DB (we wouldn't need find_first_by_username or find_for_authentication), but that's database-dependent.
+  # Note that case is preserved when creating the account, so we can't just upcase/downcase the username we're looking for.
   def self.find_first_by_username(username)
-    self.find(:first, :conditions => ['LOWER(username) = ?', username.downcase]) # NOTE: It'd be better if we just set the collation on this column in the DB to be case-insensitive.
+    self.find(:first, :conditions => ['LOWER(username) = ?', username.downcase])
+  end
+
+  # Make Devise check usernames case-insensitively.
+  def self.find_for_authentication(conditions)
+    username = conditions[:username] # NOTE: Due to our Devise configuration, this will be the only key in the conditions hash.
+    self.find_first_by_username(username)
   end
 
   def follow(user_to_follow)
@@ -66,4 +75,5 @@ class User < ActiveRecord::Base
     connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, user_to_follow.id])
     return !!connection
   end
+
 end
