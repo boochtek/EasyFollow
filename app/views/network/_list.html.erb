@@ -1,11 +1,15 @@
 <% SocialNetworkSite.all.each do |network| %>
-  <div class="cell network_site" id="<%= network.name %>">
-    <img alt="<%= network.name %>" src="<%= network.icon %>" />
-    <h6><%= network.name %></h6>
-  <% if @user.accounts[network.name] && @user.accounts[network.name].authenticated_to_network_site? %>
-    <small class="network_site_username"><%= @user.accounts[network.name].username || @user.accounts[network.name].full_name %></small>
-  <% elsif current_user and @user.id == current_user.id %>
-    <small class="network_site_add"><%= link_to('Add Network', network_path(:network => network.name)) %></small>
-  <% end %>
+  <% @network = network %> <!-- Work around Rails bug 4620 -->
+  <div class="cell-wrapper">
+  <%=
+    if (current_user and current_user.following?(@user)) or (current_user and current_user == @user and @user.accounts[network.name])
+      render :partial => 'network/active', :locals => {:network => @network, :user => @user}
+    elsif true
+      render :partial => 'network/inactive', :locals => {:network => @network, :user => @user}
+    else
+      render :partial => 'network/featured', :locals => {:network => @network, :user => @user}
+    end
+  %>
   </div>
 <% end %>
+

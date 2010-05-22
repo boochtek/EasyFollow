@@ -1,0 +1,10 @@
+<div class="cell featured-cell network_site" title="<%= @user.accounts[@network.name].nil? ? @network.name : (@user.accounts[@network.name].username || @user.accounts[@network.name].full_name) %>">
+  <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
+  <a href="#">
+    <span class="cell-text">
+      <span class="cell-title"><%= @network.name %></span>
+      <span class="cell-details">Connected</span>
+    </span>
+  </a>
+  <div class="action-button remove-button">Remove</div>
+</div>
