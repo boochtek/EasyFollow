@@ -1,0 +1,10 @@
+<div class="cell inactive-cell network_site" title="<%= @network.name %>">
+  <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
+  <a href="#">
+    <span class="cell-text">
+      <span class="cell-title"><%= @network.name %></span>
+      <span class="cell-details">Not Connected</span>
+    </span>
+  </a>
+  <div class="action-button"><%= link_to('Add', network_path(:network => @network.name)) %></div>
+</div>
