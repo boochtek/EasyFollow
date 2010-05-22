@@ -68,6 +68,9 @@ ActionController::Routing::Routes.draw do |map|
   map.create_connection '/connection/create', :conditions => { :method => :post },
     :controller => 'connection',
     :action => 'create'
+  map.destroy_connection '/connection/:user', :conditions => { :method => :delete },
+    :controller => 'connection',
+    :action => 'destroy'
 
   # Profile pages -- we can use profile_url(:username => 'CraigBuchek')
   map.profile ':username', :conditions => { :method => :get },
