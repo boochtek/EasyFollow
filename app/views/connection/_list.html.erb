@@ -9,17 +9,19 @@
           <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>
         </span>
       </a>
-      <div class="action-button <%= following ? 'remove-button' : '' %>">
-        <% if !following %>
+      <% if !following %>
+        <div class="action-button <%= following ? 'remove-button' : '' %>">
           <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
             <%= form.submit 'Follow' %>
           <% end %>
-        <% elsif current_user == @user %>
+        </div>
+      <% elsif current_user == @user %>
+        <div class="action-button <%= following ? 'remove-button' : '' %>">
           <% form_for user, :url => destroy_connection_path(:user => user.username), :html => {:method => :delete} do |form| %>
             <%= form.submit 'Remove' %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
