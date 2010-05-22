@@ -1,14 +1,25 @@
-<ul>
 <% @users.each do |user| %>
   <% following = current_user.following?(user) %>
-  <li class="user" id="user_<%= user.id %>">
-    <%= user.username %>
-    <%= user.full_name %>
-    <% if !following %>
-      <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
-        <%= form.submit 'Follow' %>
-      <% end %>
-    <% end %>
-  </li>
+  <div class="cell-wrapper" id="user_<%= user.id %>">
+    <div class="cell <%= following ? '' : 'in' %>active-cell" title="<%= user.full_name %>">
+      <a href="<%= profile_path(:username => user.username) %>">
+        <img class="cell-thumb" src="images/samples/user_thumb.gif" alt="" />
+        <span class="cell-text">
+          <span class="cell-title"><%= user.username %></span>
+          <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>
+        </span>
+      </a>
+      <div class="action-button <%= following ? 'remove-button' : '' %>">
+        <% if !following %>
+          <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
+            <%= form.submit 'Follow' %>
+          <% end %>
+        <% elsif current_user == @user %>
+          <% form_for user, :url => destroy_connection_path(:user => user.username), :html => {:method => :delete} do |form| %>
+            <%= form.submit 'Remove' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
-</ul>
