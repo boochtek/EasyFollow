@@ -1,23 +1,13 @@
 <% @tagline = 'Add a contact from your search results' %>
 
-<h1>Search</h1>
-<p>
-  Sorry, the Search feature is still a work in progress. It should be completed shortly.
-  For now, here's a list of all the users on the site.
-</p>
-<br />
-<br />
-<ul>
-<% User.find(:all, :conditions => ['id != ?', current_user.id]).each do |user| %>
-  <% following = current_user.following?(user) %>
-  <li class="user" id="user_<%= user.id %>">
-    <%= user.username %>
-    <%= user.full_name %>
-    <% if !following %>
-      <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
-        <%= form.submit 'Follow' %>
-      <% end %>
+<div class="common">
+
+  <%= render :partial => 'search/form' %>
+
+  <div class="search-results clear">
+    <h6>Search results for *Search Subject*. Use the Advanced Search above to refine your results.</h6>
+    <% @users.each do |user| %>
+      <%= render :partial => 'search/result', :locals => {:user => user} %>
     <% end %>
-  </li>
-<% end %>
-</ul>
+  </div>
+</div>

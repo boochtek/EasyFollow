@@ -1,0 +1,16 @@
+<table class="results-row">
+  <tr>
+    <td class="col-1">
+      <a href="<%= profile_path(:username => user.username) %>" title=""><img src="images/samples/user_thumb.gif" alt="" /></a>			
+    </td>
+    <td class="col-2">
+      <h6><a href="<%= profile_path(:username => user.username) %>" title=""><%= user.full_name %> (<%= user.username %>)</a></h6>
+    </td>
+    <td class="col-3">
+      <p><%= user.location %></p>
+    </td>
+    <td class="col-4">
+      <p><%= user.bio %></p>
+    </td>
+  </tr>
+</table>
