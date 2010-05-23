@@ -72,20 +72,22 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'connection',
     :action => 'destroy'
 
-  # Profile pages -- we can use profile_url(:username => 'CraigBuchek')
-  map.profile ':username', :conditions => { :method => :get },
-    :controller => 'profile',
-    :action => 'show'
+  # Search page
+  map.search '/search', :controller => 'search'
+
+  # Profile pages (note that we can use profile_path(:username => 'CraigBuchek'))
   map.edit_profile '/profile/edit', :conditions => { :method => :get },
     :controller => 'profile',
     :action => 'edit'
   map.edit_profile '/profile/edit', :conditions => { :method => [:post, :put] },
     :controller => 'profile',
     :action => 'update'
-  # Make my_profile an alias for the home page (assuming the user is logged in)
+  # Make my_profile_path an alias for home_path.
   map.my_profile '', :controller => 'home'
+  # NOTE: Make sure this is the last route, because it'll match anything (without a '/' in it).
+  map.profile ':username', :conditions => { :method => :get },
+    :controller => 'profile',
+    :action => 'show'
 
-  # Search page
-  map.search '/search', :controller => 'search'
 
 end
