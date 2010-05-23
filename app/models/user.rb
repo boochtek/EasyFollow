@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     self.find_first_by_username(username)
   end
 
+  def self.search(query)
+    find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ? OR username LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%"])
+  end
+
   def follow(user_to_follow)
     Connection.create(:follower => self, :followee => user_to_follow)
   end
