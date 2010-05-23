@@ -26,7 +26,7 @@ class NetworkController < ApplicationController
           url = @account.oauth_authorize_url(@account, network_oauth_url(:network => @network))
           redirect_to url
         rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
-          # TODO: Figure out how to handle this. This will only happen if Twitter rejects our OAuth consumer account.
+          # TODO: Figure out how to handle this. This will only happen if the networking site rejects our OAuth consumer account.
           render :text => "#{network_oauth_url(:network => @network)}\n#{e.inspect}"
         end
       else

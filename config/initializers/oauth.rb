@@ -22,6 +22,14 @@ if defined?(OAuth) or defined?(OAuth2)
       :secret => '9a8eb43959ff24b2834b4f2b14705be0',
       :site => 'https://graph.facebook.com',
     },
+    :you_tube => {
+      :key => 'meezy.boochtek.com',
+      :secret => 'NWnFejsuH5iBjRFvn++60eXa',
+      :site => "https://www.google.com",
+      :request_token_path => "/accounts/OAuthGetRequestToken",
+      :access_token_path => "/accounts/OAuthGetAccessToken",
+      :authorize_path=> "/accounts/OAuthAuthorizeToken",
+    },
   }
 end
 
