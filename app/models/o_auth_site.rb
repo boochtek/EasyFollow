@@ -6,7 +6,11 @@ class OAuthSite < SocialNetworkSite
     end
 
     def oauth_authorize_url(account, callback_url)
-      request_token = consumer.get_request_token(:oauth_callback => callback_url)
+      if options[:scope]
+        request_token = consumer.get_request_token({:oauth_callback => callback_url}, {:scope => options[:scope]})
+      else
+        request_token = consumer.get_request_token({:oauth_callback => callback_url})
+      end
       account.token[:oauth_rtoken] = request_token.token
       account.token[:oauth_rsecret] = request_token.secret
       account.save!

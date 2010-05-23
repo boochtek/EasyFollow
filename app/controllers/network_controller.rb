@@ -27,7 +27,8 @@ class NetworkController < ApplicationController
           redirect_to url
         rescue OAuth::Unauthorized => e # TODO: Handle OAuth::Problem and OAuth:Error as well.
           # TODO: Figure out how to handle this. This will only happen if the networking site rejects our OAuth consumer account.
-          render :text => "#{network_oauth_url(:network => @network)}\n#{e.inspect}"
+          render :text => "#{network_oauth_url(:network => @network)}<br />\n" +
+                          "#{e.inspect}<br />\n"
         end
       else
         redirect_to :back

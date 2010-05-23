@@ -25,10 +25,11 @@ if defined?(OAuth) or defined?(OAuth2)
     :you_tube => {
       :key => 'meezy.boochtek.com',
       :secret => 'NWnFejsuH5iBjRFvn++60eXa',
-      :site => "https://www.google.com",
-      :request_token_path => "/accounts/OAuthGetRequestToken",
-      :access_token_path => "/accounts/OAuthGetAccessToken",
-      :authorize_path=> "/accounts/OAuthAuthorizeToken",
+      :site => 'https://www.google.com',
+      :scope => 'http://gdata.youtube.com',
+      :request_token_path => '/accounts/OAuthGetRequestToken',
+      :access_token_path => '/accounts/OAuthGetAccessToken',
+      :authorize_path=> '/accounts/OAuthAuthorizeToken',
     },
   }
 end
