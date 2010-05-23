@@ -28,7 +28,7 @@ JQUERY_VERSION = '1.4.2'
 GOOGLE_ANALYTICS_CODE = nil
 
 # Google Webmaster Tools (http://www.google.com/webmasters/) code. Set this to verify that you control the site, so you can see how Google views your site.
-GOOGLE_WEBMASTERS_CODE = nil
+GOOGLE_WEBMASTERS_CODE = 'y6lDgmj4wzEKaPCs0KZBmz4N9feUSl8BODhPm13z7KI'
 
 # Email exceptions to this list of addresses, if ExceptionNotifier is loaded.
 EMAIL_EXCEPTIONS_TO = ['craig@boochtek.com']
