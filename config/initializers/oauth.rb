@@ -29,7 +29,8 @@ if defined?(OAuth) or defined?(OAuth2)
       :scope => 'http://gdata.youtube.com',
       :request_token_path => '/accounts/OAuthGetRequestToken',
       :access_token_path => '/accounts/OAuthGetAccessToken',
-      :authorize_path=> '/accounts/OAuthAuthorizeToken',
+      :authorize_path => '/accounts/OAuthAuthorizeToken',
+      :developer_key => 'AI39si5cJnZZgc4b7R5S4q8GsY22P9TQLF3VqMYjrr3OZz5kDKAVNhd2HJEM92kHgu7NgOVhqXUhx4n5ZcW50F5rY9CeBEAiGg',
     },
   }
 end

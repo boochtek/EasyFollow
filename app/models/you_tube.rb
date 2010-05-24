@@ -12,7 +12,7 @@ class YouTube < OAuthSite
       # Get the user's profile information.
       response = access_token(account).get('http://gdata.youtube.com/feeds/api/users/default')
       xml = Nokogiri::XML(response.body)
-      username   = xml.xpath('//yt:username/text()',   {'yt' => 'http://gdata.youtube.com/schemas/2007'}).to_s
+      username   = xml.xpath('//yt:username/text()',  {'yt' => 'http://gdata.youtube.com/schemas/2007'}).to_s
       first_name = xml.xpath('//yt:firstName/text()', {'yt' => 'http://gdata.youtube.com/schemas/2007'}).to_s
       last_name  = xml.xpath('//yt:lastName/text()',  {'yt' => 'http://gdata.youtube.com/schemas/2007'}).to_s
 
@@ -29,7 +29,7 @@ class YouTube < OAuthSite
           <yt:username>#{account_to_follow.username}</yt:username>
         </entry>
         XML
-      access_token(account).post("http://gdata.youtube.com/feeds/api/users/default/contacts", xml)
+      access_token(account).post("http://gdata.youtube.com/feeds/api/users/default/contacts", xml, {'Content-Type' => 'application/atom+xml', 'X-GData-Key' => "key=#{options[:developer_key]}"})
     end
 
     def authenticate_to_network
