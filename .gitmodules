@@ -1,30 +1,9 @@
-[submodule "vendor/plugins/blue-ridge"]
-	path = vendor/plugins/blue-ridge
-	url = git://github.com/relevance/blue-ridge.git
 [submodule "vendor/plugins/exception_notifier"]
 	path = vendor/plugins/exception_notifier
 	url = git://github.com/rails/exception_notification.git
-[submodule "vendor/plugins/validation_reflection"]
-	path = vendor/plugins/validation_reflection
-	url = http://github.com/redinger/validation_reflection.git
-[submodule "vendor/plugins/country-select"]
-	path = vendor/plugins/country-select
-	url = http://github.com/rails/iso-3166-country-select.git
-[submodule "vendor/plugins/formtastic"]
-	path = vendor/plugins/formtastic
-	url = http://github.com/justinfrench/formtastic.git
-[submodule "vendor/plugins/default_views"]
-	path = vendor/plugins/default_views
-	url = git://github.com/boochtek/rails-default_views.git
-[submodule "vendor/plugins/crud_actions"]
-	path = vendor/plugins/crud_actions
-	url = git://github.com/boochtek/rails-crud_actions.git
 [submodule "vendor/plugins/asset_packager"]
 	path = vendor/plugins/asset_packager
 	url = git://github.com/sbecker/asset_packager.git
-[submodule "vendor/plugins/ssl_requirement"]
-	path = vendor/plugins/ssl_requirement
-	url = git://github.com/rails/ssl_requirement.git
 [submodule "vendor/plugins/activerecord-attribute_declarations"]
 	path = vendor/plugins/activerecord-attribute_declarations
 	url = git://github.com/boochtek/activerecord-attribute_declarations.git
