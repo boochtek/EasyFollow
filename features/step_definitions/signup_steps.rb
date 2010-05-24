@@ -43,9 +43,14 @@ When /^I enter a username that is already taken$/ do
   click_button 'sign-up'
 end
 
-When /^I enter a username that contains a slash$/ do
+When /^I enter a username that contains a (slash|space)$/ do |character|
   When 'I fill out the signup form'
-  fill_in 'user[username]', :with => 'craig/buchek'
+  case character
+  when 'space'
+    fill_in 'user[username]', :with => 'craig buchek'
+  when 'slash'
+    fill_in 'user[username]', :with => 'craig/buchek'
+  end
   click_button 'sign-up'
 end
 

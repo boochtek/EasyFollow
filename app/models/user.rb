@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   delegate :location, :title, :industry, :description, :to => '(bio or return nil)'
 
   validates_each :username do |record, attr, value|
-    record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:alnum:]]*\Z}
+    record.errors.add attr, 'may not contain spaces' if value =~ %r{[[:space:]]}
+    record.errors.add attr, 'may only contain alphanumeric characters, plus _ . ! @ -' if value !~ %r{\A[-_.!@[:space:][:alnum:]]*\Z} # NOTE: We include space in here, because we only want the previous error to show up.
     record.errors.add attr, 'is not allowed' if value =~ PROHIBITED_USERNAME_REGEX
   end
 
