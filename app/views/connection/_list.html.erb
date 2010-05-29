@@ -1,27 +1,14 @@
 <% @user.connections.collect(&:followee).each do |user| %>
   <% following = current_user && current_user.following?(user) %>
   <div class="cell-wrapper medium-cells" id="user_<%= user.id %>">
-    <div class="cell <%= following ? '' : 'in' %>active-cell" title="<%= user.full_name %>">
-      <a href="<%= profile_path(:username => user.username) %>">
+    <a href="<%= profile_path(:username => user.username) %>">
+      <span class="cell <%= following ? '' : 'in' %>active-cell" title="<%= user.full_name %>">
         <img class="cell-thumb" src="images/samples/user_thumb.gif" alt="" />
         <span class="cell-text">
           <span class="cell-title"><%= user.username %></span>
           <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>
         </span>
-      </a>
-      <% if !following %>
-        <div class="action-button <%= following ? 'remove-button' : '' %>">
-          <% form_for user, :url => create_connection_path(:user => user.username), :html => {:method => :post} do |form| %>
-            <%= form.submit 'Follow' %>
-          <% end %>
-        </div>
-      <% elsif current_user == @user %>
-        <div class="action-button <%= following ? 'remove-button' : '' %>">
-          <% form_for user, :url => destroy_connection_path(:user => user.username), :html => {:method => :delete} do |form| %>
-            <%= form.submit 'Remove' %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      </span>
+    </a>
   </div>
 <% end %>
