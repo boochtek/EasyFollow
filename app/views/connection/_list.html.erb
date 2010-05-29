@@ -1,12 +1,15 @@
 <% @user.connections.collect(&:followee).each do |user| %>
   <% following = current_user && current_user.following?(user) %>
+  <% active = (current_user && !following) ? 'inactive-cell' : 'active-cell' %>
   <div class="cell-wrapper medium-cells" id="user_<%= user.id %>">
     <a href="<%= profile_path(:username => user.username) %>">
-      <span class="cell <%= following ? '' : 'in' %>active-cell" title="<%= user.full_name %>">
+      <span class="cell <%= active %>" title="<%= user.full_name %>">
         <img class="cell-thumb" src="images/samples/user_thumb.gif" alt="" />
         <span class="cell-text">
           <span class="cell-title"><%= user.username %></span>
-          <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>
+          <% if current_user %>
+            <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>
+          <% end %>
         </span>
       </span>
     </a>
