@@ -22,9 +22,8 @@ class ApplicationController < ActionController::Base
     if const_defined?('HoptoadNotifier') and Hoptoad.api_key
       include HoptoadNotifier::Catcher
     end
-    if const_defined?('ExceptionNotifiable')
-      include ExceptionNotifiable
-      ExceptionNotifier.exception_recipients = EMAIL_EXCEPTIONS_TO
+    if const_defined?('ExceptionNotification')
+      include ExceptionNotification::Notifiable
     end
   end
 

@@ -32,6 +32,9 @@ GOOGLE_WEBMASTERS_CODE = 'y6lDgmj4wzEKaPCs0KZBmz4N9feUSl8BODhPm13z7KI'
 
 # Email exceptions to this list of addresses, if ExceptionNotifier is loaded.
 EMAIL_EXCEPTIONS_TO = ['craig@boochtek.com']
+if const_defined?('ExceptionNotification')
+  ExceptionNotification::Notifier.exception_recipients = EMAIL_EXCEPTIONS_TO
+end
 
 # Reply address for emails. Used by Clearance, and possibly other gems/plugins.
 DO_NOT_REPLY = "donotreply@#{HOST}"

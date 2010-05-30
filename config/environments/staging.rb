@@ -29,6 +29,8 @@ config.action_mailer.default_url_options = { :host => 'meezy.boochtek.com' }
 
 # Enable threaded mode
 # config.threadsafe!
+
+# Display backtraces for exceptions in staging.
 config.action_controller.consider_all_requests_local = true
 
 config.gem 'mysql'
