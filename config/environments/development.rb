@@ -36,3 +36,6 @@ config.gem 'rspec-rails', :lib => false, :version => '>= 1.3.2'
 config.gem 'rspec', :lib => false, :version => '>= 1.3.0'
 
 ActiveRecord::Base.logger = Logger.new(STDOUT) if "irb" == $0
+
+# Define our host, so ActionMailer can create URLs.
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
