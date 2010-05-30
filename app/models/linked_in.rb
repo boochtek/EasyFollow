@@ -4,7 +4,7 @@ class LinkedIn < OAuthSite
   class << self
 
     def icon
-      '/images/social_networking_iconpack/linkedin_32.png'
+      '/images/icons/linkedin.gif'
     end
 
     # Return a hash containing :username, :uid, and :full_name, according to the site.

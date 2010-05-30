@@ -6,7 +6,7 @@ class FaceBook < OAuth2Site
     end
 
     def icon
-      '/images/social_networking_iconpack/facebook_32.png'
+      '/images/icons/facebook.gif'
     end
 
     # Return a hash containing :username, :uid, and :full_name, according to the site.

@@ -2,7 +2,7 @@ class Twitter < OAuthSite
   class << self
 
     def icon
-      '/images/social_networking_iconpack/twitter_32.png'
+      '/images/icons/twitter.gif'
     end
 
     # Return a hash containing :username, :uid, and :full_name, according to the site.

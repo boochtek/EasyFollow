@@ -4,7 +4,7 @@ class YouTube < OAuthSite
   class << self
 
     def icon
-      '/images/social_networking_iconpack/youtube_32.png'
+      '/images/icons/youtube.gif'
     end
 
     # Return a hash containing :username, :uid, and :full_name, according to the site.
