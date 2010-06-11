@@ -15,14 +15,14 @@ class LinkedIn < OAuthSite
       uid = xml.xpath('//person/id/text()').to_s
       first_name = xml.xpath('//person/first-name/text()').to_s
       last_name  = xml.xpath('//person/last-name/text()').to_s
-      url = xml.xpath('//person/api-standard-profile-request/url/text()').to_s
+      url = xml.xpath('//person/site-standard-profile-request/url/text()').to_s
 
       # Save the user's URL in the account token.
       account.token[:url] = url
       account.save!
 
       # Return the user details.
-      return {:uid => uid, :full_name => "#{first_name} #{last_name}"}
+      return {:uid => uid, :full_name => "#{first_name} #{last_name}", :url => url}
     end
 
     # Have one user follow another on this site. (Or whatever is most analagous to following.)

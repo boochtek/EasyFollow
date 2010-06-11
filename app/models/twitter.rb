@@ -9,7 +9,7 @@ class Twitter < OAuthSite
     def get_user_details(account)
       response = access_token(account).get('http://api.twitter.com/1/account/verify_credentials.json') # TODO: Can we drop the http://api.twitter.com/1 part?
       json = JSON.parse(response.body)
-      return {:username => json['screen_name'], :uid => json['id'], :full_name => json['name']}
+      return {:username => json['screen_name'], :uid => json['id'], :full_name => json['name'], :url => "http://twitter.com/#{json['screen_name']}"}
     end
 
     # Have one user follow another on this site. (Or whatever is most analagous to following.)

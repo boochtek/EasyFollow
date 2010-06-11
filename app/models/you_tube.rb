@@ -17,7 +17,7 @@ class YouTube < OAuthSite
       last_name  = xml.xpath('//yt:lastName/text()',  {'yt' => 'http://gdata.youtube.com/schemas/2007'}).to_s
 
       # Return the user details.
-      return {:username => username, :full_name => "#{first_name} #{last_name}"}
+      return {:username => username, :full_name => "#{first_name} #{last_name}", :url => "http://www.youtube.com/user/#{username}"}
     end
 
     # Have one user follow another on this site. (Or whatever is most analagous to following.)

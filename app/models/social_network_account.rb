@@ -26,6 +26,12 @@ class SocialNetworkAccount < ActiveRecord::Base
 #    @username ||= read_attribute(:username) || network_site.get_user_details(self)[:username]
 #  end
 
+
+  def url
+    return nil if !authenticated_to_network_site?
+    @url ||= network_site.get_user_details(self)[:url]
+  end
+
   delegate :auth_type, :to => :network_site
   delegate :oauth_authorize_url, :to => :network_site
 
