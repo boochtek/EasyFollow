@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
   def follow(user_to_follow, networks)
     networks = [networks].flatten # Allow networks to accept a single network or an array of networks.
     networks.each do |network|
+      network = network.name if network.is_a?(Class) # Allow networks to be passed by name or class.
       Connection.create(:follower => self, :followee => user_to_follow, :network => network)
     end
   end
@@ -82,14 +83,16 @@ class User < ActiveRecord::Base
   def unfollow(user_to_unfollow, networks)
     networks = [networks].flatten # Allow networks to accept a single network or an array of networks.
     networks.each do |network|
+      network = network.name if network.is_a?(Class) # Allow networks to be passed by name or class.
       connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ? AND network = ?', self.id, user_to_unfollow.id, network])
+      Connection.destroy(connection.id)
     end
-    connection.destroy
   end
 
   def following?(other_user, network=nil)
     if network
-      connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ? AND network = ?', self.id, other_user.id, network.name])
+      network = network.name if network.is_a?(Class) # Allow networks to be passed by name or class.
+      connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ? AND network = ?', self.id, other_user.id, network])
     else
       connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, other_user.id])
     end
