@@ -1,5 +1,5 @@
 <div class="cell network_site" title="<%= @user.accounts[@network.name].nil? ? @network.name : (@user.accounts[@network.name].username || @user.accounts[@network.name].full_name) %>">
-  <a href="<%= @user.accounts[@network.name].url %>"><img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" /></a>
+  <a target="_blank" href="<%= @user.accounts[@network.name].url %>"><img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" /></a>
   <span class="cell-text">
     <span class="cell-title"><%= @network.name %></span>
     <span class="cell-details">Connected</span>
