@@ -72,18 +72,33 @@ class User < ActiveRecord::Base
     find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ? OR username LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%"])
   end
 
-  def follow(user_to_follow)
-    Connection.create(:follower => self, :followee => user_to_follow)
+  def follow(user_to_follow, networks)
+    networks = [networks].flatten # Allow networks to accept a single network or an array of networks.
+    networks.each do |network|
+      Connection.create(:follower => self, :followee => user_to_follow, :network => network)
+    end
   end
 
-  def unfollow(user_to_unfollow)
-    connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, user_to_unfollow.id])
+  def unfollow(user_to_unfollow, networks)
+    networks = [networks].flatten # Allow networks to accept a single network or an array of networks.
+    networks.each do |network|
+      connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ? AND network = ?', self.id, user_to_unfollow.id, network])
+    end
     connection.destroy
   end
 
-  def following?(user_to_follow)
-    connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, user_to_follow.id])
+  def following?(other_user)
+    connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, other_user.id])
     return !!connection
+  end
+
+  def followees
+    connections.collect(&:followee)
+  end
+
+  # Networks that this user has accounts on.
+  def networks
+    self.accounts.collect(&:network_name)
   end
 
 end

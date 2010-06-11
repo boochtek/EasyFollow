@@ -1,4 +1,4 @@
-<% @user.connections.collect(&:followee).each do |user| %>
+<% @user.followees.each do |user| %>
   <% following = current_user && current_user.following?(user) %>
   <% active = (current_user && !following) ? 'inactive-cell' : 'active-cell' %>
   <div class="cell-wrapper medium-cells" id="user_<%= user.id %>">

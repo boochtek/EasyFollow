@@ -10,11 +10,7 @@
     <p><strong>Bio:</strong> <%= @user.description %></p>
     <% if @profile_type == 'my' %>
       <h6 class="edit-link"><a href="<%= edit_profile_path %>" title="Edit Profile">edit my profile</a></h6>
-    <% elsif @profile_type == 'their' %>
-      <% form_for @user, :url => create_connection_path(:user => @user.username), :html => {:method => :post} do |form| %>
-        <%= form.submit 'Follow Me' %>
-      <% end %>
-    <% else %>
+    <% elsif @profile_type == 'public' %>
       <%= link_to 'Sign up to follow me', signup_path %>
     <% end %>
   </div>
