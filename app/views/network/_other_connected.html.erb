@@ -1,4 +1,4 @@
-<div class="cell featured-cell network_site" title="<%= @user.accounts[@network.name].nil? ? @network.name : (@user.accounts[@network.name].username || @user.accounts[@network.name].full_name) %>">
+<div class="cell network_site" title="<%= @user.accounts[@network.name].nil? ? @network.name : (@user.accounts[@network.name].username || @user.accounts[@network.name].full_name) %>">
   <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
   <a href="#">
     <span class="cell-text">
