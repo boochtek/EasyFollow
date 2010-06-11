@@ -63,6 +63,10 @@ ActionController::Routing::Routes.draw do |map|
   map.network_oauth2 '/network/oauth2/:network', :conditions => { :method => :get },
     :controller => 'network',
     :action => 'create_oauth2'
+  # Remove network from a user's account. NOTE: We should really require this to be a DELETE, but our HTML doesn't currently make that feasible.
+  map.remove_network '/network/remove/:network', :conditions => { :method => [:get, :post, :delete] },
+    :controller => 'network',
+    :action => 'destroy'
 
   # Connections (following)
   map.create_connection '/connection/create', :conditions => { :method => :post },

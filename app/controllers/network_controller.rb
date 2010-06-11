@@ -13,6 +13,14 @@ class NetworkController < ApplicationController
     render 'signup/step2'
   end
 
+  # Remove network from a user's account.
+  def destroy
+    @network = params[:network]
+    @account = current_user.accounts[@network]
+    SocialNetworkAccount.destroy(@account.id)
+    redirect_to :back
+  end
+
   # Enter info to connect to a network.
   def new
     session[:referrer] = request.referrer
