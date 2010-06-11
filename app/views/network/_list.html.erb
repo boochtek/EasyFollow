@@ -8,12 +8,14 @@
       else
         render :partial => 'network/my_inactive', :locals => {:network => @network, :user => @user}
       end
-    elsif @user.accounts[network.name]
-      if current_user and current_user.following?(@user) and current_user.accounts[network.name] and @user.accounts[network.name] and 
+    elsif current_user and @user.accounts[network.name]
+      if current_user.following?(@user, network) and current_user.accounts[network.name]
         render :partial => 'network/other_connected', :locals => {:network => @network, :user => @user}
       else
         render :partial => 'network/other_unconnected', :locals => {:network => @network, :user => @user}
       end
+    elsif @user.accounts[network.name]
+      render :partial => 'network/other_public', :locals => {:network => @network, :user => @user}
     end
     %>
   </div>

@@ -3,7 +3,7 @@ class ConnectionController < ApplicationController
   def create
     @user = User.find_first_by_username(params[:user])
     if @user and current_user
-      current_user.follow(@user)
+      current_user.follow(@user, params[:network])
       redirect_to :back
     else
       # This should not happen unless the followee has disabled their account, or someone is directly POSTing to the URL.

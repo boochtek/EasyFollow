@@ -13,12 +13,10 @@ class Connection < ActiveRecord::Base
   # NOTE: This checks the raw network attribute. TODO: Make sure it's in the list of actual SocialNetworkSite subclasses.
   validates_format_of :network, :with => /\A[a-zA-Z_]*\Z/, :allow_nil => true, :message => 'must be a SocialNetworkSite names.'
 
-  # Don't allow setting network from params.
-  attr_protected :network
-
   # Do the actual work to connect the 2 accounts.
   before_create :create_connection_on_social_network_site
   def create_connection_on_social_network_site
+    site = SocialNetworkSite(network)
     follower_account = follower.accounts[network]
     followee_account = followee.accounts[network]
     if follower_account and followee_account

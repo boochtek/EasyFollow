@@ -87,8 +87,12 @@ class User < ActiveRecord::Base
     connection.destroy
   end
 
-  def following?(other_user)
-    connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, other_user.id])
+  def following?(other_user, network=nil)
+    if network
+      connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ? AND network = ?', self.id, other_user.id, network.name])
+    else
+      connection = Connection.find(:first, :conditions => ['follower_id = ? AND followee_id = ?', self.id, other_user.id])
+    end
     return !!connection
   end
 
