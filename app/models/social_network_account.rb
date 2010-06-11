@@ -30,6 +30,8 @@ class SocialNetworkAccount < ActiveRecord::Base
   def url
     return nil if !authenticated_to_network_site?
     @url ||= network_site.get_user_details(self)[:url]
+  rescue
+    return nil
   end
 
   delegate :auth_type, :to => :network_site
