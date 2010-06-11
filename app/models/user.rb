@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   end
 
   def followees
-    connections.collect(&:followee)
+    connections.collect(&:followee).uniq
   end
 
   # Networks that this user has accounts on.
