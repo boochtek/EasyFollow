@@ -2,8 +2,12 @@
   <% @network = network %> <!-- Work around Rails bug 4620 -->
   <div class="cell-wrapper">
   <%=
-    if current_user and current_user.id == @user.id and current_user.accounts[network.name]
-      render :partial => 'network/my_active', :locals => {:network => @network, :user => @user}
+    if current_user and current_user.id == @user.id
+      if current_user.accounts[network.name]
+        render :partial => 'network/my_active', :locals => {:network => @network, :user => @user}
+      else
+        render :partial => 'network/my_inactive', :locals => {:network => @network, :user => @user}
+      end
     elsif @user.accounts[network.name]
       if current_user and current_user.following?(@user) and current_user.accounts[network.name] and @user.accounts[network.name] and 
         render :partial => 'network/other_connected', :locals => {:network => @network, :user => @user}
