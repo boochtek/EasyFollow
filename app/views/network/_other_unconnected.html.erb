@@ -1,10 +1,8 @@
-<div class="cell network_site" title="<%= @user.accounts[@network.name].nil? ? @network.name : (@user.accounts[@network.name].username || @user.accounts[@network.name].full_name) %>">
+<div class="cell inactive-cell network_site">
   <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
-  <a href="#">
-    <span class="cell-text">
-      <span class="cell-title"><%= @network.name %></span>
-      <span class="cell-details">Not Connected</span>
-    </span>
-  </a>
+  <span class="cell-text">
+    <span class="cell-title"><%= @network.name %></span>
+    <span class="cell-details">Not Connected</span>
+  </span>
   <div class="action-button"><%= button_to('Connect', create_connection_path(:user => @user.username, :network => @network)) %></div>
 </div>
