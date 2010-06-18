@@ -68,8 +68,12 @@ class User < ActiveRecord::Base
     self.find_first_by_username(username)
   end
 
-  def self.search(query)
-    find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ? OR username LIKE ?', "%#{query}%", "%#{query}%", "%#{query}%"])
+  def self.search(query, options={})
+    scope = self.scoped(:limit => 100, :include => :bio, :conditions => ['(first_name LIKE :query OR last_name LIKE :query OR username LIKE :query)', {:query => "%#{query}%"}])
+    [:location, :title, :industry].each do |field_type|
+      scope = scope.scoped(:joins => :bio, :conditions => ["#{field_type.to_s} LIKE ?", "%#{options[field_type]}%"]) if !options[field_type].blank?
+    end
+    scope
   end
 
   def follow(user_to_follow, networks)
