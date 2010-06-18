@@ -5,9 +5,33 @@
   <%= render :partial => 'search/form' %>
 
   <div class="search-results clear">
-    <h6>Search results for *Search Subject*. Use the Advanced Search above to refine your results.</h6>
-    <% @users.each do |user| %>
-      <%= render :partial => 'search/result', :locals => {:user => user} %>
+    <h6>Search results for "<%= params[:query] %>". Use the Advanced Search above to refine your results.</h6>
+    <% # NOTE: For some reason @users.empty? causes an SQL error here. %>
+    <% if @users.blank? %>
+      No Matches!
+    <% elsif current_user %>
+      <% if !@users_in_my_network.blank? %>
+        Users in your network:
+        <table class="search-results">
+          <% @users_in_my_network.each do |user| %>
+            <%= render :partial => 'search/result', :locals => {:user => user} %>
+          <% end %>
+        </table>
+      <% end %>
+      <% if !@users_not_in_my_network.blank? %>
+        Users NOT in your network:
+        <table class="search-results">
+          <% @users_not_in_my_network.each do |user| %>
+            <%= render :partial => 'search/result', :locals => {:user => user} %>
+          <% end %>
+        </table>
+      <% end %>
+    <% else %>
+      <table class="search-results">
+        <% @users.each do |user| %>
+          <%= render :partial => 'search/result', :locals => {:user => user} %>
+        <% end %>
+      </table>
     <% end %>
   </div>
 </div>
