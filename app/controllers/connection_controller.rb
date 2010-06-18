@@ -5,7 +5,7 @@ class ConnectionController < ApplicationController
     @network = params[:network]
     if @user and current_user
       current_user.follow(@user, @network)
-      flash[:notice] = "Successfully added connection to #{@user} on #{@network}"
+      flash[:notice] = "Successfully added connection to #{@user.username} on #{@network}"
       redirect_to :back
     else
       # This should not happen unless the followee has disabled their account, or someone is directly POSTing to the URL.
@@ -19,7 +19,7 @@ class ConnectionController < ApplicationController
     @network = params[:network]
     if @user and current_user and current_user.following?(@user, @network)
       current_user.unfollow(@user, @network)
-      flash[:notice] = "Successfully removed the connection to #{@user} on #{@network} (NOTE: We have not removed your connection on #{@network}, just on Meezy)"
+      flash[:notice] = "Successfully removed the connection to #{@user.username} on #{@network} (NOTE: We have not removed your connection on #{@network}, just on Meezy)"
       redirect_to :back
     else
       # This should not happen unless someone is directly POSTing to the URL.
