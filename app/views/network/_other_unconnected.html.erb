@@ -1,8 +1,10 @@
-<div class="cell inactive-cell network_site">
-  <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
-  <span class="cell-text">
-    <span class="cell-title"><%= @network.name %></span>
-    <span class="cell-details">Not Connected</span>
-  </span>
-  <div class="action-button"><%= button_to('Connect', create_connection_path(:user => @user.username, :network => @network)) %></div>
+<div class="cell-wrapper">
+  <div class="cell inactive-cell network_site">
+    <img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" />
+    <span class="cell-text">
+      <span class="cell-title"><%= @network.name %></span>
+      <span class="cell-details">Not Connected</span>
+    </span>
+    <div class="action-button"><%= button_to('Connect', create_connection_path(:user => @user.username, :network => @network)) %></div>
+  </div>
 </div>

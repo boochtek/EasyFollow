@@ -1,8 +1,10 @@
-<div class="cell network_site" title="<%= @user.accounts[@network.name].username || @user.accounts[@network.name].full_name %>">
-  <a target="_blank" href="<%= @user.accounts[@network.name].url %>"><img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" /></a>
-  <span class="cell-text">
-    <span class="cell-title"><%= @network.name %></span>
-    <span class="cell-details">Connected</span>
-  </span>
-  <div class="action-button remove-button"><%= link_to('Remove', remove_network_path(:network => @network.name)) %></div>
+<div class="cell-wrapper">
+  <div class="cell network_site" title="<%= @user.accounts[@network.name].username || @user.accounts[@network.name].full_name %>">
+    <a target="_blank" href="<%= @user.accounts[@network.name].url %>"><img class="cell-thumb" src="<%= @network.icon %>" alt="<%= @network.name %>" /></a>
+    <span class="cell-text">
+      <span class="cell-title"><%= @network.name %></span>
+      <span class="cell-details">Connected</span>
+    </span>
+    <div class="action-button remove-button"><%= link_to('Remove', remove_network_path(:network => @network.name)) %></div>
+  </div>
 </div>

@@ -1,6 +1,5 @@
 <% SocialNetworkSite.all.each do |network| %>
   <% @network = network %> <!-- Work around Rails bug 4620 -->
-  <div class="cell-wrapper">
   <%=
     if current_user and current_user.id == @user.id
       if current_user.accounts[network.name]
@@ -20,6 +19,5 @@
       render :partial => 'network/other_public', :locals => {:network => @network, :user => @user}
     end
     %>
-  </div>
 <% end %>
 
