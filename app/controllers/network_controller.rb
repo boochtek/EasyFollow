@@ -18,6 +18,7 @@ class NetworkController < ApplicationController
     @network = params[:network]
     @account = current_user.accounts[@network]
     SocialNetworkAccount.destroy(@account.id)
+    flash[:notice] = "Successfully removed the #{@network} network"
     redirect_to :back
   end
 

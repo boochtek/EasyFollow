@@ -2,8 +2,10 @@ class ConnectionController < ApplicationController
 
   def create
     @user = User.find_first_by_username(params[:user])
+    @network = params[:network]
     if @user and current_user
-      current_user.follow(@user, params[:network])
+      current_user.follow(@user, @network)
+      flash[:notice] = "Successfully added connection to #{@user} on #{@network}"
       redirect_to :back
     else
       # This should not happen unless the followee has disabled their account, or someone is directly POSTing to the URL.
@@ -14,8 +16,10 @@ class ConnectionController < ApplicationController
 
   def destroy
     @user = User.find_first_by_username(params[:user])
-    if @user and current_user and current_user.following?(@user, params[:network])
-      current_user.unfollow(@user, params[:network])
+    @network = params[:network]
+    if @user and current_user and current_user.following?(@user, @network)
+      current_user.unfollow(@user, @network)
+      flash[:notice] = "Successfully removed the connection to #{@user} on #{@network} (NOTE: We have not removed your connection on #{@network}, just on Meezy)"
       redirect_to :back
     else
       # This should not happen unless someone is directly POSTing to the URL.
