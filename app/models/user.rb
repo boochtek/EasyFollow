@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   PROHIBITED_USERNAME_REGEX = Regexp.new("\\A(#{PROHIBITED_USERNAMES.join('|')}|.*\\.(#{PROHIBITED_USERNAME_SUFFIXES.join('|')}))\\Z")
 
   attribute :username,      :string, :required => true, :unique => true, :min_length => 2, :max_length => 50
-  attribute :email,         :string, :required => true, :min_length => 6, :max_length => 100, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  attribute :email,         :string, :required => true, :min_length => 6, :max_length => 100 # NOTE: Devise includes a format validation for email address, so don't create a duplicate error message.
   attribute :first_name,    :string, :required => true, :max_length => 50
   attribute :last_name,     :string, :max_length => 50
   attr_accessor :terms_of_service # Note that this is a *virtual* attribute, not in the database. Used for validates_acceptance_of below.
