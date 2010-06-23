@@ -3,7 +3,9 @@ class ConnectionController < ApplicationController
   def create
     @user = User.find_first_by_username(params[:user])
     @network = params[:network]
-    if @user and current_user
+    if params[:submit] == 'Cancel'
+      redirect_to :back
+    elsif @user and current_user
       current_user.follow(@user, @network)
       flash[:notice] = "Successfully added connection to #{@user.username} on #{@network}"
       redirect_to :back

@@ -5,6 +5,34 @@
       <span class="cell-title"><%= @network.name %></span>
       <span class="cell-details">Not Connected</span>
     </span>
-    <div class="action-button"><%= button_to('Connect', create_connection_path(:user => @user.username, :network => @network)) %></div>
+    <% if @network.name == 'FaceBook' %>
+      <div class="action-button">
+        <form class="lightbox-popup" target="_blank" action="http://www.facebook.com/profile.php">
+          <input name="id" type="hidden" value="<%= @user.accounts['FaceBook'].uid %>" />
+          <input type="submit" value="Connect"  />
+        </form>
+      </div>
+    <% else %>
+      <div class="action-button"><%= button_to('Connect', create_connection_path(:user => @user.username, :network => @network)) %></div>
+    <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+// Get info from server-side Ruby code.
+iframe_source = "http://www.facebook.com/profile.php?id=<%= @user.accounts['FaceBook'].uid %>";
+form_action = "<%= create_connection_path(:user => @user.username, :network => @network)%>";
+authenticity_token = "<%= form_authenticity_token %>";
+
+// Create a lightbox pop-up, and populate it with buttons and an IFRAME containing the FaceBook page.
+jQuery('form.lightbox-popup input[type=submit]').click(function(){
+  // TODO: Make sure we don't already have a lightbox.
+  jQuery('.page-wrapper').after('<div class="lightbox" /><p>Please add your connection in FaceBook, and hit DONE.</p></div>');
+  jQuery('.lightbox').append('<form class="lightbox-buttons" method="post" action="' + form_action + '">');
+  jQuery('.lightbox').append('<iframe src="' + iframe_source + '" width="75%" height="300"></iframe>');
+  jQuery('.lightbox-buttons').append('<input type="hidden" name="authenticity_token" value="' + authenticity_token + '" />')
+  jQuery('.lightbox-buttons').append('<input type="submit" value="Done" />')
+  jQuery('.lightbox-buttons').append('<input type="submit" name="submit" value="Cancel" />')
+  return false;
+});
+</script>

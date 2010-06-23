@@ -16,6 +16,11 @@ class FaceBook < OAuth2Site
       return {:username => json['name'], :uid => json['id'], :full_name => json['first_name'] + ' ' + json['last_name'], :url => json['link']}
     end
 
+    # NOTE: We don't implement follow(), because FaceBook does not have a follow API. So we have to have the controller/view implement this for us.
+    def follow(account, account_to_follow)
+      nil
+    end
+
     # Have one user follow another on this site. (Or whatever is most analagous to following.)
     def follow(account, account_to_follow)
       # TODO: access_token(account).post("/=#{account_to_follow.uid}") # NOTE: We'll need to get uid working first.
