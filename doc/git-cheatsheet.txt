@@ -26,17 +26,16 @@ Set up git with your username and email address:
 
 Pulling Down the Repository
 ===========================
-Clone the repository from its Github URL:
+Clone the repository from its GitHub URL:
     git clone git@github.com:boochtek/EasyFollow.git
 Change to the project directory:
-    cd EasyFollow
+    cd EasyFollow # All git commands should be run from this top-level directory.
 Pull in some dependencies:
     git submodule init
-All git commands should be run from this top-level directory.
 
 Day-to-Day Workflow
 ===================
-Get the latest updates from Github:
+Get the latest updates from GitHub:
     git pull
 Edit your files and make your changes.
 See what files have been changed:
@@ -48,7 +47,7 @@ See what changes you'll be committing:
     git diff --cached
 Commit the changes to your local repository:
     git commit # You'll be prompted to enter a commit message.
-When done with a set of changes, push them up to Github:
+When done with a set of changes, push them up to GitHub:
     git pull
     git push
 NOTE: The 'git push' command won't let you push if you need to pull first.
@@ -70,6 +69,18 @@ When done with the changes, add files with changes you want to commit:
     git add file-with-resolved-conflict.txt
 The git docs have a good section on merge conflicts:
     http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#resolving-a-merge
+
+Messed Up Commits
+=================
+If you leave the commit message blank, the commit will be aborted.
+If you've committed something, but haven't pushed, you can still fix it.
+If you just need to fix the commit message:
+    git commit --amend
+If you forgot to add something to the commit:
+    git reset --soft HEAD^
+    git add forgot.txt these.txt files.rb
+    git status
+    git commit
 
 Note on Editors
 ===============
