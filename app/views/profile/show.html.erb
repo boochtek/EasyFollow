@@ -12,6 +12,8 @@
       <h6 class="edit-link"><a href="<%= edit_profile_path %>" title="Edit Profile">edit my profile</a></h6>
     <% elsif @profile_type == 'public' %>
       <%= link_to 'Sign up to follow me', signup_path %>
+    <% else %>
+      <h6 class="edit-link"><%= link_to 'CONNECT', edit_connections_path(:user => @user.username) %></h6>
     <% end %>
   </div>
 

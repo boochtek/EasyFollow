@@ -30,4 +30,14 @@ class ConnectionController < ApplicationController
     end
   end
 
+  def list
+    @user = User.find_first_by_username(params[:user])
+    if @user and current_user
+      render 'connections/edit', :layout => false
+    else
+      # This should not happen unless someone is directly accessing the URL, so we don't care if the error message is just plain text.
+      render :text => "Cannot view connections! #{current_user.username} #{@user.username}"
+    end
+  end
+
 end
