@@ -69,6 +69,12 @@ ActionController::Routing::Routes.draw do |map|
     :action => 'destroy'
 
   # Connections (following)
+  map.edit_connections '/connections/:user', :conditions => { :method => :get },
+    :controller => 'connection',
+    :action => 'list'
+  map.set_connections '/connections/:user', :conditions => { :method => :post },
+    :controller => 'connection',
+    :action => 'set'
   map.create_connection '/connection/create', :conditions => { :method => :post },
     :controller => 'connection',
     :action => 'create'
