@@ -5,7 +5,7 @@ class ConnectionController < ApplicationController
     @network = params[:network]
     if params[:submit] == 'Cancel'
       redirect_to :back
-    elsif @user and current_user
+    elsif @user and current_user and @network
       current_user.follow(@user, @network)
       flash[:notice] = "Successfully added connection to #{@user.username} on #{@network}"
       redirect_to :back
