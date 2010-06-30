@@ -40,4 +40,26 @@ class ConnectionController < ApplicationController
     end
   end
 
+  # Considered calling this update, but we're really setting which networks we're connecting on.
+  def set
+    @user = User.find_first_by_username(params[:user])
+    @networks = params[:networks]
+    @networks_to_follow = []
+    @networks_to_unfollow = []
+    SocialNetworkSite.all.each do |network|
+      @networks_to_follow   << network if @networks[network.name] == '1' and !current_user.following?(@user, network)
+      @networks_to_unfollow << network if @networks[network.name] == '0' and current_user.following?(@user, network)
+    end
+    current_user.follow(@user, @networks_to_follow)     unless @networks_to_follow.empty?
+    current_user.unfollow(@user, @networks_to_unfollow) unless @networks_to_unfollow.empty?
+    flash[:notice] = ''
+    flash[:notice] += "Successfully added connection to #{@user.username} on #{@networks_to_follow.join(', ')}. "    unless @networks_to_follow.empty?
+    flash[:notice] += "Successfully removed connection to #{@user.username} on #{@networks_to_unfollow.join(', ')}." unless @networks_to_unfollow.empty?
+    if request.xhr?
+      render :nothing => true, :status => 204 # Let jQuery know that we successfully set the connections.
+    else
+      redirect_to profile_path(@user.username)
+    end
+  end
+
 end
