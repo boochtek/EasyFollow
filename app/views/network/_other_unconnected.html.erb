@@ -18,6 +18,7 @@
   </div>
 </div>
 
+<% if @network.name == 'FaceBook' %>
 <script type="text/javascript">
 // Get info from server-side Ruby code.
 iframe_source = "http://www.facebook.com/profile.php?id=<%= @user.accounts['FaceBook'].uid %>";
@@ -36,3 +37,4 @@ jQuery('form.lightbox-popup input[type=submit]').click(function(){
   return false;
 });
 </script>
+<% end %>
