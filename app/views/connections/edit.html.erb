@@ -2,7 +2,7 @@
   <% SocialNetworkSite.all.each do |network| %>
     <% if current_user.accounts[network.name] and @user.accounts[network.name] %>
       <%= hidden_field_tag "networks[#{network}]", 0 %> <!-- Send a 0 if the checkbox is not checked. -->
-      <%= check_box_tag "networks[#{network}]", 1, current_user.following?(@user, network) %>
+      <%= check_box_tag "networks[#{network}]", 1, true %>
       <div class="cell network_site" title="<%= @user.accounts[network.name].nil? ? @network.name : (@user.accounts[network.name].username || @user.accounts[network.name].full_name) %>">
         <img class="cell-thumb" src="<%= network.icon %>" alt="<%= network.name %>" />
         <span class="cell-text">
