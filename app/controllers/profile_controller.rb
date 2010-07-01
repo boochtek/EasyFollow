@@ -28,12 +28,27 @@ class ProfileController < ApplicationController
   def update
     @bio = current_user.bio
     @bio = Bio.create(:user => current_user) if @bio.nil?
-    if @bio.update_attributes(params[:bio])
-      flash[:notice] = 'Profile was successfully updated.'
+    if password_change_submitted? and current_user.update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation ])
+      flash[:notice] = 'Password was successfully changed. '
+    end
+    if password_change_submitted? and !current_user.valid?
+      flash[:notice] = 'There were problems changing your password.'
+      # TODO: Output the errors.
+      render 'profile/edit'
+    elsif @bio.update_attributes(params[:bio])
+      flash[:notice] = (flash[:notice] || '') + 'Profile was successfully updated.'
       redirect_to(my_profile_path)
     else
       render 'profile/edit'
     end
+  end
+
+private
+
+  def password_change_submitted?
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
+    return (!(@assword.empty?) and !(password_confirmation.empty?) and !(password == 'Password' and password_confirmation == 'Confirm Password'))
   end
 
 end
