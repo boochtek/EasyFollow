@@ -4,7 +4,7 @@
   <div class="cell-wrapper medium-cells" id="user_<%= user.id %>">
     <a href="<%= profile_path(:username => user.username) %>">
       <span class="cell <%= active %>" title="<%= user.full_name %>">
-        <img class="cell-thumb" src="images/samples/user_thumb.gif" alt="" />
+        <img class="cell-thumb" src="<%= user.thumbnail %>" alt="" />
         <span class="cell-text">
           <span class="cell-title"><%= user.username %></span>
           <% if current_user && @user.id != current_user.id %>

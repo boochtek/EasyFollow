@@ -1,7 +1,7 @@
 <div class="<%= @profile_type %>_profile">
 
   <div class="profile-block column bio">
-    <img class="thumb" src="/images/samples/medium_thumb.jpg" alt="" /><!-- TODO: Pull in user's image here. -->
+    <img class="profile-thumb" src="<%= @user.picture %>" alt="" />
     <h3><%= @user.username %></h3>
     <p><strong>Name:</strong> <%= @user.full_name %></p>
     <p><strong>Location:</strong> <%= @user.location %></p>

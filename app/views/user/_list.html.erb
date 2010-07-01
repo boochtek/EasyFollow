@@ -3,7 +3,7 @@
   <div class="cell-wrapper" id="user_<%= user.id %>">
     <div class="cell <%= following ? '' : 'in' %>active-cell" title="<%= user.full_name %>">
       <a href="<%= profile_path(:username => user.username) %>">
-        <img class="cell-thumb" src="images/samples/user_thumb.gif" alt="" />
+        <img class="cell-thumb" src="<%= user.thumbnail %>" alt="" />
         <span class="cell-text">
           <span class="cell-title"><%= user.username %></span>
           <span class="cell-details"><%= following ? '' : 'Not ' %>Connected</span>

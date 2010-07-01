@@ -1,6 +1,6 @@
 <tr class="results-row">
   <td class="col-1">
-    <a href="<%= profile_path(:username => user.username) %>" title=""><img src="images/samples/user_thumb.gif" alt="" /></a>			
+    <a href="<%= profile_path(:username => user.username) %>" title=""><img src="<%= user.thumbnail %>" class="cell-thumb" alt="" /></a>
   </td>
   <td class="col-2">
     <h6><a href="<%= profile_path(:username => user.username) %>" title=""><%= user.full_name %> (<%= user.username %>)</a></h6>
