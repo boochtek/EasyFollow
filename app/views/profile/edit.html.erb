@@ -1,6 +1,6 @@
 <% @tagline = 'One click editing makes profile maintenance a snap' %>
 
-<% form_for @bio, :url => edit_profile_path, :class => 'edit_profile' do |form| %>
+<% form_for @bio, :url => edit_profile_path, :class => 'edit_profile', :html => { :multipart => true } do |form| %>
 
   <div class="outline-box">
     <div class="inner common common-form">
@@ -19,10 +19,10 @@
       </div>
       <div class="right-col column">
         <fieldset class="section thumb-height">
-          <img class="align-left profile-thumb" src="<%= @bio.picture %>" alt="" height="144" width="144" />
+          <img class="align-left profile-thumb" src="<%= @bio.picture %>" alt="" />
           <label>Profile Image</label>
           <p>Use the button below to find an image file on your computer to use in your profile.</p>
-          <%= form.file_field :picture_file, :class => 'file-upload', :value => 'Browse' %>
+          <%= form.file_field :picture, :class => 'file-upload', :value => 'Browse' %>
         </fieldset>
         <fieldset>
           <label>Bio</label>
