@@ -48,7 +48,7 @@ private
   def password_change_submitted?
     password = params[:password]
     password_confirmation = params[:password_confirmation]
-    return (!(@assword.empty?) and !(password_confirmation.empty?) and !(password == 'Password' and password_confirmation == 'Confirm Password'))
+    return (!(@password.blank?) and !(password_confirmation.blank?) and !(password == 'Password' && password_confirmation == 'Confirm Password'))
   end
 
 end
