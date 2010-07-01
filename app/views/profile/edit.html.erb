@@ -6,13 +6,24 @@
     <div class="inner common common-form">
       <div class="left-col column">
         <fieldset class="section thumb-height">
-          <label>Meezy.me Profile</label>
+          <label>Change Password</label>
+          <%= text_field_tag :password,              'Password',         :class => 'text-input clear-field' %>
+          <%= text_field_tag :password_confirmation, 'Confirm Password', :class => 'text-input clear-field' %>
+        </fieldset>
+        <fieldset class="section">
+          <label>Personal Information</label>
           <%= form.text_field :location, :class => 'text-input clear-field', :value => 'Location' %>
           <%= form.text_field :title,    :class => 'text-input clear-field', :value => 'Title' %>
           <%= form.text_field :industry, :class => 'text-input clear-field', :value => 'Industry' %>
         </fieldset>
       </div>
       <div class="right-col column">
+        <fieldset class="section thumb-height">
+          <img class="align-left profile-thumb" src="<%= @bio.picture %>" alt="" height="144" width="144" />
+          <label>Profile Image</label>
+          <p>Use the button below to find an image file on your computer to use in your profile.</p>
+          <%= form.file_field :picture_file, :class => 'file-upload', :value => 'Browse' %>
+        </fieldset>
         <fieldset>
           <label>Bio</label>
           <%= form.text_area :description, :class => 'text-input' %>
