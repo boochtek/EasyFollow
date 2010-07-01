@@ -7,4 +7,12 @@ class Bio < ActiveRecord::Base
 
   belongs_to :user
 
+  # TODO: Replace these with a picture the user has uploaded.
+  def picture
+    'images/samples/medium_thumb.jpg'
+  end
+  def thumbnail
+    'images/samples/user_thumb.jpg'
+  end
+
 end

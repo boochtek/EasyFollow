@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  delegate :location, :title, :industry, :description, :to => '(bio or return nil)'
+  delegate :location, :title, :industry, :description, :picture, :thumbnail, :to => '(bio or return nil)'
 
   validates_each :username do |record, attr, value|
     record.errors.add attr, 'may not contain spaces' if value =~ %r{[[:space:]]}
