@@ -2,7 +2,7 @@ class Bio < ActiveRecord::Base
 
   DEFAULT_PICTURE = '/images/samples/medium_thumb.jpg'
   DEFAULT_THUMBNAIL = '/images/samples/user_thumb.gif'
-  ALLOWED_PICTURE_EXTENSIONS = %w{ gif png jpg jpeg } # NOTE: These must be in lower case.
+  ALLOWED_PICTURE_EXTENSIONS = %w{ .gif .png .jpg .jpeg } # NOTE: These must start with a period and be all lower case.
 
   attribute :location,    :string, :max_length => 50
   attribute :title,       :string, :max_length => 75
