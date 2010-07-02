@@ -39,6 +39,7 @@ class Bio < ActiveRecord::Base
       else
         File.open(file_to_write, 'wb') { |f| f.write(uploaded_file.read) }
       end
+      FileUtils.chmod(0644, file_to_write) # Make sure Apache (or whatever front-end server we have) can read the file in order to serve it.
     else
       # TODO: Add errors to the object if the picture is invalid.
     end
