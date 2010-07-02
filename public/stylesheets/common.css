@@ -373,6 +373,10 @@
 				left : 5px;
 			}
 			
+			img.cell-thumb {
+				height: 50px;
+				width: 50px;
+			}
 			.cell-wrapper .cell .cell-text {
 				position : absolute;
 				top : 6px;
@@ -573,9 +577,11 @@
 				position : relative;
 			}	
 			
-			.profile-block .thumb {
+			img.profile-thumb {
 				margin : 0 auto 5px auto;
 				display : block;
+				height: 144px;
+				width: 136px;
 			}				
 			
 			.profile-block h3 {
@@ -1144,4 +1150,4 @@
             .inline		{ display : inline !important; }
             
             .middle		{ vertical-align : middle !important; }
-	
+
