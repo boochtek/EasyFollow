@@ -60,7 +60,7 @@ private
   end
 
   def picture_is_valid?
-    return true if @uploaded_file.nil?
+    return true if (@uploaded_file.nil? or @uploaded_file.original_filename.empty?)
     file_ext = File.extname(@uploaded_file.original_filename)
     return ALLOWED_PICTURE_EXTENSIONS.include?(file_ext.downcase)
     # TODO: Should also validate that the file is the type they say it is, and does not contain malware.
