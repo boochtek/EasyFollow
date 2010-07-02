@@ -26,19 +26,22 @@ class ProfileController < ApplicationController
   end
 
   def update
+    flash[:notice] = '' # Clear out the flash, so we can add to it.
     @bio = current_user.bio
     @bio = Bio.create(:user => current_user) if @bio.nil?
     if password_change_submitted? and current_user.update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation ])
-      flash[:notice] = 'Password was successfully changed. '
+      flash[:notice] += 'Password was successfully changed. '
     end
     if password_change_submitted? and !current_user.valid?
-      flash[:notice] = 'There were problems changing your password.'
+      flash[:notice] += 'There were problems changing your password. '
       # TODO: Output the errors.
       render 'profile/edit'
     elsif @bio.update_attributes(params[:bio])
-      flash[:notice] = (flash[:notice] || '') + 'Profile was successfully updated.'
+      flash[:notice] += 'Profile was successfully updated.'
       redirect_to(my_profile_path)
     else
+      flash[:notice] += 'There were problems changing your profile.'
+      # TODO: Output the errors.
       render 'profile/edit'
     end
   end
