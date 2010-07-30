@@ -33,8 +33,8 @@ config.action_mailer.delivery_method = :sendmail
 # Enable threaded mode
 # config.threadsafe!
 
-# Display backtraces for exceptions in staging.
-config.action_controller.consider_all_requests_local = true
+# Don't display backtraces for exceptions in staging, because we want ExceptionNotifier to send us an email instead. (In 2.3, ExceptionNotifier doesn't let us do both.)
+config.action_controller.consider_all_requests_local = false
 
 config.gem 'mysql'
 
