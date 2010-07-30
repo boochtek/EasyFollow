@@ -27,6 +27,9 @@ config.action_mailer.raise_delivery_errors = false
 # Define our host, so ActionMailer can create URLs.
 config.action_mailer.default_url_options = { :host => 'meezy.me' }
 
+# Use /usr/sbin/sendmail to delivery emails.
+config.action_mailer.delivery_method = :sendmail
+
 # Enable threaded mode
 # config.threadsafe!
 
