@@ -1,9 +1,9 @@
-[submodule "vendor/plugins/exception_notifier"]
-	path = vendor/plugins/exception_notifier
-	url = git://github.com/rails/exception_notification.git
 [submodule "vendor/plugins/asset_packager"]
 	path = vendor/plugins/asset_packager
 	url = git://github.com/sbecker/asset_packager.git
 [submodule "vendor/plugins/activerecord-attribute_declarations"]
 	path = vendor/plugins/activerecord-attribute_declarations
 	url = git://github.com/boochtek/activerecord-attribute_declarations.git
+[submodule "vendor/plugins/exception_notifier"]
+	path = vendor/plugins/exception_notifier
+	url = http://github.com/rails/exception_notification.git
