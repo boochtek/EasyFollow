@@ -7,7 +7,11 @@ class ConnectionController < ApplicationController
       redirect_to :back
     elsif @user and current_user and @network
       current_user.follow(@user, @network)
-      flash[:notice] = "Successfully added connection to #{@user.username} on #{@network}"
+      if current_user.following?(@user, @network)
+        flash[:notice] = "Successfully added connection to #{@user.username} on #{@network}"
+      else
+        flash[:notice] = "Sorry, unable to connect to #{@user.username} on #{@network}"
+      end
       redirect_to :back
     else
       # This should not happen unless the followee has disabled their account, or someone is directly POSTing to the URL.
