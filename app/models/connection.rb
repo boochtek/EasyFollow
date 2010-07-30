@@ -22,5 +22,7 @@ class Connection < ActiveRecord::Base
     if follower_account and followee_account
       site.follow(follower_account, followee_account)
     end
+  rescue
+    false # Don't create the Connection if we had some sort of problem.
   end
 end

@@ -52,7 +52,7 @@ class LinkedIn < OAuthSite
           </item-content>
         </mailbox-item>
         XML
-    access_token(account).post("http://api.linkedin.com/v1/people/~/mailbox", xml)
+      access_token(account).post("http://api.linkedin.com/v1/people/~/mailbox", xml)
     end
 
     def authenticate_to_network
